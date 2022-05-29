@@ -1,0 +1,9 @@
+namespace SimpleKit.WindowsRuntime.UI.Navigation
+{
+	[default_interface]
+	[webhosthidden]
+	unsealed runtimeclass NavigationHelper : Windows.UI.Xaml.DependencyObject
+	{
+		NavigationHelper(Windows.UI.Xaml.Controls.Page page);
+	}
+}
