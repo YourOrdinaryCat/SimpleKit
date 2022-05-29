@@ -8,9 +8,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	using Windows::Foundation::IInspectable;
 
-	using namespace Windows::UI::Core;
-	using namespace Windows::UI::Xaml;
-	using namespace Windows::UI::Xaml::Controls;
+	using Windows::UI::Core::AcceleratorKeyEventArgs;
+	using Windows::UI::Core::CoreDispatcher;
+	using Windows::UI::Core::CoreWindow;
+	using Windows::UI::Core::PointerEventArgs;
+
+	using Windows::UI::Xaml::RoutedEventArgs;
+
+	using Windows::UI::Xaml::Controls::Page;
 
 	NavigationHelper::NavigationHelper(Page const& page)
 	{
