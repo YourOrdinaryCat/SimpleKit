@@ -29,4 +29,7 @@
       <Filter>Project Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Midl Include="NavigationHelper.idl" />
+  </ItemGroup>
 </Project>
