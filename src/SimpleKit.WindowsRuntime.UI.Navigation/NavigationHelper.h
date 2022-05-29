@@ -11,7 +11,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		bool CanGoBack();
 		void GoBack();
-		
+
 		bool CanGoForward();
 		void GoForward();
 
@@ -20,6 +20,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		void m_revokeEvents();
 
+		Windows::UI::Core::SystemNavigationManager::BackRequested_revoker m_backRequestedToken;
 		Windows::UI::Xaml::Controls::Page::Loaded_revoker m_loadedToken;
 		Windows::UI::Xaml::Controls::Page::Unloaded_revoker m_unloadedToken;
 
@@ -36,6 +37,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		(
 			Windows::Foundation::IInspectable const& sender,
 			Windows::UI::Xaml::RoutedEventArgs const& args
+		);
+
+		void OnBackRequested
+		(
+			Windows::Foundation::IInspectable const& sender,
+			Windows::UI::Core::BackRequestedEventArgs const& args
 		);
 
 		void OnAcceleratorKeyActivated

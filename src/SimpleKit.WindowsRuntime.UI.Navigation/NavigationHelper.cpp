@@ -14,11 +14,13 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	using Windows::System::VirtualKeyModifiers;
 
 	using Windows::UI::Core::AcceleratorKeyEventArgs;
+	using Windows::UI::Core::BackRequestedEventArgs;
 	using Windows::UI::Core::CoreAcceleratorKeyEventType;
 	using Windows::UI::Core::CoreDispatcher;
 	using Windows::UI::Core::CoreVirtualKeyStates;
 	using Windows::UI::Core::CoreWindow;
 	using Windows::UI::Core::PointerEventArgs;
+	using Windows::UI::Core::SystemNavigationManager;
 
 	using Windows::UI::Xaml::RoutedEventArgs;
 	using Windows::UI::Xaml::Window;
@@ -109,6 +111,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		if (m_page)
 		{
+			m_backRequestedToken = SystemNavigationManager::GetForCurrentView().BackRequested
+			(
+				winrt::auto_revoke,
+				{ this, &NavigationHelper::OnBackRequested }
+			);
+
 			// Listen to the window directly so page focus isn't required
 			m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
 			(
@@ -127,8 +135,18 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	void NavigationHelper::OnPageUnloaded(IInspectable const& sender, RoutedEventArgs const& args)
 	{
 		// Once the page unloads, associated tokens should be revoked
+		m_backRequestedToken.revoke();
 		m_acceleratorKeyActivatedToken.revoke();
 		m_pointerPressedToken.revoke();
+	}
+
+	void NavigationHelper::OnBackRequested(IInspectable const&, BackRequestedEventArgs const& args)
+	{
+		if (CanGoBack())
+		{
+			args.Handled(true);
+			GoBack();
+		}
 	}
 
 	void NavigationHelper::OnAcceleratorKeyActivated(CoreDispatcher const&, AcceleratorKeyEventArgs const& args)
