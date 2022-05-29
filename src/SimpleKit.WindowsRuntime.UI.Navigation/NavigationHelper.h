@@ -17,6 +17,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		Windows::UI::Xaml::Controls::Page::Loaded_revoker m_loadedToken;
 		Windows::UI::Xaml::Controls::Page::Unloaded_revoker m_unloadedToken;
 
+		Windows::UI::Core::CoreDispatcher::AcceleratorKeyActivated_revoker m_acceleratorKeyActivatedToken;
+		Windows::UI::Core::CoreWindow::PointerPressed_revoker m_pointerPressedToken;
+
 		void OnPageLoaded
 		(
 			Windows::Foundation::IInspectable const& sender,
@@ -27,6 +30,18 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		(
 			Windows::Foundation::IInspectable const& sender,
 			Windows::UI::Xaml::RoutedEventArgs const& args
+		);
+
+		void OnAcceleratorKeyActivated
+		(
+			Windows::UI::Core::CoreDispatcher const& sender,
+			Windows::UI::Core::AcceleratorKeyEventArgs const& args
+		);
+
+		void OnPointerPressed
+		(
+			Windows::UI::Core::CoreWindow const& sender,
+			Windows::UI::Core::PointerEventArgs const& args
 		);
 	};
 }
