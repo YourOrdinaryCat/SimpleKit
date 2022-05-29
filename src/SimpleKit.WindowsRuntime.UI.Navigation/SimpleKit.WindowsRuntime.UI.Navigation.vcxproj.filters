@@ -12,10 +12,10 @@
     <None Include="PropertySheet.props">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="packages.config">
+    <None Include="$(ProjectName).def">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="$(ProjectName).def">
+    <None Include="packages.config">
       <Filter>Project Files</Filter>
     </None>
   </ItemGroup>
