@@ -171,5 +171,31 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void NavigationHelper::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
 	{
+		auto properties = args.CurrentPoint().Properties();
+
+		// Ignore button chords with the left, right, and middle buttons
+		if (properties.IsLeftButtonPressed() ||
+			properties.IsRightButtonPressed() ||
+			properties.IsMiddleButtonPressed())
+		{
+			return;
+		}
+
+		// If back or foward are pressed (but not both) navigate appropriately
+		bool backPressed = properties.IsXButton1Pressed();
+		bool forwardPressed = properties.IsXButton2Pressed();
+
+		if (backPressed ^ forwardPressed)
+		{
+			args.Handled(true);
+			if (backPressed)
+			{
+				GoBack();
+			}
+			else
+			{
+				GoForward();
+			}
+		}
 	}
 }
