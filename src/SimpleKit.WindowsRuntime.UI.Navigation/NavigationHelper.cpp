@@ -10,15 +10,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	NavigationHelper::NavigationHelper(Page const& page)
 	{
-		m_page = page;
+		m_page = make_weak<Page>(page);
 
-		m_loadedToken = m_page.Loaded
+		m_loadedToken = page.Loaded
 		(
 			winrt::auto_revoke,
 			{ this, &NavigationHelper::OnPageLoaded }
 		);
 
-		m_unloadedToken = m_page.Unloaded
+		m_unloadedToken = page.Unloaded
 		(
 			winrt::auto_revoke,
 			{ this, &NavigationHelper::OnPageUnloaded }

@@ -10,7 +10,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		~NavigationHelper();
 
 	private:
-		Windows::UI::Xaml::Controls::Page m_page;
+		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
 
 		void m_revokeEvents();
 
