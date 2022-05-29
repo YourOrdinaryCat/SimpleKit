@@ -6,6 +6,8 @@
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
+
+#pragma region Using Directives
 	using Windows::Foundation::IInspectable;
 
 	using Windows::UI::Core::AcceleratorKeyEventArgs;
@@ -14,8 +16,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	using Windows::UI::Core::PointerEventArgs;
 
 	using Windows::UI::Xaml::RoutedEventArgs;
+	using Windows::UI::Xaml::Window;
 
 	using Windows::UI::Xaml::Controls::Page;
+#pragma endregion
 
 	NavigationHelper::NavigationHelper(Page const& page)
 	{
@@ -50,7 +54,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void NavigationHelper::OnPageLoaded(IInspectable const& sender, RoutedEventArgs const& args)
 	{
-		auto coreWindow = Windows::UI::Xaml::Window::Current().CoreWindow();
+		auto coreWindow = Window::Current().CoreWindow();
 
 		// Listen to the window directly so focus isn't required
 		m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
