@@ -4,10 +4,14 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
-using winrt::Windows::UI::Xaml::Controls::Page;
-
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
+	using Windows::Foundation::IInspectable;
+
+	using namespace Windows::UI::Core;
+	using namespace Windows::UI::Xaml;
+	using namespace Windows::UI::Xaml::Controls;
+
 	NavigationHelper::NavigationHelper(Page const& page)
 	{
 		m_page = make_weak<Page>(page);
@@ -39,7 +43,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		m_pointerPressedToken.revoke();
 	}
 
-	void NavigationHelper::OnPageLoaded(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args)
+	void NavigationHelper::OnPageLoaded(IInspectable const& sender, RoutedEventArgs const& args)
 	{
 		auto coreWindow = Windows::UI::Xaml::Window::Current().CoreWindow();
 
@@ -57,18 +61,18 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		);
 	}
 
-	void NavigationHelper::OnPageUnloaded(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args)
+	void NavigationHelper::OnPageUnloaded(IInspectable const& sender, RoutedEventArgs const& args)
 	{
 		// Once the page unloads, associated tokens should be revoked
 		m_acceleratorKeyActivatedToken.revoke();
 		m_pointerPressedToken.revoke();
 	}
 
-	void NavigationHelper::OnAcceleratorKeyActivated(Windows::UI::Core::CoreDispatcher const& sender, Windows::UI::Core::AcceleratorKeyEventArgs const& args)
+	void NavigationHelper::OnAcceleratorKeyActivated(CoreDispatcher const& sender, AcceleratorKeyEventArgs const& args)
 	{
 	}
 
-	void NavigationHelper::OnPointerPressed(Windows::UI::Core::CoreWindow const& sender, Windows::UI::Core::PointerEventArgs const& args)
+	void NavigationHelper::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
 	{
 	}
 }
