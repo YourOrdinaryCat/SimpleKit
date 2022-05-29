@@ -101,6 +101,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		m_loadedToken.revoke();
 		m_unloadedToken.revoke();
 
+		m_backRequestedToken.revoke();
 		m_acceleratorKeyActivatedToken.revoke();
 		m_pointerPressedToken.revoke();
 	}
