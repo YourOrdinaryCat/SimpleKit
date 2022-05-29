@@ -56,18 +56,21 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	{
 		auto coreWindow = Window::Current().CoreWindow();
 
-		// Listen to the window directly so focus isn't required
-		m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
-		(
-			winrt::auto_revoke,
-			{ this, &NavigationHelper::OnAcceleratorKeyActivated }
-		);
+		if (m_page)
+		{
+			// Listen to the window directly so page focus isn't required
+			m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
+			(
+				winrt::auto_revoke,
+				{ this, &NavigationHelper::OnAcceleratorKeyActivated }
+			);
 
-		m_pointerPressedToken = coreWindow.PointerPressed
-		(
-			winrt::auto_revoke,
-			{ this, &NavigationHelper::OnPointerPressed }
-		);
+			m_pointerPressedToken = coreWindow.PointerPressed
+			(
+				winrt::auto_revoke,
+				{ this, &NavigationHelper::OnPointerPressed }
+			);
+		}
 	}
 
 	void NavigationHelper::OnPageUnloaded(IInspectable const& sender, RoutedEventArgs const& args)
