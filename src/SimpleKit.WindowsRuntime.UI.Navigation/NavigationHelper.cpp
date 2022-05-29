@@ -10,8 +10,13 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 #pragma region Using Directives
 	using Windows::Foundation::IInspectable;
 
+	using Windows::System::VirtualKey;
+	using Windows::System::VirtualKeyModifiers;
+
 	using Windows::UI::Core::AcceleratorKeyEventArgs;
+	using Windows::UI::Core::CoreAcceleratorKeyEventType;
 	using Windows::UI::Core::CoreDispatcher;
+	using Windows::UI::Core::CoreVirtualKeyStates;
 	using Windows::UI::Core::CoreWindow;
 	using Windows::UI::Core::PointerEventArgs;
 
@@ -126,8 +131,42 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		m_pointerPressedToken.revoke();
 	}
 
-	void NavigationHelper::OnAcceleratorKeyActivated(CoreDispatcher const& sender, AcceleratorKeyEventArgs const& args)
+	void NavigationHelper::OnAcceleratorKeyActivated(CoreDispatcher const&, AcceleratorKeyEventArgs const& args)
 	{
+		auto virtualKey = args.VirtualKey();
+
+		// Only investigate further when Left, Right, or the dedicated Previous or Next keys
+		// are pressed
+		if ((args.EventType() == CoreAcceleratorKeyEventType::SystemKeyDown ||
+			args.EventType() == CoreAcceleratorKeyEventType::KeyDown) &&
+			(virtualKey == VirtualKey::Left || virtualKey == VirtualKey::Right ||
+				virtualKey == VirtualKey::GoBack || virtualKey == VirtualKey::GoForward))
+		{
+			auto coreWindow = Window::Current().CoreWindow();
+			auto downState = CoreVirtualKeyStates::Down;
+
+			bool menuKey = (coreWindow.GetKeyState(VirtualKey::Menu) & downState) == downState;
+			bool controlKey = (coreWindow.GetKeyState(VirtualKey::Control) & downState) == downState;
+			bool shiftKey = (coreWindow.GetKeyState(VirtualKey::Shift) & downState) == downState;
+
+			bool noModifiers = !menuKey && !controlKey && !shiftKey;
+			bool onlyAlt = menuKey && !controlKey && !shiftKey;
+
+			if ((virtualKey == VirtualKey::GoBack && noModifiers) ||
+				(virtualKey == VirtualKey::Left && onlyAlt))
+			{
+				// When the previous key or Alt+Left are pressed navigate back
+				args.Handled(true);
+				GoBack();
+			}
+			else if ((virtualKey == VirtualKey::GoForward && noModifiers) ||
+				(virtualKey == VirtualKey::Right && onlyAlt))
+			{
+				// When the next key or Alt+Right are pressed navigate forward
+				args.Handled(true);
+				GoForward();
+			}
+		}
 	}
 
 	void NavigationHelper::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
