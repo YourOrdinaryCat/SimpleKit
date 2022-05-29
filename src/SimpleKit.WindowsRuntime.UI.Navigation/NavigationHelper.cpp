@@ -105,7 +105,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		m_pointerPressedToken.revoke();
 	}
 
-	void NavigationHelper::OnPageLoaded(IInspectable const& sender, RoutedEventArgs const& args)
+	void NavigationHelper::OnPageLoaded(IInspectable const&, RoutedEventArgs const&)
 	{
 		auto coreWindow = Window::Current().CoreWindow();
 
@@ -132,7 +132,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void NavigationHelper::OnPageUnloaded(IInspectable const& sender, RoutedEventArgs const& args)
+	void NavigationHelper::OnPageUnloaded(IInspectable const&, RoutedEventArgs const&)
 	{
 		// Once the page unloads, associated tokens should be revoked
 		m_backRequestedToken.revoke();
@@ -187,7 +187,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void NavigationHelper::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
+	void NavigationHelper::OnPointerPressed(CoreWindow const&, PointerEventArgs const& args)
 	{
 		auto properties = args.CurrentPoint().Properties();
 
