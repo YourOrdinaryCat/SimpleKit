@@ -9,6 +9,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		NavigationHelper(Windows::UI::Xaml::Controls::Page const& page);
 		~NavigationHelper();
 
+		bool CanGoBack();
+		void GoBack();
+		
+		bool CanGoForward();
+		void GoForward();
+
 	private:
 		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
 

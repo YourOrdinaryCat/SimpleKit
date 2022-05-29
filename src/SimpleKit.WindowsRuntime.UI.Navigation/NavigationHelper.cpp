@@ -43,6 +43,52 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		m_revokeEvents();
 	}
 
+	bool NavigationHelper::CanGoBack()
+	{
+		auto page = m_page.get();
+		if (page != nullptr)
+		{
+			auto frame = page.Frame();
+			return (frame != nullptr && frame.CanGoBack());
+		}
+
+		return false;
+	}
+
+	void NavigationHelper::GoBack()
+	{
+		auto page = m_page.get();
+		if (page != nullptr)
+		{
+			auto frame = page.Frame();
+			if (frame != nullptr && frame.CanGoBack())
+				frame.GoBack();
+		}
+	}
+
+	bool NavigationHelper::CanGoForward()
+	{
+		auto page = m_page.get();
+		if (page != nullptr)
+		{
+			auto frame = page.Frame();
+			return (frame != nullptr && frame.CanGoForward());
+		}
+
+		return false;
+	}
+
+	void NavigationHelper::GoForward()
+	{
+		auto page = m_page.get();
+		if (page != nullptr)
+		{
+			auto frame = page.Frame();
+			if (frame != nullptr && frame.CanGoForward())
+				frame.GoForward();
+		}
+	}
+
 	void NavigationHelper::m_revokeEvents()
 	{
 		m_loadedToken.revoke();

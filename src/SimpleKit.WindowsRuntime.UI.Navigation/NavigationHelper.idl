@@ -5,5 +5,11 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 	unsealed runtimeclass NavigationHelper : Windows.UI.Xaml.DependencyObject
 	{
 		NavigationHelper(Windows.UI.Xaml.Controls.Page page);
+
+		Boolean CanGoBack();
+		void GoBack();
+
+		Boolean CanGoForward();
+		void GoForward();
 	}
 }
