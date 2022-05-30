@@ -1,0 +1,8 @@
+namespace SimpleKit.WindowsRuntime.UI.Input
+{
+	[default_interface]
+	runtimeclass RelayCommand
+	{
+		RelayCommand();
+	}
+}
