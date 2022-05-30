@@ -9,6 +9,10 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Button Click="Button_Click" Content="Go to next page" />
+        <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="Button_Click"
+            Content="Go to next page" />
     </Grid>
 </Page>

@@ -8,7 +8,11 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Orientation="Vertical" Spacing="6">
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical"
+            Spacing="6">
             <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Press Alt + Left to go back, Alt + Right to move forward" />
             <Button Click="Button_Click" Content="Go to next page" />
         </StackPanel>
