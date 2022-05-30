@@ -1,6 +1,7 @@
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
 	[default_interface]
+	[bindable]
 	[webhosthidden]
 	unsealed runtimeclass NavigationHelper : Windows.UI.Xaml.DependencyObject
 	{
