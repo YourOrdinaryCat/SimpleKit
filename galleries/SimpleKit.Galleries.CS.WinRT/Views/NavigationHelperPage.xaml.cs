@@ -16,12 +16,12 @@ namespace SimpleKit.Galleries.CS.WinRT.Views
         {
             this.InitializeComponent();
 
-            _navigationHelper = new NavigationHelper(this);
+            this._navigationHelper = new NavigationHelper(this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(NavigationHelperPage));
+            _ = this.Frame.Navigate(typeof(NavigationHelperPage));
         }
     }
 }
