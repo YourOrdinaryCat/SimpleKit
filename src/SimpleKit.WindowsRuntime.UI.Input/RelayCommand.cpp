@@ -38,4 +38,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Input::implementation
 		if (m_canExecute != nullptr) return m_canExecute(param);
 		return true;
 	}
+
+	winrt::event_token RelayCommand::CanExecuteChanged(EventHandler<IInspectable> const& handler)
+	{
+		return m_canExecuteChanged.add(handler);
+	}
+
+	void RelayCommand::CanExecuteChanged(winrt::event_token const& token) noexcept
+	{
+		m_canExecuteChanged.remove(token);
+	}
 }
