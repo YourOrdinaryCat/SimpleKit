@@ -32,22 +32,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	{
 		m_page = make_weak<Page>(page);
 
-		m_loadedToken = page.Loaded
-		(
-			winrt::auto_revoke,
-			{ this, &NavigationHelper::OnPageLoaded }
-		);
-
-		m_unloadedToken = page.Unloaded
-		(
-			winrt::auto_revoke,
-			{ this, &NavigationHelper::OnPageUnloaded }
-		);
-	}
-
-	NavigationHelper::~NavigationHelper()
-	{
-		m_revokeEvents();
+		m_loadedToken = page.Loaded({ this, &NavigationHelper::OnPageLoaded });
+		m_unloadedToken = page.Unloaded({ this, &NavigationHelper::OnPageUnloaded });
 	}
 
 	bool NavigationHelper::CanGoBack()
@@ -96,49 +82,55 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void NavigationHelper::m_revokeEvents()
+	NavigationHelper::~NavigationHelper()
 	{
-		m_loadedToken.revoke();
-		m_unloadedToken.revoke();
-
-		m_backRequestedToken.revoke();
-		m_acceleratorKeyActivatedToken.revoke();
-		m_pointerPressedToken.revoke();
+		m_page = nullptr;
 	}
 
 	void NavigationHelper::OnPageLoaded(IInspectable const&, RoutedEventArgs const&)
 	{
 		auto coreWindow = Window::Current().CoreWindow();
-
 		if (m_page)
 		{
-			m_backRequestedToken = SystemNavigationManager::GetForCurrentView().BackRequested
-			(
-				winrt::auto_revoke,
-				{ this, &NavigationHelper::OnBackRequested }
-			);
+			m_backRequestedToken = SystemNavigationManager::GetForCurrentView().
+				BackRequested({ this, &NavigationHelper::OnBackRequested });
 
 			// Listen to the window directly so page focus isn't required
 			m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
 			(
-				winrt::auto_revoke,
 				{ this, &NavigationHelper::OnAcceleratorKeyActivated }
 			);
 
-			m_pointerPressedToken = coreWindow.PointerPressed
-			(
-				winrt::auto_revoke,
-				{ this, &NavigationHelper::OnPointerPressed }
-			);
+			m_pointerPressedToken = coreWindow.
+				PointerPressed({ this, &NavigationHelper::OnPointerPressed });
+
+			m_navigationShortcutsRegistered = true;
 		}
 	}
 
 	void NavigationHelper::OnPageUnloaded(IInspectable const&, RoutedEventArgs const&)
 	{
 		// Once the page unloads, associated tokens should be revoked
-		m_backRequestedToken.revoke();
-		m_acceleratorKeyActivatedToken.revoke();
-		m_pointerPressedToken.revoke();
+		if (m_navigationShortcutsRegistered)
+		{
+			auto coreWindow = Window::Current().CoreWindow();
+			SystemNavigationManager::GetForCurrentView().
+				BackRequested(m_backRequestedToken);
+
+			coreWindow.Dispatcher().
+				AcceleratorKeyActivated(m_acceleratorKeyActivatedToken);
+
+			coreWindow.PointerPressed(m_pointerPressedToken);
+
+			m_navigationShortcutsRegistered = false;
+		}
+
+		// Remove handler and release the reference to page
+		if (auto page = m_page.get())
+		{
+			page.Loaded(m_loadedToken);
+			page.Unloaded(m_unloadedToken);
+		}
 	}
 
 	void NavigationHelper::OnBackRequested(IInspectable const&, BackRequestedEventArgs const& args)

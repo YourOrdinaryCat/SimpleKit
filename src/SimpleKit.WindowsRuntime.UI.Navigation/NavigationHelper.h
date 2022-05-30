@@ -7,7 +7,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	struct NavigationHelper : NavigationHelperT<NavigationHelper>
 	{
 		NavigationHelper(Windows::UI::Xaml::Controls::Page const& page);
-		~NavigationHelper();
 
 		bool CanGoBack();
 		void GoBack();
@@ -16,16 +15,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		void GoForward();
 
 	private:
+		~NavigationHelper();
 		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
 
-		void m_revokeEvents();
+		winrt::event_token m_backRequestedToken;
+		winrt::event_token m_loadedToken;
+		winrt::event_token m_unloadedToken;
 
-		Windows::UI::Core::SystemNavigationManager::BackRequested_revoker m_backRequestedToken;
-		Windows::UI::Xaml::Controls::Page::Loaded_revoker m_loadedToken;
-		Windows::UI::Xaml::Controls::Page::Unloaded_revoker m_unloadedToken;
-
-		Windows::UI::Core::CoreDispatcher::AcceleratorKeyActivated_revoker m_acceleratorKeyActivatedToken;
-		Windows::UI::Core::CoreWindow::PointerPressed_revoker m_pointerPressedToken;
+		winrt::event_token m_acceleratorKeyActivatedToken;
+		winrt::event_token m_pointerPressedToken;
 
 		void OnPageLoaded
 		(
@@ -39,6 +37,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			Windows::UI::Xaml::RoutedEventArgs const& args
 		);
 
+		bool m_navigationShortcutsRegistered = false;
 		void OnBackRequested
 		(
 			Windows::Foundation::IInspectable const& sender,
