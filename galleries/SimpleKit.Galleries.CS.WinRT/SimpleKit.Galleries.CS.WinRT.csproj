@@ -159,6 +159,16 @@
   <ItemGroup>
     <None Include="SimpleKit.Galleries.CS.WinRT_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SimpleKit.WindowsRuntime.UI.Input\SimpleKit.WindowsRuntime.UI.Input.vcxproj">
+      <Project>{789deed8-c4b8-4a87-922d-8f8f544f1361}</Project>
+      <Name>SimpleKit.WindowsRuntime.UI.Input</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\SimpleKit.WindowsRuntime.UI.Navigation\SimpleKit.WindowsRuntime.UI.Navigation.vcxproj">
+      <Project>{e0da2127-0bc4-4530-9ef9-d5e73f2f547a}</Project>
+      <Name>SimpleKit.WindowsRuntime.UI.Navigation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
