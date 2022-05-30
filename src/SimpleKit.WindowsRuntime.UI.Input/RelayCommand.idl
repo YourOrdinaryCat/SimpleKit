@@ -1,6 +1,7 @@
 namespace SimpleKit.WindowsRuntime.UI.Input
 {
 	[default_interface]
+	[webhosthidden]
 	runtimeclass RelayCommand
 	{
 		RelayCommand();
