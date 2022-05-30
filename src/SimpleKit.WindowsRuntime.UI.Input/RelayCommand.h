@@ -6,7 +6,23 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Input::implementation
 {
 	struct RelayCommand : RelayCommandT<RelayCommand>
 	{
-		RelayCommand() = default;
+		RelayCommand
+		(
+			SimpleKit::WindowsRuntime::UI::Input::ExecuteDelegate const& execute
+		);
+
+		RelayCommand
+		(
+			SimpleKit::WindowsRuntime::UI::Input::ExecuteDelegate const& execute,
+			SimpleKit::WindowsRuntime::UI::Input::CanExecuteDelegate const& canExecute
+		);
+
+		void Execute(winrt::Windows::Foundation::IInspectable const& param);
+		bool CanExecute(winrt::Windows::Foundation::IInspectable const& param);
+
+	private:
+		SimpleKit::WindowsRuntime::UI::Input::ExecuteDelegate m_execute;
+		SimpleKit::WindowsRuntime::UI::Input::CanExecuteDelegate m_canExecute;
 	};
 }
 
