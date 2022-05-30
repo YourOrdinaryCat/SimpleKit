@@ -1,4 +1,5 @@
-﻿using SimpleKit.WindowsRuntime.UI.Navigation;
+﻿using SimpleKit.Galleries.CS.WinRT.Views;
+using SimpleKit.WindowsRuntime.UI.Navigation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -21,7 +22,7 @@ namespace SimpleKit.Galleries.CS.WinRT
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(NavigationHelperPage));
         }
     }
 }
