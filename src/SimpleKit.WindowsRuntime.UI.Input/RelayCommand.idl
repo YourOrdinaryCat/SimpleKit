@@ -1,0 +1,13 @@
+namespace SimpleKit.WindowsRuntime.UI.Input
+{
+	delegate void ExecuteDelegate(Object param);
+	delegate Boolean CanExecuteDelegate(Object param);
+
+	[default_interface]
+	[webhosthidden]
+	runtimeclass RelayCommand : Windows.UI.Xaml.Input.ICommand
+	{
+		RelayCommand(ExecuteDelegate execute);
+		RelayCommand(ExecuteDelegate execute, CanExecuteDelegate canExecute);
+	}
+}
