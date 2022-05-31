@@ -11,10 +11,12 @@
         <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Vertical"
-            Spacing="6">
+            Orientation="Vertical">
             <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Press Alt + Left to go back, Alt + Right to move forward" />
-            <Button Click="Button_Click" Content="Go to next page" />
+            <Button
+                Margin="0,6,0,0"
+                Click="Button_Click"
+                Content="Go to next page" />
         </StackPanel>
     </Grid>
 </Page>
