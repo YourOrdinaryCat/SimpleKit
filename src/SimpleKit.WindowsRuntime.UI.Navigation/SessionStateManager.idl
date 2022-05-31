@@ -1,0 +1,7 @@
+namespace SimpleKit.WindowsRuntime.UI.Navigation
+{
+	[default_interface]
+	static runtimeclass SessionStateManager
+	{
+	}
+}
