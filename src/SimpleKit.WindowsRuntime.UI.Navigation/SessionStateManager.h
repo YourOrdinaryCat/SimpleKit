@@ -6,7 +6,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct SessionStateManager : SessionStateManagerT<SessionStateManager>
 	{
-		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring const& sessionStateKey, hstring const& sessionBaseKey);
+		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey);
 
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> SessionStateForFrame(Windows::UI::Xaml::Controls::Frame const& frame);
 
@@ -19,6 +19,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		static Windows::UI::Xaml::DependencyProperty m_frameSessionStateProperty;
 		static Windows::UI::Xaml::DependencyProperty m_frameSessionStateKeyProperty;
+		static Windows::UI::Xaml::DependencyProperty m_frameSessionBaseKeyProperty;
 	};
 }
 

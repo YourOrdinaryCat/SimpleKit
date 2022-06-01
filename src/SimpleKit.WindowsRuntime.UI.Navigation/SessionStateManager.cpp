@@ -16,7 +16,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	using Windows::UI::Xaml::Controls::Frame;
 #pragma endregion
 
-	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey, hstring const& sessionBaseKey)
+	void SessionStateManager::RegisterFrame(Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey)
 	{
 		if (frame.GetValue(m_frameSessionStateKeyProperty) != nullptr)
 		{
@@ -28,8 +28,19 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			throw hresult_illegal_method_call(L"Frames must either be registered before accessing frame session state, or not registered at all.");
 		}
 
-		//TODO: Register the frame
-		throw hresult_not_implemented();
+		if (sessionBaseKey != hstring{ })
+		{
+			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
+			sessionStateKey = sessionBaseKey + L"_" + sessionStateKey;
+		}
+
+		// Use a dependency property to associate the session key with a frame, and keep a list of frames whose
+		// navigation state should be managed
+		frame.SetValue(m_frameSessionStateKeyProperty, box_value(sessionStateKey));
+		m_registeredFrames.insert(m_registeredFrames.begin(), make_weak(frame));
+
+		// Check to see if navigation state can be restored
+		RestoreFrameNavigationState(frame);
 	}
 
 	IMap<hstring, IInspectable> SessionStateManager::SessionStateForFrame(Frame const& frame)
@@ -86,4 +97,5 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	DependencyProperty SessionStateManager::m_frameSessionStateProperty{ nullptr };
 	DependencyProperty SessionStateManager::m_frameSessionStateKeyProperty{ nullptr };
+	DependencyProperty SessionStateManager::m_frameSessionBaseKeyProperty{ nullptr };
 }
