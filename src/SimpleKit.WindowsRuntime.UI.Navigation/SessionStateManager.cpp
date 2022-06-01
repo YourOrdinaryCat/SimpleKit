@@ -13,8 +13,40 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	using Windows::Foundation::Collections::IMap;
 
 	using Windows::UI::Xaml::DependencyProperty;
+	using Windows::UI::Xaml::PropertyMetadata;
+
 	using Windows::UI::Xaml::Controls::Frame;
 #pragma endregion
+
+	void SessionStateManager::Initialize()
+	{
+		if (!m_sessionState)
+		{
+			m_sessionState = single_threaded_map<hstring, IInspectable>();
+			m_registeredFrames = std::vector<weak_ref<Frame>>();
+
+			m_frameSessionStateProperty =
+				DependencyProperty::RegisterAttached(
+					L"m_frameSessionState",
+					xaml_typename<IMap<hstring, IInspectable>>(),
+					xaml_typename<Navigation::SessionStateManager>(),
+					PropertyMetadata{ nullptr });
+
+			m_frameSessionStateKeyProperty =
+				DependencyProperty::RegisterAttached(
+					L"m_frameSessionStateKey",
+					xaml_typename<hstring>(),
+					xaml_typename<Navigation::SessionStateManager>(),
+					PropertyMetadata{ nullptr });
+
+			m_frameSessionBaseKeyProperty =
+				DependencyProperty::RegisterAttached(
+					L"m_frameSessionBaseKey",
+					xaml_typename<hstring>(),
+					xaml_typename<Navigation::SessionStateManager>(),
+					PropertyMetadata{ nullptr });
+		}
+	}
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)
 	{

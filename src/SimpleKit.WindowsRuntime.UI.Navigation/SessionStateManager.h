@@ -6,6 +6,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct SessionStateManager : SessionStateManagerT<SessionStateManager>
 	{
+		static void Initialize();
+
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> SessionState()
 		{
 			return m_sessionState;
