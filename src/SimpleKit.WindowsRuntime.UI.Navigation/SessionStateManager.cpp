@@ -16,6 +16,11 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	using Windows::UI::Xaml::Controls::Frame;
 #pragma endregion
 
+	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)
+	{
+		RegisterFrame(frame, sessionStateKey, hstring{ });
+	}
+
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey)
 	{
 		if (frame.GetValue(m_frameSessionStateKeyProperty) != nullptr)
