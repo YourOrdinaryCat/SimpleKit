@@ -48,6 +48,33 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		RestoreFrameNavigationState(frame);
 	}
 
+	void SessionStateManager::UnregisterFrame(Frame const& frame)
+	{
+		// Remove session state and remove the frame from the list of frames whose navigation
+		// state will be saved
+		auto key = frame.GetValue(m_frameSessionStateKeyProperty).as<hstring>();
+		if (m_sessionState.HasKey(key))
+		{
+			m_sessionState.Remove(key);
+		}
+
+		// Remove weak references that are no longer reachable
+		m_registeredFrames.erase
+		(
+			std::remove_if
+			(
+				m_registeredFrames.begin(),
+				m_registeredFrames.end(),
+				[=](weak_ref<Frame> const& e)
+				{
+					auto testFrame = e.get();
+					return testFrame == nullptr || testFrame == frame;
+				}
+			),
+			m_registeredFrames.end()
+					);
+	}
+
 	IMap<hstring, IInspectable> SessionStateManager::SessionStateForFrame(Frame const& frame)
 	{
 		auto frameState = frame.GetValue(m_frameSessionStateProperty).

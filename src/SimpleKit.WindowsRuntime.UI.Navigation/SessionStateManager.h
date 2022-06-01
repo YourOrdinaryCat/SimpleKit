@@ -9,6 +9,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring const& sessionStateKey);
 		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey);
 
+		static void UnregisterFrame(Windows::UI::Xaml::Controls::Frame const& frame);
+
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> SessionStateForFrame(Windows::UI::Xaml::Controls::Frame const& frame);
 
 	private:
