@@ -8,6 +8,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 
 #pragma region Using Directives
+	using Windows::Foundation::IInspectable;
+
+	using Windows::Foundation::Collections::IMap;
+
 	using Windows::UI::Xaml::DependencyProperty;
 	using Windows::UI::Xaml::Controls::Frame;
 #pragma endregion
@@ -28,6 +32,40 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		throw hresult_not_implemented();
 	}
 
+	IMap<hstring, IInspectable> SessionStateManager::SessionStateForFrame(Frame const& frame)
+	{
+		auto frameState = frame.GetValue(m_frameSessionStateProperty).
+			try_as<IMap<hstring, IInspectable>>();
+
+		if (!frameState)
+		{
+			auto frameSessionKey = frame.GetValue(m_frameSessionStateKeyProperty).try_as<hstring>();
+			if (frameSessionKey)
+			{
+				// Registered frames reflect the corresponding session state
+				if (!m_sessionState.HasKey(frameSessionKey.value()))
+					m_sessionState.Insert
+					(
+						frameSessionKey.value(),
+						single_threaded_map<hstring, IInspectable>()
+					);
+
+				frameState = m_sessionState.Lookup(frameSessionKey.value()).
+					try_as<IMap<hstring, IInspectable>>();
+			}
+			else
+			{
+				// Frames that aren't registered have transient state
+				frameState = single_threaded_map<hstring, IInspectable>();
+			}
+
+			frame.SetValue(m_frameSessionStateProperty, frameState);
+		}
+
+		return frameState.as<IMap<hstring, IInspectable>>();
+	}
+
+	IMap<hstring, IInspectable> SessionStateManager::m_sessionState{ nullptr };
 	std::vector<weak_ref<Frame>> SessionStateManager::m_registeredFrames;
 
 	DependencyProperty SessionStateManager::m_frameSessionStateProperty{ nullptr };

@@ -4,5 +4,6 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 	static runtimeclass SessionStateManager
 	{
 		static void RegisterFrame(Windows.UI.Xaml.Controls.Frame frame, String sessionStateKey, String sessionBaseKey);
+		static Windows.Foundation.Collections.IMap<String, Object> SessionStateForFrame(Windows.UI.Xaml.Controls.Frame frame);
 	}
 }
