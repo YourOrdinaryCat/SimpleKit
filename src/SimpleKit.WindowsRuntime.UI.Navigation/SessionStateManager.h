@@ -11,6 +11,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> SessionStateForFrame(Windows::UI::Xaml::Controls::Frame const& frame);
 
 	private:
+		static void RestoreFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
+		static void SaveFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
+
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> m_sessionState;
 		static std::vector<weak_ref<Windows::UI::Xaml::Controls::Frame>> m_registeredFrames;
 

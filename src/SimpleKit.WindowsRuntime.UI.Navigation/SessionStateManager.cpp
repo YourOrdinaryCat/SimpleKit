@@ -65,6 +65,22 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		return frameState.as<IMap<hstring, IInspectable>>();
 	}
 
+	void SessionStateManager::RestoreFrameNavigationState(Frame const& frame)
+	{
+		auto frameState = SessionStateForFrame(frame);
+		if (frameState.HasKey(L"Navigation"))
+		{
+			auto navState = frameState.Lookup(L"Navigation");
+			frame.SetNavigationState(navState.as<hstring>());
+		}
+	}
+
+	void SessionStateManager::SaveFrameNavigationState(Frame const& frame)
+	{
+		IMap<hstring, IInspectable> frameState = SessionStateForFrame(frame);
+		frameState.Insert(L"Navigation", box_value(frame.GetNavigationState()));
+	}
+
 	IMap<hstring, IInspectable> SessionStateManager::m_sessionState{ nullptr };
 	std::vector<weak_ref<Frame>> SessionStateManager::m_registeredFrames;
 
