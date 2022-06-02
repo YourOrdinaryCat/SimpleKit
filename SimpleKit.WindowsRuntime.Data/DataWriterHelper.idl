@@ -4,5 +4,7 @@ namespace SimpleKit.WindowsRuntime.Data
 	static runtimeclass DataWriterHelper
 	{
 		static void WriteString(Windows.Storage.Streams.DataWriter writer, String str);
+
+		static void WriteProperty(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.IPropertyValue propertyValue);
 	}
 }
