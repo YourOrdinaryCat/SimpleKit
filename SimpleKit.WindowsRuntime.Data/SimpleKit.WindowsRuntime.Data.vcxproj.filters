@@ -23,6 +23,9 @@
     <Filter Include="Project Files">
       <UniqueIdentifier>{fa4c372a-6f92-48bd-ac81-772be94fcc51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enums">
+      <UniqueIdentifier>{69b54e78-4e4b-41ab-8b2c-29e2fd268ed9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -32,5 +35,8 @@
   <ItemGroup>
     <Midl Include="DataReaderHelper.idl" />
     <Midl Include="DataWriterHelper.idl" />
+    <Midl Include="StreamTypes.idl">
+      <Filter>Enums</Filter>
+    </Midl>
   </ItemGroup>
 </Project>
