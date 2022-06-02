@@ -4,10 +4,12 @@
 #include "DataWriterHelper.g.cpp"
 #endif
 
+using winrt::Windows::Foundation::IInspectable;
 using winrt::Windows::Foundation::IPropertyValue;
 using winrt::Windows::Foundation::PropertyType;
 
 using winrt::Windows::Foundation::Collections::IMap;
+using winrt::Windows::Foundation::Collections::IVector;
 
 using winrt::Windows::Storage::Streams::DataWriter;
 
@@ -117,5 +119,16 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 
 		writer.WriteByte((uint8_t)StreamTypes::MapEndMarker);
+	}
+
+	void DataWriterHelper::WriteVector(DataWriter const& writer, IVector<IInspectable> const& vector)
+	{
+		writer.WriteByte((uint8_t)StreamTypes::VectorStartMarker);
+		writer.WriteUInt32(vector.Size());
+
+		for (auto&& item : vector)
+			WriteObject(writer, item);
+
+		writer.WriteByte((uint8_t)StreamTypes::VectorEndMarker);
 	}
 }

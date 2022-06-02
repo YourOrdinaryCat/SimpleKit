@@ -8,7 +8,8 @@ namespace SimpleKit.WindowsRuntime.Data
 		UInt8Type, UInt16Type, UInt32Type, UInt64Type, Int16Type, Int32Type, Int64Type,
 		SingleType, DoubleType, BooleanType, Char16Type, GuidType, StringType,
 
-		// Map marker values used to ensure stream integrity
-		MapStartMarker, MapEndMarker
+		// Marker values used to ensure stream integrity
+		MapStartMarker, MapEndMarker,
+		VectorStartMarker, VectorEndMarker,
 	};
 }
