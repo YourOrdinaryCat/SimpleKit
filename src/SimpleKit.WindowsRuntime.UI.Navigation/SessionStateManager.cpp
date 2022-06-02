@@ -4,20 +4,17 @@
 #include "SessionStateManager.g.cpp"
 #endif
 
+using winrt::Windows::Foundation::IInspectable;
+
+using winrt::Windows::Foundation::Collections::IMap;
+
+using winrt::Windows::UI::Xaml::PropertyMetadata;
+using winrt::Windows::UI::Xaml::DependencyProperty;
+
+using winrt::Windows::UI::Xaml::Controls::Frame;
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
-
-#pragma region Using Directives
-	using Windows::Foundation::IInspectable;
-
-	using Windows::Foundation::Collections::IMap;
-
-	using Windows::UI::Xaml::DependencyProperty;
-	using Windows::UI::Xaml::PropertyMetadata;
-
-	using Windows::UI::Xaml::Controls::Frame;
-#pragma endregion
-
 	void SessionStateManager::Initialize()
 	{
 		if (!m_sessionState)
