@@ -7,6 +7,8 @@
 using winrt::Windows::Foundation::IPropertyValue;
 using winrt::Windows::Foundation::PropertyType;
 
+using winrt::Windows::Foundation::Collections::IMap;
+
 using winrt::Windows::Storage::Streams::DataWriter;
 
 namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
@@ -16,6 +18,31 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		writer.WriteByte((uint8_t)StreamTypes::StringType);
 		writer.WriteUInt32(writer.MeasureString(str));
 		writer.WriteString(str);
+	}
+
+	void DataWriterHelper::WriteObject(DataWriter const& writer, IInspectable const& obj)
+	{
+		if (obj == nullptr)
+		{
+			writer.WriteByte((uint8_t)StreamTypes::NullPtrType);
+			return;
+		}
+
+		auto prop = obj.try_as<IPropertyValue>();
+		if (prop != nullptr)
+		{
+			WriteProperty(writer, prop);
+			return;
+		}
+
+		auto map = obj.try_as<IMap<IInspectable, IInspectable>>();
+		if (map != nullptr)
+		{
+			WriteMap(writer, map);
+			return;
+		}
+
+		throw hresult_invalid_argument(L"Unsupported property type.");
 	}
 
 	void DataWriterHelper::WriteProperty(DataWriter const& writer, IPropertyValue const& propertyValue)
@@ -76,5 +103,19 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		default:
 			throw hresult_invalid_argument(L"Unsupported property type.");
 		}
+	}
+
+	void DataWriterHelper::WriteMap(DataWriter const& writer, IMap<IInspectable, IInspectable> const& map)
+	{
+		writer.WriteByte((uint8_t)StreamTypes::MapStartMarker);
+		writer.WriteUInt32(map.Size());
+
+		for (auto&& pair : map)
+		{
+			WriteObject(writer, pair.Key());
+			WriteObject(writer, pair.Value());
+		}
+
+		writer.WriteByte((uint8_t)StreamTypes::MapEndMarker);
 	}
 }

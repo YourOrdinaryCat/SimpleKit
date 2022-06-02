@@ -7,6 +7,8 @@
 using winrt::Windows::Foundation::IInspectable;
 using winrt::Windows::Foundation::PropertyType;
 
+using winrt::Windows::Foundation::Collections::IMap;
+
 using winrt::Windows::Storage::Streams::DataReader;
 
 namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
@@ -50,8 +52,38 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			return box_value(reader.ReadGuid());
 		case (int)StreamTypes::StringType:
 			return box_value(ReadString(reader));
+		case (int)StreamTypes::MapStartMarker:
+			return box_value(ReadMap(reader));
 		default:
 			throw hresult_invalid_argument(L"Unsupported property type.");
 		}
+	}
+
+	IMap<IInspectable, IInspectable> DataReaderHelper::ReadMap(DataReader const& reader)
+	{
+		auto map = single_threaded_map<IInspectable, IInspectable>();
+		auto size = reader.ReadUInt32();
+
+		for (unsigned int index = 0; index < size; index++)
+		{
+			auto key = ReadObject(reader);
+			auto value = ReadObject(reader);
+
+			if (key)
+			{
+				map.Insert(key, value);
+			}
+			else
+			{
+				throw hresult_invalid_argument(L"Invalid key at index: " + index);
+			}
+		}
+
+		if (reader.ReadByte() != (uint8_t)StreamTypes::MapEndMarker)
+		{
+			throw hresult_invalid_argument(L"Invalid stream.");
+		}
+
+		return map;
 	}
 }
