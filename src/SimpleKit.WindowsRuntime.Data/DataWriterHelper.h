@@ -11,8 +11,9 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		static void WriteObject(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::IInspectable const& obj);
 		static void WriteProperty(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::IPropertyValue const& propertyValue);
 
-		static void WriteMap(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::Collections::IMap<Windows::Foundation::IPropertyValue, Windows::Foundation::IInspectable> const& map);
-		static void WriteVector(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::Collections::IVector<Windows::Foundation::IPropertyValue> const& vector);
+		static void WriteStringToObjectMap(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::Collections::IMap<hstring, IInspectable> const& map);
+		static void WriteMap(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::Collections::IMap<Windows::Foundation::IInspectable, Windows::Foundation::IInspectable> const& map);
+		static void WriteVector(Windows::Storage::Streams::DataWriter const& writer, Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable> const& vector);
 	};
 }
 
