@@ -8,7 +8,7 @@ namespace SimpleKit.WindowsRuntime.Data
 		static void WriteObject(Windows.Storage.Streams.DataWriter writer, Object obj);
 		static void WriteProperty(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.IPropertyValue propertyValue);
 
-		static void WriteMap(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.Collections.IMap<Windows.Foundation.IPropertyValue, Object> map);
-		static void WriteVector(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.Collections.IVector<Windows.Foundation.IPropertyValue> vector);
+		static void WriteMap(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.Collections.IMap<Object, Object> map);
+		static void WriteVector(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.Collections.IVector<Object> vector);
 	}
 }

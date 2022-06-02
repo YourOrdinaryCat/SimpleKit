@@ -37,14 +37,14 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			return;
 		}
 
-		auto map = obj.try_as<IMap<IPropertyValue, IInspectable>>();
+		auto map = obj.try_as<IMap<IInspectable, IInspectable>>();
 		if (map != nullptr)
 		{
 			WriteMap(writer, map);
 			return;
 		}
 
-		auto vector = obj.try_as<IVector<IPropertyValue>>();
+		auto vector = obj.try_as<IVector<IInspectable>>();
 		if (vector != nullptr)
 		{
 			WriteVector(writer, vector);
@@ -114,27 +114,27 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 	}
 
-	void DataWriterHelper::WriteMap(DataWriter const& writer, IMap<IPropertyValue, IInspectable> const& map)
+	void DataWriterHelper::WriteMap(DataWriter const& writer, IMap<IInspectable, IInspectable> const& map)
 	{
 		writer.WriteByte((uint8_t)StreamTypes::MapStartMarker);
 		writer.WriteUInt32(map.Size());
 
 		for (auto&& pair : map)
 		{
-			WriteProperty(writer, pair.Key());
+			WriteObject(writer, pair.Key());
 			WriteObject(writer, pair.Value());
 		}
 
 		writer.WriteByte((uint8_t)StreamTypes::MapEndMarker);
 	}
 
-	void DataWriterHelper::WriteVector(DataWriter const& writer, IVector<IPropertyValue> const& vector)
+	void DataWriterHelper::WriteVector(DataWriter const& writer, IVector<IInspectable> const& vector)
 	{
 		writer.WriteByte((uint8_t)StreamTypes::VectorStartMarker);
 		writer.WriteUInt32(vector.Size());
 
 		for (auto&& item : vector)
-			WriteProperty(writer, item);
+			WriteObject(writer, item);
 
 		writer.WriteByte((uint8_t)StreamTypes::VectorEndMarker);
 	}

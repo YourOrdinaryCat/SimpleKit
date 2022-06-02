@@ -5,7 +5,6 @@
 #endif
 
 using winrt::Windows::Foundation::IInspectable;
-using winrt::Windows::Foundation::IPropertyValue;
 using winrt::Windows::Foundation::PropertyType;
 
 using winrt::Windows::Foundation::Collections::IMap;
@@ -63,9 +62,9 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 	}
 
-	IMap<IPropertyValue, IInspectable> DataReaderHelper::ReadMap(DataReader const& reader)
+	IMap<IInspectable, IInspectable> DataReaderHelper::ReadMap(DataReader const& reader)
 	{
-		auto map = single_threaded_map<IPropertyValue, IInspectable>();
+		auto map = single_threaded_map<IInspectable, IInspectable>();
 		auto size = reader.ReadUInt32();
 
 		for (unsigned int index = 0; index < size; index++)
@@ -75,7 +74,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 
 			if (key)
 			{
-				map.Insert(key.as<IPropertyValue>(), value);
+				map.Insert(key, value);
 			}
 			else
 			{
@@ -91,16 +90,16 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		return map;
 	}
 
-	IVector<IPropertyValue> DataReaderHelper::ReadVector(DataReader const& reader)
+	IVector<IInspectable> DataReaderHelper::ReadVector(DataReader const& reader)
 	{
-		auto vector = single_threaded_vector<IPropertyValue>();
+		auto vector = single_threaded_vector<IInspectable>();
 		auto size = reader.ReadUInt32();
 
 		for (unsigned int index = 0; index < size; index++)
 		{
 			auto value = ReadObject(reader);
 			if (value)
-				vector.Append(value.as<IPropertyValue>());
+				vector.Append(value);
 			else
 				throw hresult_invalid_argument(L"Invalid key at index: " + index);
 		}
