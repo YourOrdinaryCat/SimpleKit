@@ -4,9 +4,24 @@
 #include "SessionStateManager.g.cpp"
 #endif
 
+#include "winrt/SimpleKit.WindowsRuntime.Data.h"
+
+using winrt::SimpleKit::WindowsRuntime::Data::DataWriterHelper;
+
 using winrt::Windows::Foundation::IInspectable;
+using winrt::Windows::Foundation::IAsyncAction;
 
 using winrt::Windows::Foundation::Collections::IMap;
+
+using winrt::Windows::Storage::ApplicationData;
+using winrt::Windows::Storage::CreationCollisionOption;
+using winrt::Windows::Storage::FileAccessMode;
+using winrt::Windows::Storage::StorageFile;
+
+using winrt::Windows::Storage::Streams::DataWriter;
+using winrt::Windows::Storage::Streams::InMemoryRandomAccessStream;
+using winrt::Windows::Storage::Streams::IRandomAccessStream;
+using winrt::Windows::Storage::Streams::RandomAccessStream;
 
 using winrt::Windows::UI::Xaml::PropertyMetadata;
 using winrt::Windows::UI::Xaml::DependencyProperty;
@@ -43,6 +58,42 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 					xaml_typename<Navigation::SessionStateManager>(),
 					PropertyMetadata{ nullptr });
 		}
+	}
+
+	IAsyncAction SessionStateManager::SaveAsync()
+	{
+		// Save the navigation state for all registered frames
+		for (weak_ref<Frame> weakRef : m_registeredFrames)
+		{
+			auto frame = weakRef.get();
+			if (frame)
+			{
+				SaveFrameNavigationState(frame);
+			}
+		}
+
+		// Switch to a background context to reduce unnecessary switching
+		winrt::apartment_context context;
+		co_await winrt::resume_background();
+
+		// Serialize the session state synchronously to avoid asynchronous access to shared state
+		auto sessionData = InMemoryRandomAccessStream();
+		auto sessionDataWriter = DataWriter(sessionData.GetOutputStreamAt(0));
+		DataWriterHelper::WriteObject(sessionDataWriter, m_sessionState);
+
+		co_await sessionDataWriter.StoreAsync();
+
+		StorageFile file{ co_await ApplicationData::Current().LocalFolder().
+			CreateFileAsync(m_sessionStateFilename, CreationCollisionOption::ReplaceExisting) };
+		IRandomAccessStream fileStream{ co_await file.OpenAsync(FileAccessMode::ReadWrite) };
+
+		co_await RandomAccessStream::CopyAsync(
+			sessionData.GetInputStreamAt(0),
+			fileStream.GetOutputStreamAt(0)
+		);
+
+		// Go back to the original context before returning
+		co_await context;
 	}
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)

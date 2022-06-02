@@ -157,6 +157,11 @@
       <SubType>Designer</SubType>
     </Midl>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SimpleKit.WindowsRuntime.Data\SimpleKit.WindowsRuntime.Data.vcxproj">
+      <Project>{2c818720-fec1-4cfd-8dc1-800c500b0c00}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
