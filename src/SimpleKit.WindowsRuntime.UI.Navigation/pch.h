@@ -4,6 +4,7 @@
 #include <winrt/Windows.Foundation.Collections.h>
 
 #include <winrt/Windows.Storage.h>
+#include <winrt/Windows.Storage.FileProperties.h>
 #include <winrt/Windows.Storage.Streams.h>
 
 #include <winrt/Windows.System.h>
