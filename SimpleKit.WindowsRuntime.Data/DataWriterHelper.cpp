@@ -44,6 +44,13 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			return;
 		}
 
+		auto vector = obj.try_as<IVector<IInspectable>>();
+		if (vector != nullptr)
+		{
+			WriteVector(writer, vector);
+			return;
+		}
+
 		throw hresult_invalid_argument(L"Unsupported property type.");
 	}
 
