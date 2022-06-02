@@ -3,5 +3,6 @@ namespace SimpleKit.WindowsRuntime.Data
 	[default_interface]
 	static runtimeclass DataWriterHelper
 	{
+		static void WriteString(Windows.Storage.Streams.DataWriter writer, String str);
 	}
 }

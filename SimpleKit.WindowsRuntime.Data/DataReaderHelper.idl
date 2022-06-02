@@ -3,5 +3,6 @@ namespace SimpleKit.WindowsRuntime.Data
 	[default_interface]
 	static runtimeclass DataReaderHelper
 	{
+		static String ReadString(Windows.Storage.Streams.DataReader reader);
 	}
 }

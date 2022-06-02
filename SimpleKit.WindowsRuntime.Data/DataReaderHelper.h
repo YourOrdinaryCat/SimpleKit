@@ -6,6 +6,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 {
 	struct DataReaderHelper : DataReaderHelperT<DataReaderHelper>
 	{
+		static hstring ReadString(Windows::Storage::Streams::DataReader const& reader);
 	};
 }
 

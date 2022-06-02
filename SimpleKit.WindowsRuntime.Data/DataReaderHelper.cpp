@@ -4,6 +4,13 @@
 #include "DataReaderHelper.g.cpp"
 #endif
 
+using winrt::Windows::Storage::Streams::DataReader;
+
 namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 {
+	hstring DataReaderHelper::ReadString(DataReader const& reader)
+	{
+		int length = reader.ReadUInt32();
+		return reader.ReadString(length);
+	}
 }
