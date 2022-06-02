@@ -1,0 +1,14 @@
+namespace SimpleKit.WindowsRuntime.Data
+{
+	[default_interface]
+	static runtimeclass DataWriterHelper
+	{
+		static void WriteString(Windows.Storage.Streams.DataWriter writer, String str);
+
+		static void WriteObject(Windows.Storage.Streams.DataWriter writer, Object obj);
+		static void WriteProperty(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.IPropertyValue propertyValue);
+
+		static void WriteMap(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.Collections.IMap<Object, Object> map);
+		static void WriteVector(Windows.Storage.Streams.DataWriter writer, Windows.Foundation.Collections.IVector<Object> vector);
+	}
+}

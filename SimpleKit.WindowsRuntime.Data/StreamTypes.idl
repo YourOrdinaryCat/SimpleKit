@@ -1,0 +1,15 @@
+namespace SimpleKit.WindowsRuntime.Data
+{
+	enum StreamTypes
+	{
+		NullPtrType = 0,
+
+		// Supported IPropertyValue types
+		UInt8Type, UInt16Type, UInt32Type, UInt64Type, Int16Type, Int32Type, Int64Type,
+		SingleType, DoubleType, BooleanType, Char16Type, GuidType, StringType,
+
+		// Marker values used to ensure stream integrity
+		MapStartMarker, MapEndMarker,
+		VectorStartMarker, VectorEndMarker,
+	};
+}
