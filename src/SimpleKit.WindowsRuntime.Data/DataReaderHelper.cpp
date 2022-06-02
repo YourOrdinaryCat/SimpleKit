@@ -62,6 +62,28 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 	}
 
+	IMap<hstring, IInspectable> DataReaderHelper::ReadStringToObjectMap(DataReader const& reader)
+	{
+		auto map = single_threaded_map<hstring, IInspectable>();
+		auto size = reader.ReadUInt32();
+
+		for (unsigned int index = 0; index < size; index++)
+		{
+			auto key = ReadObject(reader).try_as<hstring>();
+			auto value = ReadObject(reader);
+
+			if (key)
+				map.Insert(key.value(), value);
+			else
+				throw hresult_invalid_argument(L"Invalid key at index: " + index);
+		}
+
+		if (reader.ReadByte() != (uint8_t)StreamTypes::MapEndMarker)
+			throw hresult_invalid_argument(L"Invalid stream");
+
+		return map;
+	}
+
 	IMap<IInspectable, IInspectable> DataReaderHelper::ReadMap(DataReader const& reader)
 	{
 		auto map = single_threaded_map<IInspectable, IInspectable>();
@@ -73,19 +95,13 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			auto value = ReadObject(reader);
 
 			if (key)
-			{
 				map.Insert(key, value);
-			}
 			else
-			{
 				throw hresult_invalid_argument(L"Invalid key at index: " + index);
-			}
 		}
 
 		if (reader.ReadByte() != (uint8_t)StreamTypes::MapEndMarker)
-		{
 			throw hresult_invalid_argument(L"Invalid stream.");
-		}
 
 		return map;
 	}
@@ -105,9 +121,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 
 		if (reader.ReadByte() != (uint8_t)StreamTypes::VectorEndMarker)
-		{
 			throw hresult_invalid_argument(L"Invalid stream.");
-		}
 
 		return vector;
 	}

@@ -114,6 +114,20 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 	}
 
+	void DataWriterHelper::WriteStringToObjectMap(DataWriter const& writer, IMap<hstring, IInspectable> const& map)
+	{
+		writer.WriteByte((uint8_t)StreamTypes::MapStartMarker);
+		writer.WriteUInt32(map.Size());
+
+		for (auto&& pair : map)
+		{
+			WriteString(writer, pair.Key());
+			WriteObject(writer, pair.Value());
+		}
+
+		writer.WriteByte((uint8_t)StreamTypes::MapEndMarker);
+	}
+
 	void DataWriterHelper::WriteMap(DataWriter const& writer, IMap<IInspectable, IInspectable> const& map)
 	{
 		writer.WriteByte((uint8_t)StreamTypes::MapStartMarker);
