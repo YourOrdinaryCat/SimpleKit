@@ -1,0 +1,12 @@
+namespace SimpleKit.WindowsRuntime.Data
+{
+	[default_interface]
+	static runtimeclass DataReaderHelper
+	{
+		static String ReadString(Windows.Storage.Streams.DataReader reader);
+		static Object ReadObject(Windows.Storage.Streams.DataReader reader);
+
+		static Windows.Foundation.Collections.IMap<Windows.Foundation.IPropertyValue, Object> ReadMap(Windows.Storage.Streams.DataReader reader);
+		static Windows.Foundation.Collections.IVector<Windows.Foundation.IPropertyValue> ReadVector(Windows.Storage.Streams.DataReader reader);
+	}
+}
