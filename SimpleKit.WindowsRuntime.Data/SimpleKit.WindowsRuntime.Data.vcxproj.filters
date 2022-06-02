@@ -29,4 +29,8 @@
       <Filter>Project Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Midl Include="DataReaderHelper.idl" />
+    <Midl Include="DataWriterHelper.idl" />
+  </ItemGroup>
 </Project>
