@@ -14,6 +14,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 
 		static Windows::Foundation::IAsyncAction SaveAsync();
+		static Windows::Foundation::IAsyncAction RestoreAsync();
+		static Windows::Foundation::IAsyncAction RestoreAsync(hstring const& sessionBaseKey);
 
 		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring const& sessionStateKey);
 		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey);

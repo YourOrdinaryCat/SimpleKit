@@ -8,6 +8,8 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		static Windows.Foundation.Collections.IMap<String, Object> SessionState { get; };
 
 		static Windows.Foundation.IAsyncAction SaveAsync();
+		static Windows.Foundation.IAsyncAction RestoreAsync();
+		static Windows.Foundation.IAsyncAction RestoreAsync(String sessionBaseKey);
 
 		static void RegisterFrame(Windows.UI.Xaml.Controls.Frame frame, String sessionStateKey);
 		static void RegisterFrame(Windows.UI.Xaml.Controls.Frame frame, String sessionStateKey, String sessionBaseKey);

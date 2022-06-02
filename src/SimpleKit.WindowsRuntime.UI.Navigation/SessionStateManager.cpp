@@ -6,6 +6,7 @@
 
 #include "winrt/SimpleKit.WindowsRuntime.Data.h"
 
+using winrt::SimpleKit::WindowsRuntime::Data::DataReaderHelper;
 using winrt::SimpleKit::WindowsRuntime::Data::DataWriterHelper;
 
 using winrt::Windows::Foundation::IInspectable;
@@ -18,9 +19,13 @@ using winrt::Windows::Storage::CreationCollisionOption;
 using winrt::Windows::Storage::FileAccessMode;
 using winrt::Windows::Storage::StorageFile;
 
+using winrt::Windows::Storage::FileProperties::BasicProperties;
+
+using winrt::Windows::Storage::Streams::DataReader;
 using winrt::Windows::Storage::Streams::DataWriter;
 using winrt::Windows::Storage::Streams::InMemoryRandomAccessStream;
 using winrt::Windows::Storage::Streams::IRandomAccessStream;
+using winrt::Windows::Storage::Streams::IRandomAccessStreamWithContentType;
 using winrt::Windows::Storage::Streams::RandomAccessStream;
 
 using winrt::Windows::UI::Xaml::PropertyMetadata;
@@ -87,13 +92,61 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			CreateFileAsync(m_sessionStateFilename, CreationCollisionOption::ReplaceExisting) };
 		IRandomAccessStream fileStream{ co_await file.OpenAsync(FileAccessMode::ReadWrite) };
 
-		co_await RandomAccessStream::CopyAsync(
+		co_await RandomAccessStream::CopyAsync
+		(
 			sessionData.GetInputStreamAt(0),
 			fileStream.GetOutputStreamAt(0)
 		);
 
 		// Go back to the original context before returning
 		co_await context;
+	}
+
+	IAsyncAction SessionStateManager::RestoreAsync()
+	{
+		return RestoreAsync(hstring{ });
+	}
+
+	IAsyncAction SessionStateManager::RestoreAsync(hstring const& sessionBaseKey)
+	{
+		m_sessionState.Clear();
+
+		// Switch to a background context to reduce unnecessary switching
+		winrt::apartment_context context;
+		co_await winrt::resume_background();
+
+		StorageFile stateFile{ co_await ApplicationData::Current().
+			LocalFolder().GetFileAsync(m_sessionStateFilename) };
+
+		BasicProperties props{ co_await stateFile.GetBasicPropertiesAsync() };
+
+		// We can't work with anything larger than 4GB
+		auto size = unsigned int(props.Size());
+		if (size != props.Size())
+			throw hresult_out_of_bounds(L"Session state larger than 4GB");
+
+		IRandomAccessStreamWithContentType strm{ co_await stateFile.OpenReadAsync() };
+		auto reader = DataReader(strm);
+
+		co_await reader.LoadAsync(size);
+
+		// Deserialize the Session State
+		auto state = DataReaderHelper::ReadMap(reader);
+		m_sessionState = state.as<IMap<hstring, IInspectable>>();
+
+		// Go back to the original context before manipulating the frames
+		co_await context;
+
+		// Restore any registered frames to their saved state
+		for (auto&& weakFrame : m_registeredFrames)
+		{
+			auto frame = weakFrame.get();
+			if (frame && frame.GetValue(m_frameSessionBaseKeyProperty).as<hstring>() == sessionBaseKey)
+			{
+				frame.ClearValue(m_frameSessionStateProperty);
+				RestoreFrameNavigationState(frame);
+			}
+		}
 	}
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)
