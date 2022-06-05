@@ -4,30 +4,27 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
+using winrt::Windows::Foundation::IInspectable;
+
+using winrt::Windows::System::VirtualKey;
+using winrt::Windows::System::VirtualKeyModifiers;
+
+using winrt::Windows::UI::Core::AcceleratorKeyEventArgs;
+using winrt::Windows::UI::Core::BackRequestedEventArgs;
+using winrt::Windows::UI::Core::CoreAcceleratorKeyEventType;
+using winrt::Windows::UI::Core::CoreDispatcher;
+using winrt::Windows::UI::Core::CoreVirtualKeyStates;
+using winrt::Windows::UI::Core::CoreWindow;
+using winrt::Windows::UI::Core::PointerEventArgs;
+using winrt::Windows::UI::Core::SystemNavigationManager;
+
+using winrt::Windows::UI::Xaml::RoutedEventArgs;
+using winrt::Windows::UI::Xaml::Window;
+
+using winrt::Windows::UI::Xaml::Controls::Page;
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
-
-#pragma region Using Directives
-	using Windows::Foundation::IInspectable;
-
-	using Windows::System::VirtualKey;
-	using Windows::System::VirtualKeyModifiers;
-
-	using Windows::UI::Core::AcceleratorKeyEventArgs;
-	using Windows::UI::Core::BackRequestedEventArgs;
-	using Windows::UI::Core::CoreAcceleratorKeyEventType;
-	using Windows::UI::Core::CoreDispatcher;
-	using Windows::UI::Core::CoreVirtualKeyStates;
-	using Windows::UI::Core::CoreWindow;
-	using Windows::UI::Core::PointerEventArgs;
-	using Windows::UI::Core::SystemNavigationManager;
-
-	using Windows::UI::Xaml::RoutedEventArgs;
-	using Windows::UI::Xaml::Window;
-
-	using Windows::UI::Xaml::Controls::Page;
-#pragma endregion
-
 	NavigationHelper::NavigationHelper(Page const& page)
 	{
 		m_page = make_weak<Page>(page);
