@@ -1,0 +1,8 @@
+namespace SimpleKit.WindowsRuntime.UI.Navigation
+{
+	[default_interface]
+	unsealed runtimeclass NavPage : Windows.UI.Xaml.Controls.Page
+	{
+		NavPage();
+	}
+}

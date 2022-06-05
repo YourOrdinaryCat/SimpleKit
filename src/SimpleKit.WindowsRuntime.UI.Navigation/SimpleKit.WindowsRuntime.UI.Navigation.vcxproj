@@ -122,6 +122,10 @@
       <DependentUpon>NavigationHelper.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="NavPage.h">
+      <DependentUpon>NavPage.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="SessionStateManager.h">
       <DependentUpon>SessionStateManager.idl</DependentUpon>
@@ -131,6 +135,10 @@
   <ItemGroup>
     <ClCompile Include="NavigationHelper.cpp">
       <DependentUpon>NavigationHelper.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="NavPage.cpp">
+      <DependentUpon>NavPage.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -151,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="NavigationHelper.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="NavPage.idl">
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="SessionStateManager.idl">
