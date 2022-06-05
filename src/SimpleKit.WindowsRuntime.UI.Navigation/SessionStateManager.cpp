@@ -68,13 +68,11 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	IAsyncAction SessionStateManager::SaveAsync()
 	{
 		// Save the navigation state for all registered frames
-		for (weak_ref<Frame> weakRef : m_registeredFrames)
+		for (auto&& weakRef : m_registeredFrames)
 		{
 			auto frame = weakRef.get();
 			if (frame)
-			{
 				SaveFrameNavigationState(frame);
-			}
 		}
 
 		// Switch to a background context to reduce unnecessary switching
@@ -84,8 +82,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		// Serialize the session state synchronously to avoid asynchronous access to shared state
 		auto sessionData = InMemoryRandomAccessStream();
 		auto sessionDataWriter = DataWriter(sessionData.GetOutputStreamAt(0));
-		DataWriterHelper::WriteObject(sessionDataWriter, m_sessionState);
 
+		DataWriterHelper::WriteObject(sessionDataWriter, m_sessionState);
 		co_await sessionDataWriter.StoreAsync();
 
 		StorageFile file{ co_await ApplicationData::Current().LocalFolder().
@@ -104,10 +102,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	IAsyncAction SessionStateManager::RestoreAsync()
 	{
-		return RestoreAsync(hstring{ });
+		return RestoreAsync(hstring{});
 	}
 
-	IAsyncAction SessionStateManager::RestoreAsync(hstring const& sessionBaseKey)
+	IAsyncAction SessionStateManager::RestoreAsync(hstring sessionBaseKey)
 	{
 		m_sessionState.Clear();
 
@@ -131,7 +129,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		co_await reader.LoadAsync(size);
 
 		// Deserialize the Session State
-		auto state = DataReaderHelper::ReadMap(reader);
+		auto state = DataReaderHelper::ReadObject(reader);
 		m_sessionState = state.as<IMap<hstring, IInspectable>>();
 
 		// Go back to the original context before manipulating the frames
@@ -141,8 +139,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		for (auto&& weakFrame : m_registeredFrames)
 		{
 			auto frame = weakFrame.get();
-			if (frame && frame.GetValue(m_frameSessionBaseKeyProperty).as<hstring>() == sessionBaseKey)
+			if (frame)
 			{
+				if (!sessionBaseKey.empty())
+				{
+					auto key = frame.GetValue(m_frameSessionBaseKeyProperty).try_as<hstring>();
+					if (key && key.value() != sessionBaseKey) continue;
+				}
+
 				frame.ClearValue(m_frameSessionStateProperty);
 				RestoreFrameNavigationState(frame);
 			}
@@ -151,22 +155,18 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)
 	{
-		RegisterFrame(frame, sessionStateKey, hstring{ });
+		RegisterFrame(frame, sessionStateKey, hstring{});
 	}
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey)
 	{
-		if (frame.GetValue(m_frameSessionStateKeyProperty) != nullptr)
-		{
+		if (frame.GetValue(m_frameSessionStateKeyProperty))
 			throw hresult_invalid_argument(L"Frames can only be registered to one session state key.");
-		}
 
-		if (frame.GetValue(m_frameSessionStateProperty) != nullptr)
-		{
+		if (frame.GetValue(m_frameSessionStateProperty))
 			throw hresult_illegal_method_call(L"Frames must either be registered before accessing frame session state, or not registered at all.");
-		}
 
-		if (sessionBaseKey != hstring{ })
+		if (!sessionBaseKey.empty())
 		{
 			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
 			sessionStateKey = sessionBaseKey + L"_" + sessionStateKey;
