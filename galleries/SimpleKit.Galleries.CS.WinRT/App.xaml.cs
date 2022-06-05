@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SimpleKit.WindowsRuntime.UI.Navigation;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -43,11 +44,19 @@ namespace SimpleKit.Galleries.CS.WinRT
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                SessionStateManager.RegisterFrame(rootFrame, "MainFrame");
+                SessionStateManager.RegisterFrame(rootFrame, "MainFrame", "Default");
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    await SessionStateManager.RestoreAsync();
+                    try
+                    {
+                        await SessionStateManager.RestoreAsync("Default");
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        // There is no state file, so we assume
+                        // there's no saved state
+                    }
                 }
 
                 // Place the frame in the current Window
