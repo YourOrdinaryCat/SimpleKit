@@ -7,6 +7,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	struct NavPage : NavPageT<NavPage>
 	{
 		NavPage();
+
+	private:
+		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper m_navigationHelper;
 	};
 }
 
