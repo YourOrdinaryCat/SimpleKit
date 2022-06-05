@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using SimpleKit.WindowsRuntime.UI.Navigation;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -20,6 +22,8 @@ namespace SimpleKit.Galleries.CS.WinRT
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            SessionStateManager.Initialize();
         }
 
         /// <summary>
@@ -27,7 +31,7 @@ namespace SimpleKit.Galleries.CS.WinRT
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -40,9 +44,19 @@ namespace SimpleKit.Galleries.CS.WinRT
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                SessionStateManager.RegisterFrame(rootFrame, "MainFrame", "Default");
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    try
+                    {
+                        await SessionStateManager.RestoreAsync("Default");
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        // There is no state file, so we assume
+                        // there's no saved state
+                    }
                 }
 
                 // Place the frame in the current Window
@@ -80,10 +94,10 @@ namespace SimpleKit.Galleries.CS.WinRT
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            await SessionStateManager.SaveAsync();
             deferral.Complete();
         }
     }

@@ -54,9 +54,11 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		case (int)StreamTypes::StringType:
 			return box_value(ReadString(reader));
 		case (int)StreamTypes::MapStartMarker:
-			return box_value(ReadMap(reader));
+			return ReadMap(reader);
+		case (int)StreamTypes::StrToObjMapStartMarker:
+			return ReadStringToObjectMap(reader);
 		case (int)StreamTypes::VectorStartMarker:
-			return box_value(ReadVector(reader));
+			return ReadVector(reader);
 		default:
 			throw hresult_invalid_argument(L"Unsupported property type.");
 		}
@@ -78,7 +80,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 				throw hresult_invalid_argument(L"Invalid key at index: " + index);
 		}
 
-		if (reader.ReadByte() != (uint8_t)StreamTypes::MapEndMarker)
+		if (reader.ReadByte() != (uint8_t)StreamTypes::StrToObjMapEndMarker)
 			throw hresult_invalid_argument(L"Invalid stream");
 
 		return map;

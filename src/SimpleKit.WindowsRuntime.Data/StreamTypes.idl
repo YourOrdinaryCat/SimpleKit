@@ -10,6 +10,7 @@ namespace SimpleKit.WindowsRuntime.Data
 
 		// Marker values used to ensure stream integrity
 		MapStartMarker, MapEndMarker,
+		StrToObjMapStartMarker, StrToObjMapEndMarker,
 		VectorStartMarker, VectorEndMarker,
 	};
 }

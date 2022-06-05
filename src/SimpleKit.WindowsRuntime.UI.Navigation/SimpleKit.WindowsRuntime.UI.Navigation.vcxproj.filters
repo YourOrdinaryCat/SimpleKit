@@ -31,5 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="NavigationHelper.idl" />
+    <Midl Include="SessionStateManager.idl" />
   </ItemGroup>
 </Project>
