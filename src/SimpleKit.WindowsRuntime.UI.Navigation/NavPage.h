@@ -8,6 +8,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	{
 		NavPage();
 
+		virtual void OnStateLoadRequested(SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs const&) {};
+		virtual void OnStateSaveRequested(Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const&) {};
+
 	private:
 		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper m_navigationHelper;
 	};

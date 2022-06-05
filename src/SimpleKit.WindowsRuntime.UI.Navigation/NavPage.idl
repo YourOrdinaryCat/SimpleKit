@@ -1,8 +1,13 @@
+import "LoadStateEventArgs.idl";
+
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
 	[default_interface]
 	unsealed runtimeclass NavPage : Windows.UI.Xaml.Controls.Page
 	{
 		NavPage();
-	}
+
+		overridable void OnStateLoadRequested(LoadStateEventArgs e);
+		overridable void OnStateSaveRequested(Windows.Foundation.Collections.IMap<String, Object> pageState);
+	};
 }
