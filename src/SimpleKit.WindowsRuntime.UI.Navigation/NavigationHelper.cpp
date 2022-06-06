@@ -5,6 +5,7 @@
 #endif
 
 using winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs;
+using winrt::SimpleKit::WindowsRuntime::UI::Navigation::StateRequestedEventArgs;
 
 using winrt::Windows::Foundation::IInspectable;
 
@@ -126,7 +127,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
 			auto pageState = single_threaded_map<hstring, IInspectable>();
 
-			m_pageStateRequestedEvent(*this, pageState);
+			m_pageStateRequestedEvent(*this, StateRequestedEventArgs(pageState));
 			frameState.Insert(m_pageKey, pageState);
 		}
 	}

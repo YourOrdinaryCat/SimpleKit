@@ -27,7 +27,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			m_stateRestorationStartedEvent.remove(token);
 		}
 
-		winrt::event_token PageStateRequested(Windows::Foundation::EventHandler<Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable>> const& handler)
+		winrt::event_token PageStateRequested(Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::StateRequestedEventArgs> const& handler)
 		{
 			return m_pageStateRequestedEvent.add(handler);
 		}
@@ -44,7 +44,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		hstring m_pageKey;
 
 		winrt::event<Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>> m_stateRestorationStartedEvent;
-		winrt::event<Windows::Foundation::EventHandler<Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable>>> m_pageStateRequestedEvent;
+		winrt::event<Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::StateRequestedEventArgs>> m_pageStateRequestedEvent;
 
 		winrt::event_token m_backRequestedToken;
 		winrt::event_token m_loadedToken;
