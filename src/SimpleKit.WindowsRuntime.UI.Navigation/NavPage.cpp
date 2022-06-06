@@ -21,6 +21,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void NavPage::OnNavigatedTo(NavigationEventArgs const& e)
 	{
+		auto strong_this{ get_strong() };
+
 		auto frameState = SessionStateManager::SessionStateForFrame(Frame());
 		m_pageKey = L"Page-" + to_hstring(Frame().BackStackDepth());
 
@@ -38,14 +40,25 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 				nextPageKey = L"Page-" + nextPageIndex;
 			}
 
-			OnStateLoadRequested(LoadStateEventArgs(e.Parameter(), nullptr));
+			this->OnStateLoadRequested(LoadStateEventArgs(e.Parameter(), nullptr));
 		}
 		else
 		{
 			// If we were here before, pass the navigation parameter and
 			// preserved state
 			auto state = frameState.Lookup(m_pageKey).try_as<IMap<hstring, IInspectable>>();
-			OnStateLoadRequested(LoadStateEventArgs(e.Parameter(), state));
+			this->OnStateLoadRequested(LoadStateEventArgs(e.Parameter(), state));
 		}
+	}
+
+	void NavPage::OnNavigatedFrom(NavigationEventArgs const& e)
+	{
+		auto strong_this{ get_strong() };
+
+		auto frameState = SessionStateManager::SessionStateForFrame(Frame());
+		auto pageState = single_threaded_map<hstring, IInspectable>();
+
+		this->OnStateSaveRequested(pageState);
+		frameState.Insert(m_pageKey, pageState);
 	}
 }
