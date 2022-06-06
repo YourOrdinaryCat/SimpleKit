@@ -8,11 +8,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	{
 		NavPage();
 
+		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
+
 		virtual void OnStateLoadRequested(SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs const&) {};
 		virtual void OnStateSaveRequested(Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const&) {};
 
 	private:
 		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper m_navigationHelper;
+
+		hstring m_pageKey;
 	};
 }
 
