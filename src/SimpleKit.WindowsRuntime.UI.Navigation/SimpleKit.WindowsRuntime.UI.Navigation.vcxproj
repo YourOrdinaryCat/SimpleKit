@@ -135,6 +135,10 @@
       <DependentUpon>SessionStateManager.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="StateRequestedEventArgs.h">
+      <DependentUpon>StateRequestedEventArgs.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LoadStateEventArgs.cpp">
@@ -157,6 +161,10 @@
       <DependentUpon>SessionStateManager.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="StateRequestedEventArgs.cpp">
+      <DependentUpon>StateRequestedEventArgs.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ProjectName).def" />
@@ -176,6 +184,9 @@
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="SessionStateManager.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="StateRequestedEventArgs.idl">
       <SubType>Designer</SubType>
     </Midl>
   </ItemGroup>
