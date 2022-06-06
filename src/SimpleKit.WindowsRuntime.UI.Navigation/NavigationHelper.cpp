@@ -4,7 +4,11 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
+using winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs;
+
 using winrt::Windows::Foundation::IInspectable;
+
+using winrt::Windows::Foundation::Collections::IMap;
 
 using winrt::Windows::System::VirtualKey;
 using winrt::Windows::System::VirtualKeyModifiers;
@@ -22,6 +26,9 @@ using winrt::Windows::UI::Xaml::RoutedEventArgs;
 using winrt::Windows::UI::Xaml::Window;
 
 using winrt::Windows::UI::Xaml::Controls::Page;
+
+using winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs;
+using winrt::Windows::UI::Xaml::Navigation::NavigationMode;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
@@ -75,6 +82,52 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			auto frame = page.Frame();
 			if (frame != nullptr && frame.CanGoForward())
 				frame.GoForward();
+		}
+	}
+
+	void NavigationHelper::HandleNavigationToPage(NavigationEventArgs const& args)
+	{
+		auto page = m_page.get();
+		if (page)
+		{
+			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
+			m_pageKey = L"Page-" + to_hstring(page.Frame().BackStackDepth());
+
+			if (args.NavigationMode() == NavigationMode::New)
+			{
+				// Clear existing state for new navigation
+				hstring nextPageKey = m_pageKey;
+				int nextPageIndex = page.Frame().BackStackDepth();
+
+				while (frameState.HasKey(nextPageKey))
+				{
+					frameState.Remove(nextPageKey);
+					nextPageIndex++;
+					nextPageKey = L"Page-" + nextPageIndex;
+				}
+
+				m_stateRestorationStartedEvent(*this, LoadStateEventArgs(args.Parameter(), nullptr));
+			}
+			else
+			{
+				// If we were here before, pass the navigation parameter and
+				// preserved state
+				auto state = frameState.Lookup(m_pageKey).try_as<IMap<hstring, IInspectable>>();
+				m_stateRestorationStartedEvent(*this, LoadStateEventArgs(args.Parameter(), state));
+			}
+		}
+	}
+
+	void NavigationHelper::HandleNavigatedFromPage()
+	{
+		auto page = m_page.get();
+		if (page)
+		{
+			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
+			auto pageState = single_threaded_map<hstring, IInspectable>();
+
+			m_pageStateRequestedEvent(*this, pageState);
+			frameState.Insert(m_pageKey, pageState);
 		}
 	}
 

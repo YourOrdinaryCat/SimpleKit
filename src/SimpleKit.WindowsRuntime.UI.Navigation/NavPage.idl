@@ -1,4 +1,4 @@
-import "LoadStateEventArgs.idl";
+import "NavigationHelper.idl";
 
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
@@ -8,7 +8,6 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 	{
 		NavPage();
 
-		overridable void OnStateLoadRequested(LoadStateEventArgs e);
-		overridable void OnStateSaveRequested(Windows.Foundation.Collections.IMap<String, Object> pageState);
+		protected SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper StateHandler;
 	};
 }
