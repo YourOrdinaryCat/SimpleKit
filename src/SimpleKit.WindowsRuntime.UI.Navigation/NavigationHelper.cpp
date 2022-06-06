@@ -25,12 +25,11 @@ using winrt::Windows::UI::Xaml::Controls::Page;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
-	NavigationHelper::NavigationHelper(Page const& page)
+	NavigationHelper::NavigationHelper(Page const& page) :
+		m_page(page),
+		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
+		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
 	{
-		m_page = make_weak<Page>(page);
-
-		m_loadedToken = page.Loaded({ this, &NavigationHelper::OnPageLoaded });
-		m_unloadedToken = page.Unloaded({ this, &NavigationHelper::OnPageUnloaded });
 	}
 
 	bool NavigationHelper::CanGoBack()
