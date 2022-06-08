@@ -107,7 +107,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 				}
 
 				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, nullptr);
-				m_stateRestorationStartedEvent
+				m_loadingStateEvent
 				(
 					*this,
 					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
@@ -120,7 +120,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 				auto state = frameState.Lookup(m_pageKey).try_as<IMap<hstring, IInspectable>>();
 				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, state);
 
-				m_stateRestorationStartedEvent
+				m_loadingStateEvent
 				(
 					*this,
 					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
@@ -134,7 +134,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		auto page = m_page.get();
 		if (page)
 		{
-			m_pageStateRequestedEvent(*this, args);
+			m_savingStateEvent(*this, args);
 		}
 	}
 

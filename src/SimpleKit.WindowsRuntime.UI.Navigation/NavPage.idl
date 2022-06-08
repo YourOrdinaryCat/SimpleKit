@@ -8,6 +8,6 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 	{
 		NavPage();
 
-		protected SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper StateHandler{ get; };
+		protected SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper PageHelper{ get; };
 	};
 }

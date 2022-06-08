@@ -20,7 +20,7 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 
 		void SaveState(Windows.Foundation.Collections.IMap<String, Object> state);
 
-		event Windows.Foundation.EventHandler<SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs> StateRestorationStarted;
-		event Windows.Foundation.EventHandler<Windows.UI.Xaml.Navigation.NavigationEventArgs> PageStateRequested;
+		event Windows.Foundation.EventHandler<SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs> LoadingState;
+		event Windows.Foundation.EventHandler<Windows.UI.Xaml.Navigation.NavigationEventArgs> SavingState;
 	}
 }

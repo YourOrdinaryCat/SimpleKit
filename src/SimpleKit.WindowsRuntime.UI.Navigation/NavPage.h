@@ -11,13 +11,13 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
 		void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
 
-		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper StateHandler()
+		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper PageHelper()
 		{
-			return m_stateHandler;
+			return m_pageHelper;
 		}
 
 	private:
-		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper m_stateHandler{ nullptr };
+		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper m_pageHelper;
 	};
 }
 

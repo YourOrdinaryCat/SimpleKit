@@ -19,24 +19,24 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		void SaveState(Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const& state);
 
-		winrt::event_token StateRestorationStarted(Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs> const& handler)
+		winrt::event_token LoadingState(Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs> const& handler)
 		{
-			return m_stateRestorationStartedEvent.add(handler);
+			return m_loadingStateEvent.add(handler);
 		}
 
-		void StateRestorationStarted(winrt::event_token const& token) noexcept
+		void LoadingState(winrt::event_token const& token) noexcept
 		{
-			m_stateRestorationStartedEvent.remove(token);
+			m_loadingStateEvent.remove(token);
 		}
 
-		winrt::event_token PageStateRequested(Windows::Foundation::EventHandler<Windows::UI::Xaml::Navigation::NavigationEventArgs> const& handler)
+		winrt::event_token SavingState(Windows::Foundation::EventHandler<Windows::UI::Xaml::Navigation::NavigationEventArgs> const& handler)
 		{
-			return m_pageStateRequestedEvent.add(handler);
+			return m_savingStateEvent.add(handler);
 		}
 
-		void PageStateRequested(winrt::event_token const& token) noexcept
+		void SavingState(winrt::event_token const& token) noexcept
 		{
-			m_pageStateRequestedEvent.remove(token);
+			m_savingStateEvent.remove(token);
 		}
 
 	private:
@@ -45,8 +45,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
 		hstring m_pageKey;
 
-		winrt::event<Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>> m_stateRestorationStartedEvent;
-		winrt::event<Windows::Foundation::EventHandler<Windows::UI::Xaml::Navigation::NavigationEventArgs>> m_pageStateRequestedEvent;
+		winrt::event<Windows::Foundation::EventHandler<SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>> m_loadingStateEvent;
+		winrt::event<Windows::Foundation::EventHandler<Windows::UI::Xaml::Navigation::NavigationEventArgs>> m_savingStateEvent;
 
 		winrt::event_token m_backRequestedToken;
 		winrt::event_token m_loadedToken;
