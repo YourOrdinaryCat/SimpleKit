@@ -4,36 +4,39 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
+#include "LoadStateEventArgs.h"
+
+using winrt::Windows::Foundation::IInspectable;
+
+using winrt::Windows::Foundation::Collections::IMap;
+
+using winrt::Windows::System::VirtualKey;
+using winrt::Windows::System::VirtualKeyModifiers;
+
+using winrt::Windows::UI::Core::AcceleratorKeyEventArgs;
+using winrt::Windows::UI::Core::BackRequestedEventArgs;
+using winrt::Windows::UI::Core::CoreAcceleratorKeyEventType;
+using winrt::Windows::UI::Core::CoreDispatcher;
+using winrt::Windows::UI::Core::CoreVirtualKeyStates;
+using winrt::Windows::UI::Core::CoreWindow;
+using winrt::Windows::UI::Core::PointerEventArgs;
+using winrt::Windows::UI::Core::SystemNavigationManager;
+
+using winrt::Windows::UI::Xaml::RoutedEventArgs;
+using winrt::Windows::UI::Xaml::Window;
+
+using winrt::Windows::UI::Xaml::Controls::Page;
+
+using winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs;
+using winrt::Windows::UI::Xaml::Navigation::NavigationMode;
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
-
-#pragma region Using Directives
-	using Windows::Foundation::IInspectable;
-
-	using Windows::System::VirtualKey;
-	using Windows::System::VirtualKeyModifiers;
-
-	using Windows::UI::Core::AcceleratorKeyEventArgs;
-	using Windows::UI::Core::BackRequestedEventArgs;
-	using Windows::UI::Core::CoreAcceleratorKeyEventType;
-	using Windows::UI::Core::CoreDispatcher;
-	using Windows::UI::Core::CoreVirtualKeyStates;
-	using Windows::UI::Core::CoreWindow;
-	using Windows::UI::Core::PointerEventArgs;
-	using Windows::UI::Core::SystemNavigationManager;
-
-	using Windows::UI::Xaml::RoutedEventArgs;
-	using Windows::UI::Xaml::Window;
-
-	using Windows::UI::Xaml::Controls::Page;
-#pragma endregion
-
-	NavigationHelper::NavigationHelper(Page const& page)
+	NavigationHelper::NavigationHelper(Page const& page) :
+		m_page(page),
+		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
+		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
 	{
-		m_page = make_weak<Page>(page);
-
-		m_loadedToken = page.Loaded({ this, &NavigationHelper::OnPageLoaded });
-		m_unloadedToken = page.Unloaded({ this, &NavigationHelper::OnPageUnloaded });
 	}
 
 	bool NavigationHelper::CanGoBack()
@@ -79,6 +82,69 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			auto frame = page.Frame();
 			if (frame != nullptr && frame.CanGoForward())
 				frame.GoForward();
+		}
+	}
+
+	void NavigationHelper::HandleNavigationToPage(NavigationEventArgs const& args)
+	{
+		auto page = m_page.get();
+		if (page)
+		{
+			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
+			m_pageKey = L"Page-" + to_hstring(page.Frame().BackStackDepth());
+
+			if (args.NavigationMode() == NavigationMode::New)
+			{
+				// Clear existing state for new navigation
+				hstring nextPageKey = m_pageKey;
+				int nextPageIndex = page.Frame().BackStackDepth();
+
+				while (frameState.HasKey(nextPageKey))
+				{
+					frameState.Remove(nextPageKey);
+					nextPageIndex++;
+					nextPageKey = L"Page-" + nextPageIndex;
+				}
+
+				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, nullptr);
+				m_loadingStateEvent
+				(
+					*this,
+					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
+				);
+			}
+			else
+			{
+				// If we were here before, pass the navigation parameter and
+				// preserved state
+				auto state = frameState.Lookup(m_pageKey).try_as<IMap<hstring, IInspectable>>();
+				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, state);
+
+				m_loadingStateEvent
+				(
+					*this,
+					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
+				);
+			}
+		}
+	}
+
+	void NavigationHelper::HandleNavigatedFromPage(NavigationEventArgs const& args)
+	{
+		auto page = m_page.get();
+		if (page)
+		{
+			m_savingStateEvent(*this, args);
+		}
+	}
+
+	void NavigationHelper::SaveState(IMap<hstring, IInspectable> const& state)
+	{
+		auto page = m_page.get();
+		if (page)
+		{
+			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
+			frameState.Insert(m_pageKey, state);
 		}
 	}
 

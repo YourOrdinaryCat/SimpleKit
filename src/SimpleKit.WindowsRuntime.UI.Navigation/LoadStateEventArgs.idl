@@ -1,0 +1,9 @@
+namespace SimpleKit.WindowsRuntime.UI.Navigation
+{
+	[default_interface]
+	runtimeclass LoadStateEventArgs
+	{
+		Windows.UI.Xaml.Navigation.NavigationEventArgs NavigationArgs{ get; };
+		Windows.Foundation.Collections.IMap<String, Object> PageState{ get; };
+	}
+}

@@ -1,0 +1,13 @@
+import "NavigationHelper.idl";
+
+namespace SimpleKit.WindowsRuntime.UI.Navigation
+{
+	[default_interface]
+	[webhosthidden]
+	unsealed runtimeclass NavPage : Windows.UI.Xaml.Controls.Page
+	{
+		NavPage();
+
+		protected SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper PageHelper{ get; };
+	};
+}
