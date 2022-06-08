@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SimpleKit.WindowsRuntime.UI.Navigation;
+using System;
 using System.IO;
-using SimpleKit.WindowsRuntime.UI.Navigation;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
