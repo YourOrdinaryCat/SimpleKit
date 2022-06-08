@@ -39,8 +39,5 @@
     <Midl Include="LoadStateEventArgs.idl">
       <Filter>Event Args</Filter>
     </Midl>
-    <Midl Include="StateRequestedEventArgs.idl">
-      <Filter>Event Args</Filter>
-    </Midl>
   </ItemGroup>
 </Project>

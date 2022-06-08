@@ -4,8 +4,7 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
-using winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs;
-using winrt::SimpleKit::WindowsRuntime::UI::Navigation::StateRequestedEventArgs;
+#include "LoadStateEventArgs.h"
 
 using winrt::Windows::Foundation::IInspectable;
 
@@ -107,28 +106,45 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 					nextPageKey = L"Page-" + nextPageIndex;
 				}
 
-				m_stateRestorationStartedEvent(*this, LoadStateEventArgs(args.Parameter(), nullptr));
+				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, nullptr);
+				m_stateRestorationStartedEvent
+				(
+					*this,
+					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
+				);
 			}
 			else
 			{
 				// If we were here before, pass the navigation parameter and
 				// preserved state
 				auto state = frameState.Lookup(m_pageKey).try_as<IMap<hstring, IInspectable>>();
-				m_stateRestorationStartedEvent(*this, LoadStateEventArgs(args.Parameter(), state));
+				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, state);
+
+				m_stateRestorationStartedEvent
+				(
+					*this,
+					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
+				);
 			}
 		}
 	}
 
-	void NavigationHelper::HandleNavigatedFromPage()
+	void NavigationHelper::HandleNavigatedFromPage(NavigationEventArgs const& args)
+	{
+		auto page = m_page.get();
+		if (page)
+		{
+			m_pageStateRequestedEvent(*this, args);
+		}
+	}
+
+	void NavigationHelper::SaveState(IMap<hstring, IInspectable> const& state)
 	{
 		auto page = m_page.get();
 		if (page)
 		{
 			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
-			auto pageState = single_threaded_map<hstring, IInspectable>();
-
-			m_pageStateRequestedEvent(*this, StateRequestedEventArgs(pageState));
-			frameState.Insert(m_pageKey, pageState);
+			frameState.Insert(m_pageKey, state);
 		}
 	}
 

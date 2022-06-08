@@ -13,13 +13,17 @@ using winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
+	NavPage::NavPage() : m_stateHandler(*this)
+	{
+	}
+
 	void NavPage::OnNavigatedTo(NavigationEventArgs const& e)
 	{
 		StateHandler().HandleNavigationToPage(e);
 	}
 
-	void NavPage::OnNavigatedFrom(NavigationEventArgs const&)
+	void NavPage::OnNavigatedFrom(NavigationEventArgs const& e)
 	{
-		StateHandler().HandleNavigatedFromPage();
+		StateHandler().HandleNavigatedFromPage(e);
 	}
 }

@@ -6,7 +6,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct NavPage : NavPageT<NavPage>
 	{
-		NavPage() = default;
+		NavPage();
 
 		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
 		void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
@@ -14,11 +14,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper StateHandler()
 		{
 			return m_stateHandler;
-		}
-
-		void StateHandler(SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper const& stateHandler)
-		{
-			m_stateHandler = stateHandler;
 		}
 
 	private:

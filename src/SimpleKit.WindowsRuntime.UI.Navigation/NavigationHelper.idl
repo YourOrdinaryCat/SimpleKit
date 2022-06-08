@@ -1,5 +1,4 @@
 import "LoadStateEventArgs.idl";
-import "StateRequestedEventArgs.idl";
 
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
@@ -17,9 +16,11 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		void GoForward();
 
 		void HandleNavigationToPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
-		void HandleNavigatedFromPage();
+		void HandleNavigatedFromPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
+
+		void SaveState(Windows.Foundation.Collections.IMap<String, Object> state);
 
 		event Windows.Foundation.EventHandler<SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs> StateRestorationStarted;
-		event Windows.Foundation.EventHandler<SimpleKit.WindowsRuntime.UI.Navigation.StateRequestedEventArgs> PageStateRequested;
+		event Windows.Foundation.EventHandler<Windows.UI.Xaml.Navigation.NavigationEventArgs> PageStateRequested;
 	}
 }
