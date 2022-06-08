@@ -103,7 +103,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 				{
 					frameState.Remove(nextPageKey);
 					nextPageIndex++;
-					nextPageKey = L"Page-" + nextPageIndex;
+					nextPageKey = L"Page-" + winrt::to_hstring(nextPageIndex);
 				}
 
 				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, nullptr);
@@ -115,10 +115,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			}
 			else
 			{
-				// If we were here before, pass the navigation parameter and
-				// preserved state
-				auto state = frameState.Lookup(m_pageKey).try_as<IMap<hstring, IInspectable>>();
-				auto evt = winrt::make<implementation::LoadStateEventArgs>(args, state);
+				// If we were here before, pass the preserved state
+				auto const& evt = frameState.HasKey(m_pageKey) ?
+					winrt::make<implementation::LoadStateEventArgs>(args, frameState.Lookup(m_pageKey).as<IMap<hstring, IInspectable>>()) :
+					winrt::make<implementation::LoadStateEventArgs>(args, nullptr);
 
 				m_loadingStateEvent
 				(
