@@ -29,4 +29,7 @@
       <Filter>Project Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Page Include="ExtendedTitleBar.xaml" />
+  </ItemGroup>
 </Project>

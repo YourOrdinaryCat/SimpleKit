@@ -1,0 +1,9 @@
+namespace SimpleKit.WindowsRuntime.UI.Controls
+{
+	[default_interface]
+	[webhosthidden]
+	runtimeclass ExtendedTitleBar : Windows.UI.Xaml.Controls.UserControl
+	{
+		ExtendedTitleBar();
+	}
+}
