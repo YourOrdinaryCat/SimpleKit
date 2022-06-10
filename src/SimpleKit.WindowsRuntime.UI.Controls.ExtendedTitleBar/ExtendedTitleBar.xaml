@@ -15,11 +15,13 @@
         <ContentControl
             x:Name="AppIcon"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            Content="{x:Bind Icon, Mode=OneWay}" />
 
         <ContentControl
             x:Name="AppTitle"
             Margin="12,0,0,0"
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            Content="{x:Bind Title, Mode=OneWay}" />
     </Grid>
 </UserControl>

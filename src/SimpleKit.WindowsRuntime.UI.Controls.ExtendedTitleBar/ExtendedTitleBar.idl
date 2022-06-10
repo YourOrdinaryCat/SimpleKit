@@ -5,5 +5,11 @@ namespace SimpleKit.WindowsRuntime.UI.Controls
 	runtimeclass ExtendedTitleBar : Windows.UI.Xaml.Controls.UserControl
 	{
 		ExtendedTitleBar();
+
+		Object Title;
+		static Windows.UI.Xaml.DependencyProperty TitleProperty{ get; };
+
+		Object Icon;
+		static Windows.UI.Xaml.DependencyProperty IconProperty{ get; };
 	}
 }
