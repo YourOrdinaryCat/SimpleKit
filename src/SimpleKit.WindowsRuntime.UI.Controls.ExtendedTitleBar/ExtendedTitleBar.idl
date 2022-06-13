@@ -2,14 +2,8 @@ namespace SimpleKit.WindowsRuntime.UI.Controls
 {
 	[default_interface]
 	[webhosthidden]
-	runtimeclass ExtendedTitleBar : Windows.UI.Xaml.Controls.UserControl
+	unsealed runtimeclass ExtendedTitleBar : Windows.UI.Xaml.Controls.ContentControl
 	{
 		ExtendedTitleBar();
-
-		Object Title;
-		static Windows.UI.Xaml.DependencyProperty TitleProperty{ get; };
-
-		Object Icon;
-		static Windows.UI.Xaml.DependencyProperty IconProperty{ get; };
 	}
 }

@@ -119,14 +119,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ExtendedTitleBar.h">
-      <DependentUpon>ExtendedTitleBar.xaml</DependentUpon>
+      <DependentUpon>ExtendedTitleBar.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExtendedTitleBar.cpp">
-      <DependentUpon>ExtendedTitleBar.xaml</DependentUpon>
+      <DependentUpon>ExtendedTitleBar.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -142,15 +142,12 @@
     <None Include="PropertySheet.props" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ExtendedTitleBar.xaml">
+    <Midl Include="ExtendedTitleBar.idl">
       <SubType>Designer</SubType>
-    </Page>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="ExtendedTitleBar.idl">
-      <DependentUpon>ExtendedTitleBar.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
+    <Page Include="Themes\Generic.xaml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

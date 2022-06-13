@@ -23,6 +23,9 @@
     <Filter Include="Project Files">
       <UniqueIdentifier>{c3aef891-a166-45b5-822c-1d92bdf6b18a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Themes">
+      <UniqueIdentifier>{57186cfd-0f65-438c-99a1-1fc19f903fbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -30,6 +33,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ExtendedTitleBar.xaml" />
+    <Midl Include="ExtendedTitleBar.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Filter>Themes</Filter>
+    </Page>
   </ItemGroup>
 </Project>
