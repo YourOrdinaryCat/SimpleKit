@@ -87,14 +87,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 
 	void ExtendedTitleBar::OnActivated(IInspectable const&, WindowActivatedEventArgs const& e)
 	{
-		auto app = Application::Current();
-
-		hstring key = e.WindowActivationState() == CoreWindowActivationState::Deactivated ?
-			L"TextFillColorDisabledBrush" : L"TextFillColorPrimaryBrush";
-
-		auto res = app.Resources().TryLookup(winrt::box_value(key));
-		auto brush = res.as<SolidColorBrush>();
-		this->Foreground(brush);
+		if (e.WindowActivationState() == CoreWindowActivationState::Deactivated)
+			VisualStateManager::GoToState(*this, L"WindowInactiveState", true);
+		else
+			VisualStateManager::GoToState(*this, L"WindowActiveState", true);
 	}
 
 	void ExtendedTitleBar::OnUnloaded(IInspectable const&, RoutedEventArgs const&)

@@ -88,6 +88,15 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="WindowStates">
+                                <VisualState x:Name="WindowActiveState" />
+                                <VisualState x:Name="WindowInactiveState">
+                                    <VisualState.Setters>
+                                        <Setter Target="TitleBarContent.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                 </ControlTemplate>
