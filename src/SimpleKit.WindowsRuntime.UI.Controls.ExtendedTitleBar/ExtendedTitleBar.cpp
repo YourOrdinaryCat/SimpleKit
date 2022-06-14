@@ -4,10 +4,105 @@
 #include "ExtendedTitleBar.g.cpp"
 #endif
 
+using namespace winrt::Windows::ApplicationModel::Core;
+
+using namespace winrt::Windows::Foundation;
+
+using namespace winrt::Windows::UI;
+using namespace winrt::Windows::UI::Core;
+using namespace winrt::Windows::UI::ViewManagement;
+
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Xaml::Media;
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 {
 	ExtendedTitleBar::ExtendedTitleBar()
 	{
-		//DefaultStyleKey(winrt::box_value(this->GetRuntimeClassName()));
+		DefaultStyleKey(winrt::box_value(this->GetRuntimeClassName()));
+		m_unloadedToken = Unloaded
+		(
+			{ this, &ExtendedTitleBar::OnUnloaded }
+		);
+	}
+
+	void ExtendedTitleBar::SetTitleBarForCurrentView()
+	{
+		auto view = ApplicationView::GetForCurrentView();
+		auto coreView = CoreApplication::GetCurrentView();
+		auto window = Window::Current();
+
+		auto titleBar = view.TitleBar();
+		auto coreTitleBar = coreView.TitleBar();
+
+		titleBar.ButtonBackgroundColor(Colors::Transparent());
+		titleBar.ButtonInactiveBackgroundColor(Colors::Transparent());
+
+		coreTitleBar.ExtendViewIntoTitleBar(true);
+		window.SetTitleBar(*this);
+
+		m_metricsChangedToken = coreTitleBar.LayoutMetricsChanged
+		(
+			winrt::auto_revoke,
+			{ this, &ExtendedTitleBar::OnLayoutMetricsChanged }
+		);
+
+		m_visibleChangedToken = coreTitleBar.IsVisibleChanged
+		(
+			winrt::auto_revoke,
+			{ this, &ExtendedTitleBar::OnVisibleChanged }
+		);
+
+		m_activatedToken = window.Activated
+		(
+			winrt::auto_revoke,
+			{ this, &ExtendedTitleBar::OnActivated }
+		);
+	}
+
+	void ExtendedTitleBar::OnLayoutMetricsChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
+	{
+		auto newHeight = sender.Height() + 8;
+		this->Height(newHeight);
+
+		auto currMargin = this->Margin();
+		auto newMargin = Thickness
+		{
+			currMargin.Left,
+			currMargin.Top,
+			sender.SystemOverlayRightInset(),
+			currMargin.Bottom
+		};
+
+		this->Margin(newMargin);
+	}
+
+	void ExtendedTitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
+	{
+		if (sender.IsVisible())
+			VisualStateManager::GoToState(*this, L"TitleBarVisibleState", true);
+		else
+			VisualStateManager::GoToState(*this, L"TitleBarCollapsedState", true);
+	}
+
+	void ExtendedTitleBar::OnActivated(IInspectable const&, WindowActivatedEventArgs const& e)
+	{
+		auto app = Application::Current();
+
+		hstring key = e.WindowActivationState() == CoreWindowActivationState::Deactivated ?
+			L"TextFillColorDisabledBrush" : L"TextFillColorPrimaryBrush";
+
+		auto res = app.Resources().TryLookup(winrt::box_value(key));
+		auto brush = res.as<SolidColorBrush>();
+		this->Foreground(brush);
+	}
+
+	void ExtendedTitleBar::OnUnloaded(IInspectable const&, RoutedEventArgs const&)
+	{
+		m_metricsChangedToken.revoke();
+		m_visibleChangedToken.revoke();
+		m_activatedToken.revoke();
+
+		Unloaded(m_unloadedToken);
 	}
 }
