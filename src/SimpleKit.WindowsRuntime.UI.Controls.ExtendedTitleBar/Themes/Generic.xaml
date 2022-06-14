@@ -3,48 +3,93 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SimpleKit.WindowsRuntime.UI.Controls">
 
-    <ResourceDictionary.ThemeDictionaries>
-        <ResourceDictionary x:Key="Dark">
-            <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush" />
-            <StaticResource x:Key="TitleBarForegroundDisabledThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
-        </ResourceDictionary>
-
-        <ResourceDictionary x:Key="Light">
-            <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush" />
-            <StaticResource x:Key="TitleBarForegroundDisabledThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
-        </ResourceDictionary>
-
-        <ResourceDictionary x:Key="HighContrast">
-            <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="SystemColorWindowColor" />
-            <StaticResource x:Key="TitleBarForegroundDisabledThemeBrush" ResourceKey="SystemColorGrayTextColor" />
-        </ResourceDictionary>
-    </ResourceDictionary.ThemeDictionaries>
-
     <Style BasedOn="{StaticResource DefaultExtendedTitleBarStyle}" TargetType="local:ExtendedTitleBar" />
     <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
-        <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
-        <Setter Property="IsHitTestVisible" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ExtendedTitleBar">
-                    <Border
+                    <Grid
                         x:Name="TitleBar"
                         HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         AutomationProperties.AutomationId="TitleBarDraggableArea"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                         <ContentPresenter
+                            x:Name="TitleBarContent"
+                            Padding="{TemplateBinding Padding}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
-                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
-                    </Border>
+                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                            Foreground="{TemplateBinding Foreground}">
+                            <ContentPresenter.RenderTransform>
+                                <TranslateTransform x:Name="ContentTranslate" />
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualState x:Name="TitleBarVisibleState">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="ContentTranslate"
+                                            Storyboard.TargetProperty="X"
+                                            Duration="0:0:0.3">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="TitleBarContent"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Duration="0:0:0.3">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="TitleBarCollapsedState">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="ContentTranslate"
+                                            Storyboard.TargetProperty="X"
+                                            Duration="0:0:0.3">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-40">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="TitleBarContent"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Duration="0:0:0.3">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
