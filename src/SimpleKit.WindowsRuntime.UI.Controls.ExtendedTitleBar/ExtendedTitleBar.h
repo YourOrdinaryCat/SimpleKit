@@ -10,13 +10,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 		void SetTitleBarForCurrentView();
 
 	private:
-		Windows::ApplicationModel::Core::CoreApplicationViewTitleBar::LayoutMetricsChanged_revoker m_metricsChangedToken;
-		void OnLayoutMetricsChanged
-		(
-			Windows::ApplicationModel::Core::CoreApplicationViewTitleBar const& sender,
-			Windows::Foundation::IInspectable const& args
-		);
-
 		Windows::ApplicationModel::Core::CoreApplicationViewTitleBar::IsVisibleChanged_revoker m_visibleChangedToken;
 		void OnVisibleChanged
 		(

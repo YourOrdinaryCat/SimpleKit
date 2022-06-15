@@ -41,12 +41,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 		coreTitleBar.ExtendViewIntoTitleBar(true);
 		window.SetTitleBar(*this);
 
-		m_metricsChangedToken = coreTitleBar.LayoutMetricsChanged
-		(
-			winrt::auto_revoke,
-			{ this, &ExtendedTitleBar::OnLayoutMetricsChanged }
-		);
-
 		m_visibleChangedToken = coreTitleBar.IsVisibleChanged
 		(
 			winrt::auto_revoke,
@@ -58,23 +52,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 			winrt::auto_revoke,
 			{ this, &ExtendedTitleBar::OnActivated }
 		);
-	}
-
-	void ExtendedTitleBar::OnLayoutMetricsChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
-	{
-		auto newHeight = sender.Height() + 8;
-		this->Height(newHeight);
-
-		auto currMargin = this->Margin();
-		auto newMargin = Thickness
-		{
-			currMargin.Left,
-			currMargin.Top,
-			sender.SystemOverlayRightInset(),
-			currMargin.Bottom
-		};
-
-		this->Margin(newMargin);
 	}
 
 	void ExtendedTitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
@@ -95,7 +72,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 
 	void ExtendedTitleBar::OnUnloaded(IInspectable const&, RoutedEventArgs const&)
 	{
-		m_metricsChangedToken.revoke();
 		m_visibleChangedToken.revoke();
 		m_activatedToken.revoke();
 
