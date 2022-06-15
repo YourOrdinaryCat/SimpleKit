@@ -18,6 +18,9 @@
     <None Include="$(ProjectName).def">
       <Filter>Project Files</Filter>
     </None>
+    <None Include="$(ProjectName).nuspec">
+      <Filter>Project Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Project Files">
