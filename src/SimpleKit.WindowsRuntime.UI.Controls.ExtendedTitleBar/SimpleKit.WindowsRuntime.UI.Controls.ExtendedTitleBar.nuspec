@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar</id>
-		<version>1.0.0</version>
+		<version>1.0.0-1</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -10,7 +10,7 @@
 
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit</projectUrl>
 		<description>A specialized control for titlebars.</description>
-		<releaseNotes>Initial release.</releaseNotes>
+		<releaseNotes>Fixed package implementation files.</releaseNotes>
 		<tags>UWP XAML</tags>
 
 		<dependencies>
@@ -21,22 +21,25 @@
 	<files>
 		<!-- WinMD, IntelliSense -->
 		<file src="..\..\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.winmd" target="lib\uap10.0" />
-		<file src="..\..\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.xml" target="lib\uap10.0" />
+		<file src="..\..\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.xml" target="lib\uap10.0" />
 
 		<!-- XAML -->
 		<file src="Themes\Generic.xaml" target="lib\uap10.0\Themes"/>
 
 		<!-- DLLs and resources -->
-		<file src="..\..\x64\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.dll" target="runtimes\win10-x64\native" />
+		<file src="..\..\x64\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-x64\native" />
 		<file src="..\..\x64\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-x64\native" />
 
-		<file src="..\..\ARM\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.dll" target="runtimes\win10-arm\native" />
+		<file src="..\..\ARM\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-arm\native" />
 		<file src="..\..\ARM\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-arm\native" />
 
-		<file src="..\..\ARM64\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.dll" target="runtimes\win10-arm64\native" />
+		<file src="..\..\ARM64\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-arm64\native" />
 		<file src="..\..\ARM64\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-arm64\native" />
 
-		<file src="..\..\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.dll" target="runtimes\win10-x86\native" />
+		<file src="..\..\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-x86\native" />
 		<file src="..\..\Release\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-x86\native" />
+
+		<!-- Targets -->
+		<file src="SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.targets" target="build\native"/>
 	</files>
 </package>
