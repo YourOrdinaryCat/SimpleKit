@@ -4,11 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:skuc="using:SimpleKit.WindowsRuntime.UI.Controls"
     xmlns:skun="using:SimpleKit.WindowsRuntime.UI.Navigation"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Grid>
+        <skuc:ExtendedTitleBar
+            x:Name="TitleBar"
+            Height="32"
+            Padding="8,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Content="NavigationHelper" />
+
         <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center"

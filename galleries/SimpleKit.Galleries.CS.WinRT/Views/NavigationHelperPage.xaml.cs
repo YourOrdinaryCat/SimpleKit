@@ -12,6 +12,8 @@ namespace SimpleKit.Galleries.CS.WinRT.Views
         public NavigationHelperPage()
         {
             this.InitializeComponent();
+
+            this.TitleBar.SetTitleBarForCurrentView();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
