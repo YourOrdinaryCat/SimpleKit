@@ -6,17 +6,17 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
             <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush" />
-            <StaticResource x:Key="TitleBarDisabledForegroundThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
+            <StaticResource x:Key="TitleBarInactiveForegroundThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
             <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush" />
-            <StaticResource x:Key="TitleBarDisabledForegroundThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
+            <StaticResource x:Key="TitleBarInactiveForegroundThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
             <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="SystemColorWindowColor" />
-            <StaticResource x:Key="TitleBarDisabledForegroundThemeBrush" ResourceKey="SystemColorGrayTextColor" />
+            <StaticResource x:Key="TitleBarInactiveForegroundThemeBrush" ResourceKey="SystemColorGrayTextColor" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
@@ -24,6 +24,7 @@
     <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -46,6 +47,7 @@
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}">
                             <ContentPresenter.RenderTransform>
                                 <TranslateTransform x:Name="ContentTranslate" />
@@ -111,7 +113,8 @@
                                 <VisualState x:Name="WindowActiveState" />
                                 <VisualState x:Name="WindowInactiveState">
                                     <VisualState.Setters>
-                                        <Setter Target="TitleBarContent.Foreground" Value="{ThemeResource TitleBarDisabledForegroundThemeBrush}" />
+                                        <Setter Target="TitleBar.Background" Value="Transparent" />
+                                        <Setter Target="TitleBarContent.Foreground" Value="{ThemeResource TitleBarInactiveForegroundThemeBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
