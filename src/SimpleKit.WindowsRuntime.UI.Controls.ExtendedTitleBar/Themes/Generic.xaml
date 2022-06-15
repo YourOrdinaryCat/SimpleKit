@@ -56,57 +56,8 @@
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="VisibilityStates">
-                                <VisualState x:Name="TitleBarVisibleState">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentTranslate"
-                                            Storyboard.TargetProperty="X"
-                                            Duration="0:0:0.3">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
-                                                <EasingDoubleKeyFrame.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </EasingDoubleKeyFrame.EasingFunction>
-                                            </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>
-
-                                        <DoubleAnimationUsingKeyFrames
-                                            Storyboard.TargetName="TitleBarContent"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0:0:0.3">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
-                                                <EasingDoubleKeyFrame.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </EasingDoubleKeyFrame.EasingFunction>
-                                            </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-
-                                <VisualState x:Name="TitleBarCollapsedState">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentTranslate"
-                                            Storyboard.TargetProperty="X"
-                                            Duration="0:0:0.3">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-40">
-                                                <EasingDoubleKeyFrame.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </EasingDoubleKeyFrame.EasingFunction>
-                                            </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>
-
-                                        <DoubleAnimationUsingKeyFrames
-                                            Storyboard.TargetName="TitleBarContent"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0:0:0.3">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
-                                                <EasingDoubleKeyFrame.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </EasingDoubleKeyFrame.EasingFunction>
-                                            </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState x:Name="TitleBarVisibleState" />
+                                <VisualState x:Name="TitleBarCollapsedState" />
                             </VisualStateGroup>
 
                             <VisualStateGroup x:Name="WindowStates">
