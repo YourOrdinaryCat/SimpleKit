@@ -170,6 +170,10 @@
     <None Include="SimpleKit.Galleries.CS.WinRT_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.vcxproj">
+      <Project>{d7f8c9b0-5895-4163-9960-408ea9f3bb0a}</Project>
+      <Name>SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\SimpleKit.WindowsRuntime.UI.Input\SimpleKit.WindowsRuntime.UI.Input.vcxproj">
       <Project>{789deed8-c4b8-4a87-922d-8f8f544f1361}</Project>
       <Name>SimpleKit.WindowsRuntime.UI.Input</Name>

@@ -4,15 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:skuc="using:SimpleKit.WindowsRuntime.UI.Controls"
     xmlns:skun="using:SimpleKit.WindowsRuntime.UI.Navigation"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Grid>
-        <Button
+        <skuc:ExtendedTitleBar
+            x:Name="TitleBar"
+            Height="32"
+            Padding="8,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Content="SimpleKit CS Gallery" />
+
+        <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Click="Button_Click"
-            Content="Go to next page" />
+            Spacing="6">
+            <Button Click="OpenWindowButton_Click" Content="Open new window" />
+            <Button Click="Button_Click" Content="Go to next page" />
+        </StackPanel>
     </Grid>
 </skun:NavPage>

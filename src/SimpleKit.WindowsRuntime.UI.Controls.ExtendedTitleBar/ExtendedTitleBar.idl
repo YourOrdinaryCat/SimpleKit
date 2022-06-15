@@ -1,0 +1,10 @@
+namespace SimpleKit.WindowsRuntime.UI.Controls
+{
+	[default_interface]
+	[webhosthidden]
+	unsealed runtimeclass ExtendedTitleBar : Windows.UI.Xaml.Controls.ContentControl
+	{
+		ExtendedTitleBar();
+		void SetTitleBarForCurrentView();
+	}
+}
