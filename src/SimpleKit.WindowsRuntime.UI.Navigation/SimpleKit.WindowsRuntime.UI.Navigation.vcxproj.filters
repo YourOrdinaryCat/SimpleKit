@@ -18,6 +18,12 @@
     <None Include="packages.config">
       <Filter>Project Files</Filter>
     </None>
+    <None Include="SimpleKit.WindowsRuntime.UI.Navigation.nuspec">
+      <Filter>Project Files</Filter>
+    </None>
+    <None Include="SimpleKit.WindowsRuntime.UI.Navigation.targets">
+      <Filter>Project Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Project Files">

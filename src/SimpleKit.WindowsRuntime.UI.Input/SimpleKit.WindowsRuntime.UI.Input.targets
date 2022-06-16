@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<SimpleKit.WindowsRuntime.UI.Input-Platform Condition="'$(Platform)' == 'Win32'">x86</SimpleKit.WindowsRuntime.UI.Input-Platform>
+		<SimpleKit.WindowsRuntime.UI.Input-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</SimpleKit.WindowsRuntime.UI.Input-Platform>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+		<Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\SimpleKit.WindowsRuntime.UI.Input.winmd">
+			<Implementation>SimpleKit.WindowsRuntime.UI.Input.dll</Implementation>
+		</Reference>
+		<ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(SimpleKit.WindowsRuntime.UI.Input-Platform)\native\SimpleKit.WindowsRuntime.UI.Input.dll" />
+	</ItemGroup>
+</Project>

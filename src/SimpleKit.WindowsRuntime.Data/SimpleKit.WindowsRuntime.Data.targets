@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<SimpleKit.WindowsRuntime.Data-Platform Condition="'$(Platform)' == 'Win32'">x86</SimpleKit.WindowsRuntime.Data-Platform>
+		<SimpleKit.WindowsRuntime.Data-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</SimpleKit.WindowsRuntime.Data-Platform>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+		<Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\SimpleKit.WindowsRuntime.Data.winmd">
+			<Implementation>SimpleKit.WindowsRuntime.Data.dll</Implementation>
+		</Reference>
+		<ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(SimpleKit.WindowsRuntime.Data-Platform)\native\SimpleKit.WindowsRuntime.Data.dll" />
+	</ItemGroup>
+</Project>
