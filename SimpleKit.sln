@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "controls", "controls", "{C2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{74521BBF-C249-4F31-9716-A5AAFC539A7F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.Shared", "src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems", "{E5E78E7F-65E5-4B00-9DFB-9D1F8E030C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -107,8 +109,12 @@ Global
 		{A21B4525-E916-4FFE-AAC4-730C88AE5326} = {9EEB14D8-4AF8-420C-8931-CB1A63ADA320}
 		{C2AB3517-F262-4F7D-8D44-78A0200B195F} = {A21B4525-E916-4FFE-AAC4-730C88AE5326}
 		{74521BBF-C249-4F31-9716-A5AAFC539A7F} = {9EEB14D8-4AF8-420C-8931-CB1A63ADA320}
+		{E5E78E7F-65E5-4B00-9DFB-9D1F8E030C3B} = {9EEB14D8-4AF8-420C-8931-CB1A63ADA320}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42C0D6D2-15A8-48D5-A87C-A02457381A7B}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{e5e78e7f-65e5-4b00-9dfb-9d1f8e030c3b}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal
