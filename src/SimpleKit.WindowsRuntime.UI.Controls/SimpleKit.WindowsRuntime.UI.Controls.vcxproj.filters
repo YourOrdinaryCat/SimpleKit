@@ -21,7 +21,7 @@
     <None Include="$(ProjectName).nuspec">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.targets">
+    <None Include="$(ProjectName).targets">
       <Filter>Project Files</Filter>
     </None>
   </ItemGroup>

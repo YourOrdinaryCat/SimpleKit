@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.Data", "src\SimpleKit.WindowsRuntime.Data\SimpleKit.WindowsRuntime.Data.vcxproj", "{2C818720-FEC1-4CFD-8DC1-800C500B0C00}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar", "src\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar\SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.vcxproj", "{D7F8C9B0-5895-4163-9960-408EA9F3BB0A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI.Controls", "src\SimpleKit.WindowsRuntime.UI.Controls\SimpleKit.WindowsRuntime.UI.Controls.vcxproj", "{D7F8C9B0-5895-4163-9960-408EA9F3BB0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "winrt", "winrt", "{9EEB14D8-4AF8-420C-8931-CB1A63ADA320}"
 EndProject

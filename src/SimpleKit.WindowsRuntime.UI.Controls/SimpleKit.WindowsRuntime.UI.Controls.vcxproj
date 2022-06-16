@@ -7,7 +7,7 @@
     <CppWinRTGenerateWindowsMetadata>true</CppWinRTGenerateWindowsMetadata>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{d7f8c9b0-5895-4163-9960-408ea9f3bb0a}</ProjectGuid>
-    <ProjectName>SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar</ProjectName>
+    <ProjectName>SimpleKit.WindowsRuntime.UI.Controls</ProjectName>
     <RootNamespace>SimpleKit.WindowsRuntime.UI.Controls</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
@@ -85,28 +85,36 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>$(RootNamespace)</TargetName>
+    <OutDir>$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -162,7 +170,7 @@
     <None Include="packages.config" />
     <None Include="$(ProjectName).def" />
     <None Include="$(ProjectName).nuspec" />
-    <None Include="SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.targets" />
+    <None Include="$(ProjectName).targets" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />

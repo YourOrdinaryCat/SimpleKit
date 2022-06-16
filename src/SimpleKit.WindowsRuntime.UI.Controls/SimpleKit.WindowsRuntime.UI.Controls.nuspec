@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>SimpleKit.WindowsRuntime.UI.Controls</id>
+		<version>1.0</version>
+		<authors>YourOrdinaryCat</authors>
+
+		<license type="expression">GPL-3.0-only</license>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Controls</projectUrl>
+		<description>A set of useful controls written in C++ for the Windows Runtime.</description>
+		<releaseNotes>Initial release.</releaseNotes>
+		<tags>Windows UWP Fluent XAML Controls</tags>
+
+		<dependencies>
+			<group targetFramework="UAP10.0" />
+		</dependencies>
+	</metadata>
+
+	<files>
+		<!-- WinMD, IntelliSense -->
+		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Controls.winmd" target="lib\uap10.0" />
+		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Controls.xml" target="lib\uap10.0" />
+
+		<!-- XAML -->
+		<file src="Themes\Generic.xaml" target="lib\uap10.0\Themes"/>
+
+		<!-- DLLs and resources -->
+		<file src="Release\x64\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-x64\native" />
+		<file src="Release\x64\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-x64\native" />
+
+		<file src="Release\ARM\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-arm\native" />
+		<file src="Release\ARM\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-arm\native" />
+
+		<file src="Release\ARM64\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-arm64\native" />
+		<file src="Release\ARM64\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-arm64\native" />
+
+		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-x86\native" />
+		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Controls.pri" target="runtimes\win10-x86\native" />
+
+		<!-- Targets -->
+		<file src="SimpleKit.WindowsRuntime.UI.Controls.targets" target="build\native"/>
+	</files>
+</package>
