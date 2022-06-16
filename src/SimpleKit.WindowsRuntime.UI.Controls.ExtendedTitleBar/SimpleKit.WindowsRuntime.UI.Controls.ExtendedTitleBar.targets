@@ -8,6 +8,6 @@
 		<Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\SimpleKit.WindowsRuntime.UI.Controls.winmd">
 			<Implementation>SimpleKit.WindowsRuntime.UI.Controls.dll</Implementation>
 		</Reference>
-	<ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(ImageEnhancer-Platform)\native\SimpleKit.WindowsRuntime.UI.Controls.dll" />
+	<ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar-Platform)\native\SimpleKit.WindowsRuntime.UI.Controls.dll" />
 	</ItemGroup>
 </Project>
