@@ -6,32 +6,18 @@
 
 #include "winrt/SimpleKit.WindowsRuntime.Data.h"
 
-using winrt::SimpleKit::WindowsRuntime::Data::DataReaderHelper;
-using winrt::SimpleKit::WindowsRuntime::Data::DataWriterHelper;
+using namespace winrt::SimpleKit::WindowsRuntime::Data;
 
-using winrt::Windows::Foundation::IInspectable;
-using winrt::Windows::Foundation::IAsyncAction;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
 
-using winrt::Windows::Foundation::Collections::IMap;
+using namespace winrt::Windows::Storage;
+using namespace winrt::Windows::Storage::FileProperties;
 
-using winrt::Windows::Storage::ApplicationData;
-using winrt::Windows::Storage::CreationCollisionOption;
-using winrt::Windows::Storage::FileAccessMode;
-using winrt::Windows::Storage::StorageFile;
+using namespace winrt::Windows::Storage::Streams;
 
-using winrt::Windows::Storage::FileProperties::BasicProperties;
-
-using winrt::Windows::Storage::Streams::DataReader;
-using winrt::Windows::Storage::Streams::DataWriter;
-using winrt::Windows::Storage::Streams::InMemoryRandomAccessStream;
-using winrt::Windows::Storage::Streams::IRandomAccessStream;
-using winrt::Windows::Storage::Streams::IRandomAccessStreamWithContentType;
-using winrt::Windows::Storage::Streams::RandomAccessStream;
-
-using winrt::Windows::UI::Xaml::PropertyMetadata;
-using winrt::Windows::UI::Xaml::DependencyProperty;
-
-using winrt::Windows::UI::Xaml::Controls::Frame;
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Xaml::Controls;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {

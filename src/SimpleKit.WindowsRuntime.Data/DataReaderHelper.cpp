@@ -4,13 +4,10 @@
 #include "DataReaderHelper.g.cpp"
 #endif
 
-using winrt::Windows::Foundation::IInspectable;
-using winrt::Windows::Foundation::PropertyType;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
 
-using winrt::Windows::Foundation::Collections::IMap;
-using winrt::Windows::Foundation::Collections::IVector;
-
-using winrt::Windows::Storage::Streams::DataReader;
+using namespace winrt::Windows::Storage::Streams;
 
 namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 {

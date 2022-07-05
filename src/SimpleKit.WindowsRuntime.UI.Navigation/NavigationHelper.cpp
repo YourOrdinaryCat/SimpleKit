@@ -6,29 +6,16 @@
 
 #include "LoadStateEventArgs.h"
 
-using winrt::Windows::Foundation::IInspectable;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
 
-using winrt::Windows::Foundation::Collections::IMap;
+using namespace winrt::Windows::System;
 
-using winrt::Windows::System::VirtualKey;
-using winrt::Windows::System::VirtualKeyModifiers;
+using namespace winrt::Windows::UI::Core;
 
-using winrt::Windows::UI::Core::AcceleratorKeyEventArgs;
-using winrt::Windows::UI::Core::BackRequestedEventArgs;
-using winrt::Windows::UI::Core::CoreAcceleratorKeyEventType;
-using winrt::Windows::UI::Core::CoreDispatcher;
-using winrt::Windows::UI::Core::CoreVirtualKeyStates;
-using winrt::Windows::UI::Core::CoreWindow;
-using winrt::Windows::UI::Core::PointerEventArgs;
-using winrt::Windows::UI::Core::SystemNavigationManager;
-
-using winrt::Windows::UI::Xaml::RoutedEventArgs;
-using winrt::Windows::UI::Xaml::Window;
-
-using winrt::Windows::UI::Xaml::Controls::Page;
-
-using winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs;
-using winrt::Windows::UI::Xaml::Navigation::NavigationMode;
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Windows::UI::Xaml::Navigation;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {

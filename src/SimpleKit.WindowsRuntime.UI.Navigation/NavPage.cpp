@@ -4,7 +4,7 @@
 #include "NavPage.g.cpp"
 #endif
 
-using winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs;
+using namespace winrt::Windows::UI::Xaml::Navigation;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {

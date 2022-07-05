@@ -4,17 +4,12 @@
 #include "RelayCommand.g.cpp"
 #endif
 
+using namespace winrt::SimpleKit::WindowsRuntime::UI::Input;
+
+using namespace winrt::Windows::Foundation;
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Input::implementation
 {
-
-#pragma region Using Directives
-	using SimpleKit::WindowsRuntime::UI::Input::ExecuteDelegate;
-	using SimpleKit::WindowsRuntime::UI::Input::CanExecuteDelegate;
-
-	using Windows::Foundation::EventHandler;
-	using Windows::Foundation::IInspectable;
-#pragma endregion
-
 	RelayCommand::RelayCommand(ExecuteDelegate const& execute)
 	{
 		if (execute == nullptr)
