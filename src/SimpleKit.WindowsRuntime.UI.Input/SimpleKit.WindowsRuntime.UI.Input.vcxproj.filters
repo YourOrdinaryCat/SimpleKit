@@ -12,9 +12,6 @@
     <None Include="PropertySheet.props">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="packages.config">
-      <Filter>Project Files</Filter>
-    </None>
     <None Include="$(ProjectName).def">
       <Filter>Project Files</Filter>
     </None>
@@ -22,6 +19,9 @@
       <Filter>Project Files</Filter>
     </None>
     <None Include="SimpleKit.WindowsRuntime.UI.Input.targets">
+      <Filter>Project Files</Filter>
+    </None>
+    <None Include="packages.config">
       <Filter>Project Files</Filter>
     </None>
   </ItemGroup>

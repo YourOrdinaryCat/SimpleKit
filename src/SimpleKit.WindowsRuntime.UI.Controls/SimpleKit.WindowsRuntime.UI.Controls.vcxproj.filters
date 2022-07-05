@@ -9,9 +9,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <Filter>Project Files</Filter>
-    </None>
     <None Include="PropertySheet.props">
       <Filter>Project Files</Filter>
     </None>
@@ -22,6 +19,9 @@
       <Filter>Project Files</Filter>
     </None>
     <None Include="$(ProjectName).targets">
+      <Filter>Project Files</Filter>
+    </None>
+    <None Include="packages.config">
       <Filter>Project Files</Filter>
     </None>
   </ItemGroup>
