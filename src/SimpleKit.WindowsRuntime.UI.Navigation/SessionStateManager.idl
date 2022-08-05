@@ -1,8 +1,9 @@
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
 	[default_interface]
-	static runtimeclass SessionStateManager
+	runtimeclass SessionStateManager : Windows.UI.Xaml.DependencyObject
 	{
+		SessionStateManager();
 		static void Initialize();
 
 		static Windows.Foundation.Collections.IMap<String, Object> SessionState { get; };
