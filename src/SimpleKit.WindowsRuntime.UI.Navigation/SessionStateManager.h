@@ -2,6 +2,8 @@
 
 #include "SessionStateManager.g.h"
 
+#include "PropertyUtils.h"
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct SessionStateManager : SessionStateManagerT<SessionStateManager>
@@ -24,10 +26,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		static void UnregisterFrame(Windows::UI::Xaml::Controls::Frame const& frame);
 
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> SessionStateForFrame(Windows::UI::Xaml::Controls::Frame const& frame);
+		ATTACHED_PROPERTY(Windows::UI::Xaml::Controls::Frame, hstring, SessionKey);
 
 	private:
 		inline static const hstring m_sessionStateFilename = L"_sessionState.dat";
 
+		static void OnSessionKeyAdded(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
 		static void RestoreFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
 		static void SaveFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
 

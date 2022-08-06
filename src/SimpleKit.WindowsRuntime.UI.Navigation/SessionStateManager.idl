@@ -1,6 +1,7 @@
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
 	[default_interface]
+	[webhosthidden]
 	runtimeclass SessionStateManager : Windows.UI.Xaml.DependencyObject
 	{
 		SessionStateManager();
@@ -11,6 +12,10 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		static Windows.Foundation.IAsyncAction SaveAsync();
 		static Windows.Foundation.IAsyncAction RestoreAsync();
 		static Windows.Foundation.IAsyncAction RestoreAsync(String sessionBaseKey);
+
+		static Windows.UI.Xaml.DependencyProperty SessionKeyProperty { get; };
+		static String GetSessionKey(Windows.UI.Xaml.Controls.Frame target);
+		static void SetSessionKey(Windows.UI.Xaml.Controls.Frame target, String value);
 
 		static void RegisterFrame(Windows.UI.Xaml.Controls.Frame frame, String sessionStateKey);
 		static void RegisterFrame(Windows.UI.Xaml.Controls.Frame frame, String sessionStateKey, String sessionBaseKey);

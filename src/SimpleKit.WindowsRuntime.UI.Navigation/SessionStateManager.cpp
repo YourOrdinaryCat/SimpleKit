@@ -28,6 +28,13 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			m_sessionState = single_threaded_map<hstring, IInspectable>();
 			m_registeredFrames = std::vector<weak_ref<Frame>>();
 
+			m_SessionKeyProperty =
+				DependencyProperty::RegisterAttached(
+					L"SessionKey",
+					xaml_typename<hstring>(),
+					xaml_typename<Navigation::SessionStateManager>(),
+					PropertyMetadata(nullptr, OnSessionKeyAdded));
+
 			m_frameSessionStateProperty =
 				DependencyProperty::RegisterAttached(
 					L"m_frameSessionState",
@@ -227,6 +234,34 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		return frameState.as<IMap<hstring, IInspectable>>();
 	}
 
+	void SessionStateManager::OnSessionKeyAdded(DependencyObject const& d, DependencyPropertyChangedEventArgs const& e)
+	{
+		auto newVal = e.NewValue().as<hstring>();
+		auto stdVal = winrt::to_string(newVal);
+
+		auto npos = stdVal.find('_');
+		if (npos != std::string::npos)
+		{
+			auto secondHalf = stdVal.substr(npos + 1);
+			if (!secondHalf.empty())
+			{
+				auto firstHalf = stdVal.substr(0, npos);
+				if (!firstHalf.empty())
+				{
+					RegisterFrame
+					(
+						d.as<Frame>(),
+						winrt::to_hstring(secondHalf),
+						winrt::to_hstring(firstHalf)
+					);
+					return;
+				}
+			}
+		}
+
+		RegisterFrame(d.as<Frame>(), newVal);
+	}
+
 	void SessionStateManager::RestoreFrameNavigationState(Frame const& frame)
 	{
 		auto frameState = SessionStateForFrame(frame);
@@ -246,6 +281,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	IMap<hstring, IInspectable> SessionStateManager::m_sessionState{ nullptr };
 	std::vector<weak_ref<Frame>> SessionStateManager::m_registeredFrames;
 
+	DependencyProperty SessionStateManager::m_SessionKeyProperty{ nullptr };
 	DependencyProperty SessionStateManager::m_frameSessionStateProperty{ nullptr };
 	DependencyProperty SessionStateManager::m_frameSessionStateKeyProperty{ nullptr };
 	DependencyProperty SessionStateManager::m_frameSessionBaseKeyProperty{ nullptr };

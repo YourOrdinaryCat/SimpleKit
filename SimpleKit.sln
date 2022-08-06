@@ -115,6 +115,7 @@ Global
 		SolutionGuid = {42C0D6D2-15A8-48D5-A87C-A02457381A7B}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{e0da2127-0bc4-4530-9ef9-d5e73f2f547a}*SharedItemsImports = 4
 		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{e5e78e7f-65e5-4b00-9dfb-9d1f8e030c3b}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal
