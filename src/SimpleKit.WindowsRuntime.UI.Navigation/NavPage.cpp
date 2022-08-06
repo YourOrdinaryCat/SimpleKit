@@ -8,17 +8,22 @@ using namespace winrt::Windows::UI::Xaml::Navigation;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
-	NavPage::NavPage() : m_pageHelper(*this)
+	NavPage::NavPage() : m_PageHelper(*this)
+	{
+	}
+
+	NavPage::NavPage(bool const& useNavigationShortcuts) :
+		m_PageHelper(*this, useNavigationShortcuts)
 	{
 	}
 
 	void NavPage::OnNavigatedTo(NavigationEventArgs const& e)
 	{
-		m_pageHelper.HandleNavigationToPage(e);
+		m_PageHelper.HandleNavigationToPage(e);
 	}
 
 	void NavPage::OnNavigatedFrom(NavigationEventArgs const& e)
 	{
-		m_pageHelper.HandleNavigatedFromPage(e);
+		m_PageHelper.HandleNavigatedFromPage(e);
 	}
 }

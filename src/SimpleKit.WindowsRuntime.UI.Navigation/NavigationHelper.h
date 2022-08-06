@@ -7,6 +7,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	struct NavigationHelper : NavigationHelperT<NavigationHelper>
 	{
 		NavigationHelper(Windows::UI::Xaml::Controls::Page const& page);
+		NavigationHelper(Windows::UI::Xaml::Controls::Page const& page, bool const& useNavigationShortcuts);
 
 		bool CanGoBack();
 		void GoBack();
@@ -41,6 +42,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	private:
 		~NavigationHelper();
+
+		bool m_useNavigationShortcuts;
 
 		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
 		hstring m_pageKey;

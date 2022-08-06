@@ -21,6 +21,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	NavigationHelper::NavigationHelper(Page const& page) :
 		m_page(page),
+		m_useNavigationShortcuts(true),
+		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
+		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
+	{
+	}
+
+	NavigationHelper::NavigationHelper(Page const& page, bool const& useNavigationShortcuts) :
+		m_page(page),
+		m_useNavigationShortcuts(useNavigationShortcuts),
 		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
 		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
 	{
@@ -142,13 +151,13 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void NavigationHelper::OnPageLoaded(IInspectable const&, RoutedEventArgs const&)
 	{
-		auto coreWindow = Window::Current().CoreWindow();
-		if (m_page)
+		if (m_useNavigationShortcuts && m_page)
 		{
 			m_backRequestedToken = SystemNavigationManager::GetForCurrentView().
 				BackRequested({ this, &NavigationHelper::OnBackRequested });
 
 			// Listen to the window directly so page focus isn't required
+			auto coreWindow = Window::Current().CoreWindow();
 			m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
 			(
 				{ this, &NavigationHelper::OnAcceleratorKeyActivated }
@@ -166,10 +175,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		// Once the page unloads, associated tokens should be revoked
 		if (m_navigationShortcutsRegistered)
 		{
-			auto coreWindow = Window::Current().CoreWindow();
 			SystemNavigationManager::GetForCurrentView().
 				BackRequested(m_backRequestedToken);
 
+			auto coreWindow = Window::Current().CoreWindow();
 			coreWindow.Dispatcher().
 				AcceleratorKeyActivated(m_acceleratorKeyActivatedToken);
 
