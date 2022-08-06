@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Input</id>
-		<version>1.0</version>
+		<version>1.1</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -10,7 +10,9 @@
 
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Input</projectUrl>
 		<description>A set of helpers that make input management easier.</description>
-		<releaseNotes>Initial release.</releaseNotes>
+		<releaseNotes>
+			- Updated C++/WinRT version
+		</releaseNotes>
 		<tags>Windows UWP Input Command</tags>
 
 		<dependencies>
