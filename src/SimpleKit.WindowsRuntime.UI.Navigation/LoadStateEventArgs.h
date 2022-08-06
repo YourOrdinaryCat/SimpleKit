@@ -2,6 +2,8 @@
 
 #include "LoadStateEventArgs.g.h"
 
+#include "PropertyUtils.h"
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct LoadStateEventArgs : LoadStateEventArgsT<LoadStateEventArgs>
@@ -10,20 +12,22 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		(
 			Windows::UI::Xaml::Navigation::NavigationEventArgs const& navigationArgs,
 			Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const& pageState
-		) : m_navigationArgs(navigationArgs), m_pageState(pageState) {}
+		);
+		
+		LoadStateEventArgs
+		(
+			Windows::UI::Xaml::Navigation::NavigationEventArgs const& navigationArgs
+		);
 
-		Windows::UI::Xaml::Navigation::NavigationEventArgs NavigationArgs()
-		{
-			return m_navigationArgs;
-		}
-
-		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> PageState()
+		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> PageState() const
 		{
 			return m_pageState;
 		}
 
+		GET_PROPERTY(Windows::UI::Xaml::Navigation::NavigationEventArgs, NavigationArgs);
+		GET_PROPERTY(bool, HasState);
+
 	private:
-		Windows::UI::Xaml::Navigation::NavigationEventArgs m_navigationArgs;
 		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> m_pageState;
 	};
 }

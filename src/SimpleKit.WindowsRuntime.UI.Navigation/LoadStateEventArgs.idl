@@ -4,6 +4,8 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 	runtimeclass LoadStateEventArgs
 	{
 		Windows.UI.Xaml.Navigation.NavigationEventArgs NavigationArgs{ get; };
+
+		Boolean HasState{ get; };
 		Windows.Foundation.Collections.IMap<String, Object> PageState{ get; };
 	}
 }
