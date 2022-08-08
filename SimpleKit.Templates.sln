@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleKit.Templates.WindowsRuntime", "templates\SimpleKit.Templates.WindowsRuntime\SimpleKit.Templates.WindowsRuntime.csproj", "{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Debug|x86.ActiveCfg = Debug|x86
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Debug|x86.Build.0 = Debug|x86
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Release|x86.ActiveCfg = Release|x86
+		{E32E42E9-7AF8-4115-AF3E-22298BE84F3D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3AD99F61-15D7-4BAD-AD9A-AC6E14405841}
+	EndGlobalSection
+EndGlobal
