@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleKit.Templates.WindowsRuntimePackage.cs" />
+    <Compile Include="Package.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProjectTemplates\CppComponent.zip">
