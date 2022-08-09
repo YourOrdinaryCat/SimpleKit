@@ -1,0 +1,9 @@
+namespace SimpleKit.WindowsRuntime.UI.ViewManagement
+{
+	[default_interface]
+	[webhosthidden]
+	runtimeclass ViewHelpers : Windows.UI.Xaml.DependencyObject
+	{
+		ViewHelpers();
+	}
+}
