@@ -5,5 +5,9 @@ namespace SimpleKit.WindowsRuntime.UI.ViewManagement
 	runtimeclass ViewHelpers : Windows.UI.Xaml.DependencyObject
 	{
 		ViewHelpers();
+
+		static Windows.UI.Xaml.DependencyProperty ViewTitleProperty { get; };
+		static String GetViewTitle(Windows.UI.Xaml.Controls.Page target);
+		static void SetViewTitle(Windows.UI.Xaml.Controls.Page target, String value);
 	}
 }
