@@ -6,6 +6,8 @@ namespace SimpleKit.WindowsRuntime.UI.ViewManagement
 	{
 		ViewHelpers();
 
+		static Windows.Foundation.IAsyncOperation<Boolean> ShowNewViewAsync(Windows.UI.Xaml.Interop.TypeName sourcePageType);
+
 		static Windows.UI.Xaml.DependencyProperty ViewTitleProperty { get; };
 		static String GetViewTitle(Windows.UI.Xaml.Controls.Page target);
 		static void SetViewTitle(Windows.UI.Xaml.Controls.Page target, String value);
