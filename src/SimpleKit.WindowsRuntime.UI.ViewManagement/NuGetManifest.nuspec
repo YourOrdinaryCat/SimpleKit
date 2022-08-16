@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.ViewManagement</id>
-		<version>1.1</version>
+		<version>1.2</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -21,7 +21,7 @@
 	<files>
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.ViewManagement.winmd" target="lib\uap10.0" />
-		<file src="Documentation.xml" target="lib\uap10.0" />
+		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.ViewManagement.xml" target="lib\uap10.0" />
 
 		<!-- DLLs and resources -->
 		<file src="Release\x64\SimpleKit.WindowsRuntime.UI.ViewManagement.dll" target="runtimes\win10-x64\native" />
@@ -37,6 +37,6 @@
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.ViewManagement.pri" target="runtimes\win10-x86\native" />
 
 		<!-- Targets -->
-		<file src="Targets.targets" target="build\native"/>
+		<file src="SimpleKit.WindowsRuntime.UI.ViewManagement.targets" target="build\native"/>
 	</files>
 </package>

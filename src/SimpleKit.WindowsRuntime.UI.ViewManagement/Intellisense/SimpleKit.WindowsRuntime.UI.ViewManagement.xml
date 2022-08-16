@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>SimpleKit.WindowsRuntime.UI.ViewManagement</name>
+	</assembly>
+	<members>
+		<member name="T:SimpleKit.WindowsRuntime.UI.ViewManagement.ViewHelpers">
+			<summary>Contains methods and properties to manage ApplicationViews.</summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.ViewManagement.ViewHelpers.ViewTitleProperty">
+			<summary>Gets or sets the title of the ApplicationView where the page is displayed.</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.ViewManagement.ViewHelpers.CreateNewViewAsync(System.Type)">
+			<summary>Creates a new view containing the specified page.</summary>
+			<returns>When this method completes successfully, it returns a new ApplicationView.</returns>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.ViewManagement.ViewHelpers.ShowNewViewAsync(System.Type)">
+			<summary>Creates a new view containing the specified page and shows it without any special options.</summary>
+			<returns>Asynchronously returns true if the call succeeds; false if it does not.</returns>
+		</member>
+	</members>
+</doc>

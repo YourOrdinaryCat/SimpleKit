@@ -142,7 +142,7 @@
     <None Include="Exports.def" />
     <None Include="packages.config" />
     <None Include="NuGetManifest.nuspec" />
-    <None Include="Targets.targets" />
+    <None Include="SimpleKit.WindowsRuntime.UI.ViewManagement.targets" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />

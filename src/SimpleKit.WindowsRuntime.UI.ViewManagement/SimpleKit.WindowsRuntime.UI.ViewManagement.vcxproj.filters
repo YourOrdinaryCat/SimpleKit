@@ -18,7 +18,7 @@
     <None Include="NuGetManifest.nuspec">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="Targets.targets">
+    <None Include="SimpleKit.WindowsRuntime.UI.ViewManagement.targets">
       <Filter>Project Files</Filter>
     </None>
     <None Include="packages.config">
