@@ -17,7 +17,7 @@ using namespace winrt::Windows::UI::Xaml::Interop;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 {
-	IAsyncOperation<bool> ViewHelpers::ShowNewViewAsync(TypeName const sourcePageType)
+	IAsyncOperation<ApplicationView> ViewHelpers::CreateNewViewAsync(TypeName const sourcePageType)
 	{
 		auto coreView = CoreApplication::CreateNewView();
 
@@ -39,6 +39,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 		m_frames[newView.Id()] = winrt::make_weak(frame);
 
 		co_await context;
+		co_return newView;
+	}
+
+	IAsyncOperation<bool> ViewHelpers::ShowNewViewAsync(TypeName const sourcePageType)
+	{
+		ApplicationView newView{ co_await CreateNewViewAsync(sourcePageType) };
 		co_return co_await ApplicationViewSwitcher::TryShowAsStandaloneAsync(newView.Id());
 	}
 
