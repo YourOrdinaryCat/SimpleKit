@@ -1,0 +1,16 @@
+namespace SimpleKit.WindowsRuntime.UI.ViewManagement
+{
+	[default_interface]
+	[webhosthidden]
+	runtimeclass ViewHelpers : Windows.UI.Xaml.DependencyObject
+	{
+		ViewHelpers();
+
+		static Windows.Foundation.IAsyncOperation<Windows.UI.ViewManagement.ApplicationView> CreateNewViewAsync(Windows.UI.Xaml.Interop.TypeName sourcePageType);
+		static Windows.Foundation.IAsyncOperation<Boolean> ShowNewViewAsync(Windows.UI.Xaml.Interop.TypeName sourcePageType);
+
+		static Windows.UI.Xaml.DependencyProperty ViewTitleProperty { get; };
+		static String GetViewTitle(Windows.UI.Xaml.Controls.Page target);
+		static void SetViewTitle(Windows.UI.Xaml.Controls.Page target, String value);
+	}
+}
