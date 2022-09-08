@@ -1,12 +1,3 @@
----
-name: Feature addition
-about: Add a feature to the project, be it on new or existing types
-title: ''
-labels: enhancement
-assignees: ''
-
----
-
 **Change description**
 A clear and concise description for your changes.
 
