@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>SimpleKit.WindowsRuntime.UI.Controls</name>
+	</assembly>
+	<members>
+		<member name="T:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar">
+			<summary></summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.Property">
+			<summary></summary>
+			<returns></returns>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.Method(Sytem.Type)">
+			<summary></summary>
+			<returns></returns>
+		</member>
+	</members>
+</doc>
