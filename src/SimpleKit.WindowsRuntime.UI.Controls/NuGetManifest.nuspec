@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Controls</id>
-		<version>1.1</version>
+		<version>1.2</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,7 +11,7 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Controls</projectUrl>
 		<description>A set of useful controls written in C++ for the Windows Runtime.</description>
 		<releaseNotes>
-			- Updated C++/WinRT version
+			- Added documentation
 		</releaseNotes>
 		<tags>Windows UWP Fluent XAML Controls</tags>
 

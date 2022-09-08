@@ -5,15 +5,10 @@
 	</assembly>
 	<members>
 		<member name="T:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar">
-			<summary></summary>
+			<summary>This control makes extending your app's titlebar easier.</summary>
 		</member>
-		<member name="P:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.Property">
-			<summary></summary>
-			<returns></returns>
-		</member>
-		<member name="M:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.Method(Sytem.Type)">
-			<summary></summary>
-			<returns></returns>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Controls.ExtendedTitleBar.SetTitleBarForCurrentView">
+			<summary>Sets this control as the current window's titlebar.</summary>
 		</member>
 	</members>
 </doc>
