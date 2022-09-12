@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI.Navigation", "src\SimpleKit.WindowsRuntime.UI.Navigation\SimpleKit.WindowsRuntime.UI.Navigation.vcxproj", "{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI.Input", "src\SimpleKit.WindowsRuntime.UI.Input\SimpleKit.WindowsRuntime.UI.Input.vcxproj", "{789DEED8-C4B8-4A87-922D-8F8F544F1361}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.Data", "src\SimpleKit.WindowsRuntime.Data\SimpleKit.WindowsRuntime.Data.vcxproj", "{2C818720-FEC1-4CFD-8DC1-800C500B0C00}"
@@ -23,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI.Controls", "src\SimpleKit.WindowsRuntime.UI.Controls\SimpleKit.WindowsRuntime.UI.Controls.vcxproj", "{917FBEC6-169A-4C30-8904-91A2ED799164}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleKit.WindowsRuntime.UI.Navigation", "src\SimpleKit.WindowsRuntime.UI.Navigation\SimpleKit.WindowsRuntime.UI.Navigation.vcxproj", "{1D961364-C1DE-4E96-BF39-174CFABB93C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -35,22 +35,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|ARM.ActiveCfg = Debug|ARM
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|ARM.Build.0 = Debug|ARM
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|ARM64.Build.0 = Debug|ARM64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|x64.ActiveCfg = Debug|x64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|x64.Build.0 = Debug|x64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|x86.ActiveCfg = Debug|Win32
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Debug|x86.Build.0 = Debug|Win32
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|ARM.ActiveCfg = Release|ARM
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|ARM.Build.0 = Release|ARM
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|ARM64.ActiveCfg = Release|ARM64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|ARM64.Build.0 = Release|ARM64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|x64.ActiveCfg = Release|x64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|x64.Build.0 = Release|x64
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|x86.ActiveCfg = Release|Win32
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A}.Release|x86.Build.0 = Release|Win32
 		{789DEED8-C4B8-4A87-922D-8F8F544F1361}.Debug|ARM.ActiveCfg = Debug|ARM
 		{789DEED8-C4B8-4A87-922D-8F8F544F1361}.Debug|ARM.Build.0 = Debug|ARM
 		{789DEED8-C4B8-4A87-922D-8F8F544F1361}.Debug|ARM64.ActiveCfg = Debug|ARM64
@@ -115,12 +99,27 @@ Global
 		{917FBEC6-169A-4C30-8904-91A2ED799164}.Release|x64.Build.0 = Release|x64
 		{917FBEC6-169A-4C30-8904-91A2ED799164}.Release|x86.ActiveCfg = Release|Win32
 		{917FBEC6-169A-4C30-8904-91A2ED799164}.Release|x86.Build.0 = Release|Win32
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|ARM.Build.0 = Debug|ARM
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|ARM64.Build.0 = Debug|ARM64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|x64.ActiveCfg = Debug|x64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|x64.Build.0 = Debug|x64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|x86.ActiveCfg = Debug|Win32
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Debug|x86.Build.0 = Debug|Win32
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|ARM.ActiveCfg = Release|ARM
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|ARM.Build.0 = Release|ARM
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|ARM64.ActiveCfg = Release|ARM64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|ARM64.Build.0 = Release|ARM64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|x64.ActiveCfg = Release|x64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|x64.Build.0 = Release|x64
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|x86.ActiveCfg = Release|Win32
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E0DA2127-0BC4-4530-9EF9-D5E73F2F547A} = {A21B4525-E916-4FFE-AAC4-730C88AE5326}
 		{789DEED8-C4B8-4A87-922D-8F8F544F1361} = {A21B4525-E916-4FFE-AAC4-730C88AE5326}
 		{2C818720-FEC1-4CFD-8DC1-800C500B0C00} = {74521BBF-C249-4F31-9716-A5AAFC539A7F}
 		{A21B4525-E916-4FFE-AAC4-730C88AE5326} = {9EEB14D8-4AF8-420C-8931-CB1A63ADA320}
@@ -129,12 +128,13 @@ Global
 		{E5E78E7F-65E5-4B00-9DFB-9D1F8E030C3B} = {9EEB14D8-4AF8-420C-8931-CB1A63ADA320}
 		{EE3AF4C9-6D86-46E1-8B6C-6D42CBEF39F5} = {A21B4525-E916-4FFE-AAC4-730C88AE5326}
 		{917FBEC6-169A-4C30-8904-91A2ED799164} = {C2AB3517-F262-4F7D-8D44-78A0200B195F}
+		{1D961364-C1DE-4E96-BF39-174CFABB93C5} = {A21B4525-E916-4FFE-AAC4-730C88AE5326}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42C0D6D2-15A8-48D5-A87C-A02457381A7B}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{e0da2127-0bc4-4530-9ef9-d5e73f2f547a}*SharedItemsImports = 4
+		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{1d961364-c1de-4e96-bf39-174cfabb93c5}*SharedItemsImports = 4
 		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{e5e78e7f-65e5-4b00-9dfb-9d1f8e030c3b}*SharedItemsImports = 9
 		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{ee3af4c9-6d86-46e1-8b6c-6d42cbef39f5}*SharedItemsImports = 4
 	EndGlobalSection

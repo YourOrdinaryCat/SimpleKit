@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>SimpleKit.WindowsRuntime.UI.Navigation</name>
+	</assembly>
+	<members>
+		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.Class">
+			<summary></summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.Class.Property">
+			<summary></summary>
+			<returns></returns>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.Class.Method(Sytem.Type)">
+			<summary></summary>
+			<returns></returns>
+		</member>
+	</members>
+</doc>
