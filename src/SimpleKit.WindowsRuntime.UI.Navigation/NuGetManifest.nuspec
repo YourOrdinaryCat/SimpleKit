@@ -17,7 +17,7 @@
 
 		<dependencies>
 			<group targetFramework="UAP10.0">
-				<dependency id="SimpleKit.WindowsRuntime.Data" version="1.1" />
+				<dependency id="SimpleKit.WindowsRuntime.Data" version="1.2" />
 			</group>
 		</dependencies>
 	</metadata>

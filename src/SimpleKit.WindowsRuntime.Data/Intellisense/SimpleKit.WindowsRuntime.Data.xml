@@ -4,16 +4,21 @@
 		<name>SimpleKit.WindowsRuntime.Data</name>
 	</assembly>
 	<members>
-		<member name="T:SimpleKit.WindowsRuntime.Data.Class">
-			<summary></summary>
+		<member name="T:SimpleKit.WindowsRuntime.Data.DataReaderHelper">
+			<summary>
+				Contains methods to read data through <see cref="T:Windows.Storage.Streams.DataReader"/>.
+			</summary>
 		</member>
-		<member name="P:SimpleKit.WindowsRuntime.Data.Class.Property">
-			<summary></summary>
-			<returns></returns>
+		<member name="T:SimpleKit.WindowsRuntime.Data.DataWriterHelper">
+			<summary>
+				Contains methods to write data through <see cref="T:Windows.Storage.Streams.DataWriter"/>.
+			</summary>
 		</member>
-		<member name="M:SimpleKit.WindowsRuntime.Data.Class.Method(Sytem.Type)">
-			<summary></summary>
-			<returns></returns>
+		<member name="T:SimpleKit.WindowsRuntime.Data.StreamTypes">
+			<summary>
+				Contains a set of markers used by <see cref="T:SimpleKit.WindowsRuntime.Data.DataReaderHelper"/>
+				and <see cref="T:SimpleKit.WindowsRuntime.Data.DataWriterHelper"/> to ensure stream integrity.
+			</summary>
 		</member>
 	</members>
 </doc>
