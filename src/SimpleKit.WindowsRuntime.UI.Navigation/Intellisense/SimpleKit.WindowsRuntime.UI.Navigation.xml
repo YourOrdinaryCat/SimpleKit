@@ -4,16 +4,189 @@
 		<name>SimpleKit.WindowsRuntime.UI.Navigation</name>
 	</assembly>
 	<members>
-		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.Class">
-			<summary></summary>
+		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs">
+			<summary>Holds event data related to reloading a page's state.</summary>
 		</member>
-		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.Class.Property">
-			<summary></summary>
-			<returns></returns>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs.NavigationArgs">
+			<summary>Event data that describes how this page was reached.</summary>
 		</member>
-		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.Class.Method(Sytem.Type)">
-			<summary></summary>
-			<returns></returns>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs.HasState">
+			<summary>Whether the page has preserved state.</summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs.PageState">
+			<summary>
+				A dictionary of state preserved by this page. This will be null
+				the first time a page is visited, or when the user gets to the
+				page by navigating back/forward.
+			</summary>
+		</member>
+
+		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper">
+			<summary>
+				A class that aids in navigation between pages, integrating with
+				<see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager"/>
+				for state saving/restoring. Optionally provides support for the
+				system back button, gestures, and keyboard shortcuts.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.#ctor(Windows.UI.Xaml.Controls.Page)">
+			<summary>
+				Initializes a new instance of <see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper"/>
+				associated with the given page.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.#ctor(Windows.UI.Xaml.Controls.Page,System.Boolean)">
+			<summary>
+				Initializes a new instance of <see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper"/>
+				associated with the given page.
+			</summary>
+			<param name="useNavigationShortcuts">
+				Whether to enable handling for back/forward gestures and button combinations.
+			</param>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.SaveState(System.Collections.Generic.IDictionary{System.String,System.Object})">
+			<summary>
+				Saves the data inside the dictionary for state restoration.
+			</summary>
+			<remarks>
+				The values inside the dictionary must be types that
+				<see cref="T:Windows.Storage.Streams.DataWriter"/> can work with.
+				For a set of types that are known to work, check
+				<see cref="T:Windows.Foundation.PropertyType"/>.
+			</remarks>
+		</member>
+		<member name="E:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.LoadingState">
+			<summary>
+				Invoked when the page is navigated to. This is your opportunity to
+				load session state.
+			</summary>
+		</member>
+		<member name="E:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.SavingState">
+			<summary>
+				Invoked when the page is about to be unloaded, last opportunity you
+				get to save the page's state.
+			</summary>
+		</member>
+
+		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.NavPage">
+			<summary>
+				A base class for XAML pages that integrates with
+				<see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper"/>
+				for session state management and back/forward gestures.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.#ctor">
+			<summary>
+				Initializes a new instance of the page.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.#ctor(System.Boolean)">
+			<summary>
+				Initializes a new instance of the page.
+			</summary>
+			<param name="useNavigationShortcuts">
+				Whether to enable handling for back/forward gestures and button combinations.
+			</param>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.PageHelper">
+			<summary>
+				The <see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper"/>
+				associated with this page.
+			</summary>
+		</member>
+
+		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager">
+			<summary>
+				Manages session state for frames, allowing to easily save or restore
+				state from multiple kinds of sessions.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.Initialize">
+			<summary>
+				Initializes the properties necessary to allow this class to function.
+				Usually called inside the App constructor.
+			</summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.SessionState">
+			<summary>
+				Contains the currently available session state across all registered frames.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.SaveAsync">
+			<summary>
+				Save the current session state. Any frames registered through RegisterFrame
+				(or one of its overloads) will preserve their navigation stack, and give
+				their current page an opportunity to save its state.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.RestoreAsync">
+			<summary>
+				Restores previously saved session state. Any frames registered through
+				RegisterFrame (or one of its overloads) will restore their navigation stack,
+				and give their active page an opportunity to restore its state.
+			</summary>
+			<remarks>
+				This method simply calls the <see cref="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.RestoreAsync(System.String)"/>
+				overload, with an empty session key.
+			</remarks>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.RestoreAsync(System.String)">
+			<summary>
+				Restores previously saved session state. Any frames registered through
+				RegisterFrame (or one of its overloads) will restore their navigation stack,
+				and give their active page an opportunity to restore its state.
+			</summary>
+			<param name="sessionBaseKey">
+				A key that identifies the type of session. This can be used to
+				distinguish between multiple application launch scenarios.
+			</param>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.SessionKeyProperty">
+			<summary>
+				An attached property that allows registering a frame directly from XAML.
+				The value must be a string, where the session state and base keys are
+				separated by an underscore. If you only want a session state key, use
+				a string without an underscore.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String)">
+			<summary>
+				Registers the given frame to allow its navigation history to be saved to
+				<see cref="P:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.SessionState"/>.
+				Preferrably, register frames immediately after creation. Upon registration,
+				if state has already been restored for the specified key, the navigation
+				history will immediately be restored.
+			</summary>
+			<param name="sessionStateKey">
+				A unique key into used to store navigation-related information.
+			</param>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)">
+			<summary>
+				Registers the given frame to allow its navigation history to be saved to
+				<see cref="P:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.SessionState"/>.
+				Preferrably, register frames immediately after creation. Upon registration,
+				if state has already been restored for the specified key, the navigation
+				history will immediately be restored.
+			</summary>
+			<param name="sessionStateKey">
+				A unique key into used to store navigation-related information.
+			</param>
+			<param name="sessionBaseKey">
+				A key that identifies the type of session. This can be used to
+				distinguish between multiple application launch scenarios.
+			</param>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.UnregisterFrame(Windows.UI.Xaml.Controls.Frame)">
+			<summary>
+				Unregisters the given frame. Upon calling this method, any saved state
+				from the frame will be removed.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager.SessionStateForFrame(Windows.UI.Xaml.Controls.Frame)">
+			<summary>
+				Gets the session state associated with the frame.
+			</summary>
 		</member>
 	</members>
 </doc>

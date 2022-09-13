@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Navigation</id>
-		<version>1.1</version>
+		<version>1.2</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,9 +11,7 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Navigation</projectUrl>
 		<description>A set of helpers that aid in navigation and session state management.</description>
 		<releaseNotes>
-			- Updated C++/WinRT version
-			- Added attached property to allow for easier frame registration
-			- Added a way to disable page gestures when using NavigationHelper
+			- Added documentation
 		</releaseNotes>
 		<tags>Windows UWP XAML Navigation</tags>
 
