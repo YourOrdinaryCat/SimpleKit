@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>SimpleKit.WindowsRuntime.Data</name>
+	</assembly>
+	<members>
+		<member name="T:SimpleKit.WindowsRuntime.Data.Class">
+			<summary></summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.Data.Class.Property">
+			<summary></summary>
+			<returns></returns>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.Data.Class.Method(Sytem.Type)">
+			<summary></summary>
+			<returns></returns>
+		</member>
+	</members>
+</doc>

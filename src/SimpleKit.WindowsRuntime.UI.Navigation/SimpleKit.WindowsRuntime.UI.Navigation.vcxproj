@@ -188,7 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleKit.WindowsRuntime.Data\SimpleKit.WindowsRuntime.Data.vcxproj">
-      <Project>{2c818720-fec1-4cfd-8dc1-800c500b0c00}</Project>
+      <Project>{0f149b90-5ad6-4bc1-8b09-0bc213a654c0}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

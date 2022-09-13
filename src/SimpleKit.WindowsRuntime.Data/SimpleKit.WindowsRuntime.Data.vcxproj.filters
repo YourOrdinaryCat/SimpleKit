@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+    <ClCompile Include="pch.cpp">
       <Filter>Project Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
       <Filter>Project Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -12,13 +12,16 @@
     <None Include="PropertySheet.props">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="$(ProjectName).def">
+    <None Include="Exports.def">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="SimpleKit.WindowsRuntime.Data.nuspec">
+    <None Include="NuGetManifest.nuspec">
       <Filter>Project Files</Filter>
     </None>
     <None Include="SimpleKit.WindowsRuntime.Data.targets">
+      <Filter>Project Files</Filter>
+    </None>
+    <None Include="Intellisense\SimpleKit.WindowsRuntime.Data.xml">
       <Filter>Project Files</Filter>
     </None>
     <None Include="packages.config">
@@ -27,10 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Project Files">
-      <UniqueIdentifier>{fa4c372a-6f92-48bd-ac81-772be94fcc51}</UniqueIdentifier>
+      <UniqueIdentifier>0b71fe70-ae14-4534-aa9a-d05e159e6086</UniqueIdentifier>
     </Filter>
     <Filter Include="Enums">
-      <UniqueIdentifier>{69b54e78-4e4b-41ab-8b2c-29e2fd268ed9}</UniqueIdentifier>
+      <UniqueIdentifier>{8f7ff1d3-d023-428f-87b6-8dfffd904c5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
