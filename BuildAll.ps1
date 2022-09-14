@@ -3,7 +3,7 @@ param
 	[switch]$BuildProjects = $false,
 	[switch]$CreatePackages = $false,
 	[string]$ProjectLog = "$($PSScriptRoot)\out.txt",
-	[string]$NuGetSource,
+	[string]$NuGetSource
 )
 
 if ($BuildProjects)
