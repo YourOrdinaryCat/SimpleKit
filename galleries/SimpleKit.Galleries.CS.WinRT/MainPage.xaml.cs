@@ -1,12 +1,8 @@
 ﻿using SimpleKit.Galleries.CS.WinRT.Views;
 using SimpleKit.WindowsRuntime.UI.Navigation;
+using SimpleKit.WindowsRuntime.UI.ViewManagement;
 using System;
-using System.Collections.Generic;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace SimpleKit.Galleries.CS.WinRT
 {
@@ -16,9 +12,6 @@ namespace SimpleKit.Galleries.CS.WinRT
     /// </summary>
     public sealed partial class MainPage : NavPage
     {
-        private readonly Dictionary<int, WeakReference<Frame>> frames =
-            new Dictionary<int, WeakReference<Frame>>();
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -33,37 +26,7 @@ namespace SimpleKit.Galleries.CS.WinRT
 
         private async void OpenWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            var window = CoreApplication.CreateNewView();
-            ApplicationView newView = null;
-
-            await window.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                Frame frame = new Frame();
-                _ = frame.Navigate(typeof(MainPage));
-
-                var curr = Window.Current;
-                curr.Content = frame;
-                curr.Activate();
-
-                newView = ApplicationView.GetForCurrentView();
-                newView.Consolidated += NewView_Consolidated;
-
-                frames[newView.Id] = new WeakReference<Frame>(frame);
-            });
-
-            await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newView.Id);
-        }
-
-        private void NewView_Consolidated(ApplicationView sender, ApplicationViewConsolidatedEventArgs args)
-        {
-            var id = sender.Id;
-
-            var result = frames[id].TryGetTarget(out var frame);
-            if (result)
-                frame.Content = null;
-
-            frames.Remove(id);
-            sender.Consolidated -= NewView_Consolidated;
+            _ = await ViewHelpers.ShowNewViewAsync(typeof(MainPage));
         }
     }
 }

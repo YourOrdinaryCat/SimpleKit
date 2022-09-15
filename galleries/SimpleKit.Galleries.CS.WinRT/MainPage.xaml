@@ -4,9 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:skuc="using:SimpleKit.WindowsRuntime.UI.Controls"
     xmlns:skun="using:SimpleKit.WindowsRuntime.UI.Navigation"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:skvm="using:SimpleKit.WindowsRuntime.UI.ViewManagement"
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
+    skvm:ViewHelpers.ViewTitle="Home"
     mc:Ignorable="d">
 
     <Grid>
