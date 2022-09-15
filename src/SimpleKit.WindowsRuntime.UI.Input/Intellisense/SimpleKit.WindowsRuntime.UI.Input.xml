@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>SimpleKit.WindowsRuntime.UI.Input</name>
+	</assembly>
+	<members>
+		<member name="T:SimpleKit.WindowsRuntime.UI.Input.RelayCommand">
+			<summary>A basic implementation of the ICommand interface.</summary>
+		</member>
+		<member name="T:SimpleKit.WindowsRuntime.UI.Input.ExecuteDelegate">
+			<summary>
+				A delegate for a command's Execute method, which takes a parameter
+				and doesn't return a value.
+			</summary>
+		</member>
+		<member name="T:SimpleKit.WindowsRuntime.UI.Input.CanExecuteDelegate">
+			<summary>
+				A delegate for a command's CanExecute method, which takes a parameter
+				and returns a value.
+			</summary>
+			<returns>**true** if the command can execute; **false** otherwise.</returns>
+		</member>
+	</members>
+</doc>

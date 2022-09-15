@@ -12,13 +12,16 @@
     <None Include="PropertySheet.props">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="$(ProjectName).def">
+    <None Include="Exports.def">
       <Filter>Project Files</Filter>
     </None>
-    <None Include="SimpleKit.WindowsRuntime.UI.Navigation.nuspec">
+    <None Include="NuGetManifest.nuspec">
       <Filter>Project Files</Filter>
     </None>
     <None Include="SimpleKit.WindowsRuntime.UI.Navigation.targets">
+      <Filter>Project Files</Filter>
+    </None>
+    <None Include="Intellisense\SimpleKit.WindowsRuntime.UI.Navigation.xml">
       <Filter>Project Files</Filter>
     </None>
     <None Include="packages.config">
@@ -27,10 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Project Files">
-      <UniqueIdentifier>{8974b741-17dc-4a25-bad7-a982bd751cc6}</UniqueIdentifier>
+      <UniqueIdentifier>2135f3ff-26b0-475a-bd38-2c936c91cf4d</UniqueIdentifier>
     </Filter>
     <Filter Include="Event Args">
-      <UniqueIdentifier>{af96f846-6153-4c7c-9a5e-34a0be9be654}</UniqueIdentifier>
+      <UniqueIdentifier>{03aafd93-1fc2-40e7-816b-a32b75ceb42b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,11 +42,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="NavigationHelper.idl" />
-    <Midl Include="SessionStateManager.idl" />
-    <Midl Include="NavPage.idl" />
     <Midl Include="LoadStateEventArgs.idl">
       <Filter>Event Args</Filter>
     </Midl>
+    <Midl Include="NavPage.idl" />
+    <Midl Include="NavigationHelper.idl" />
+    <Midl Include="SessionStateManager.idl" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Input</id>
-		<version>1.1</version>
+		<version>1.2</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,7 +11,7 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Input</projectUrl>
 		<description>A set of helpers that make input management easier.</description>
 		<releaseNotes>
-			- Updated C++/WinRT version
+			- Added documentation
 		</releaseNotes>
 		<tags>Windows UWP Input Command</tags>
 
@@ -23,7 +23,7 @@
 	<files>
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Input.winmd" target="lib\uap10.0" />
-		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Input.xml" target="lib\uap10.0" />
+		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.Input.xml" target="lib\uap10.0" />
 
 		<!-- DLLs and resources -->
 		<file src="Release\x64\SimpleKit.WindowsRuntime.UI.Input.dll" target="runtimes\win10-x64\native" />

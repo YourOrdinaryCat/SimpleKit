@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Navigation</id>
-		<version>1.1</version>
+		<version>1.2</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,15 +11,13 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Navigation</projectUrl>
 		<description>A set of helpers that aid in navigation and session state management.</description>
 		<releaseNotes>
-			- Updated C++/WinRT version
-			- Added attached property to allow for easier frame registration
-			- Added a way to disable page gestures when using NavigationHelper
+			- Added documentation
 		</releaseNotes>
 		<tags>Windows UWP XAML Navigation</tags>
 
 		<dependencies>
 			<group targetFramework="UAP10.0">
-				<dependency id="SimpleKit.WindowsRuntime.Data" version="1.1" />
+				<dependency id="SimpleKit.WindowsRuntime.Data" version="1.2" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -27,7 +25,7 @@
 	<files>
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Navigation.winmd" target="lib\uap10.0" />
-		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Navigation.xml" target="lib\uap10.0" />
+		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.Navigation.xml" target="lib\uap10.0" />
 
 		<!-- DLLs and resources -->
 		<file src="Release\x64\SimpleKit.WindowsRuntime.UI.Navigation.dll" target="runtimes\win10-x64\native" />
