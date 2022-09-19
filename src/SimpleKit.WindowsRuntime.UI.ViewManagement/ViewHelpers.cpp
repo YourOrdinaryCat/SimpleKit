@@ -70,15 +70,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 			ApplicationView::GetForCurrentView().Title(newVal.as<hstring>());
 	}
 
-	DependencyProperty ViewHelpers::m_ViewTitleProperty
-		= DependencyProperty::RegisterAttached
-		(
-			L"ViewTitle",
-			winrt::xaml_typename<hstring>(),
-			winrt::xaml_typename<ViewManagement::ViewHelpers>(),
-			PropertyMetadata(nullptr, OnViewTitleChanged)
-		);
-
 	std::map<int, winrt::weak_ref<Frame>> ViewHelpers::m_frames = std::map<int, winrt::weak_ref<Frame>>();
 	std::map<int, winrt::event_token> ViewHelpers::m_tokens = std::map<int, winrt::event_token>();
 }

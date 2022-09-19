@@ -18,7 +18,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 		static Windows::Foundation::IAsyncOperation<bool>
 			ShowNewViewAsync(Windows::UI::Xaml::Interop::TypeName const sourcePageType);
 
-		ATTACHED_PROPERTY(Windows::UI::Xaml::Controls::Page, hstring, ViewTitle)
+		ATTACHED_PROPERTY_META
+		(
+			ViewTitle,
+			hstring,
+			ViewManagement::ViewHelpers,
+			Windows::UI::Xaml::Controls::Page,
+			OnViewTitleChanged,
+			nullptr
+		)
 
 	private:
 		static std::map<int, winrt::weak_ref<Windows::UI::Xaml::Controls::Frame>> m_frames;
