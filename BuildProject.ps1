@@ -1,7 +1,7 @@
 param
 (
 	[string]$ProjectName,
-	[switch]$CreatePackages = $false,
+	[switch]$CreatePackage = $false,
 	[string]$ProjectLog = "$($PSScriptRoot)\$($ProjectName)-out.txt",
 	[string]$NuGetSource
 )
@@ -16,7 +16,7 @@ ForEach ($platform in $platforms)
 	devenv SimpleKit.sln /Build "Release|$($platform)" /Project $ProjectName /Out $ProjectLog
 }
 
-if ($CreatePackages)
+if ($CreatePackage)
 {
 	if (Test-Path -Path "$($projectPath)\NuGetManifest.nuspec")
 	{
