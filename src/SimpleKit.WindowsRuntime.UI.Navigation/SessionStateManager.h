@@ -26,7 +26,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		static void UnregisterFrame(Windows::UI::Xaml::Controls::Frame const& frame);
 
 		static Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> SessionStateForFrame(Windows::UI::Xaml::Controls::Frame const& frame);
-		ATTACHED_PROPERTY(Windows::UI::Xaml::Controls::Frame, hstring, SessionKey);
+		ATTACHED_PROPERTY_META
+		(
+			SessionKey,
+			hstring,
+			Navigation::SessionStateManager,
+			Windows::UI::Xaml::Controls::Frame,
+			OnSessionKeyAdded,
+			nullptr
+		)
 
 	private:
 		inline static const hstring m_sessionStateFilename = L"_sessionState.dat";

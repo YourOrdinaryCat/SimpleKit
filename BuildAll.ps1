@@ -9,7 +9,12 @@ param
 if ($BuildProjects)
 {
 	Remove-Item $ProjectLog
-	$platforms = @("x86","x64","ARM","ARM64") | ForEach { devenv SimpleKit.sln /Build "Release|$($_)" /Out $ProjectLog }
+	$platforms = @("x86","x64","ARM","ARM64")
+
+	ForEach ($platform in $platforms)
+	{
+		devenv SimpleKit.sln /Build "Release|$($platform)" /Out $ProjectLog
+	}
 }
 
 if ($CreatePackages)
