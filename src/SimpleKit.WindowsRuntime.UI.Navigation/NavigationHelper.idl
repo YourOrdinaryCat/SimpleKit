@@ -1,11 +1,8 @@
-import "LoadStateEventArgs.idl";
-
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
 	[default_interface]
-	[bindable]
 	[webhosthidden]
-	unsealed runtimeclass NavigationHelper : Windows.UI.Xaml.DependencyObject
+	runtimeclass NavigationHelper
 	{
 		NavigationHelper(Windows.UI.Xaml.Controls.Page page);
 		NavigationHelper(Windows.UI.Xaml.Controls.Page page, Boolean useNavigationShortcuts);
@@ -16,12 +13,7 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		Boolean CanGoForward();
 		void GoForward();
 
-		void HandleNavigationToPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
-		void HandleNavigatedFromPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
-
+		Windows.Foundation.Collections.IMap<String, Object> LoadState(Windows.UI.Xaml.Navigation.NavigationMode navigationMode);
 		void SaveState(Windows.Foundation.Collections.IMap<String, Object> state);
-
-		event Windows.Foundation.EventHandler<SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs> LoadingState;
-		event Windows.Foundation.EventHandler<Windows.UI.Xaml.Navigation.NavigationEventArgs> SavingState;
 	}
 }
