@@ -22,8 +22,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		m_PageHelper.HandleNavigationToPage(e);
 	}
 
-	void NavPage::OnNavigatedFrom(NavigationEventArgs const& e)
+	void NavPage::OnNavigatedFrom(NavigationEventArgs const&)
 	{
-		m_PageHelper.HandleNavigatedFromPage(e);
 	}
 }

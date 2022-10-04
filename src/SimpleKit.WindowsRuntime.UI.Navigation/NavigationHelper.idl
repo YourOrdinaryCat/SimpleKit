@@ -1,5 +1,3 @@
-import "LoadStateEventArgs.idl";
-
 namespace SimpleKit.WindowsRuntime.UI.Navigation
 {
 	[default_interface]
@@ -17,11 +15,6 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		void GoForward();
 
 		void HandleNavigationToPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
-		void HandleNavigatedFromPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
-
 		void SaveState(Windows.Foundation.Collections.IMap<String, Object> state);
-
-		event Windows.Foundation.EventHandler<SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs> LoadingState;
-		event Windows.Foundation.EventHandler<Windows.UI.Xaml.Navigation.NavigationEventArgs> SavingState;
 	}
 }

@@ -122,10 +122,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="LoadStateEventArgs.h">
-      <DependentUpon>LoadStateEventArgs.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
     <ClInclude Include="NavigationHelper.h">
       <DependentUpon>NavigationHelper.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -141,10 +137,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LoadStateEventArgs.cpp">
-      <DependentUpon>LoadStateEventArgs.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
     <ClCompile Include="NavigationHelper.cpp">
       <DependentUpon>NavigationHelper.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -173,9 +165,6 @@
     <None Include="PropertySheet.props" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="LoadStateEventArgs.idl">
-      <SubType>Designer</SubType>
-    </Midl>
     <Midl Include="NavigationHelper.idl">
       <SubType>Designer</SubType>
     </Midl>

@@ -4,8 +4,6 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
-#include "LoadStateEventArgs.h"
-
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
 
@@ -101,36 +99,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 					nextPageIndex++;
 					nextPageKey = L"Page-" + winrt::to_hstring(nextPageIndex);
 				}
-
-				auto evt = winrt::make<implementation::LoadStateEventArgs>(args);
-				m_loadingStateEvent
-				(
-					*this,
-					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
-				);
 			}
 			else
 			{
-				// If we were here before, pass the preserved state
-				auto const& evt = frameState.HasKey(m_pageKey) ?
-					winrt::make<implementation::LoadStateEventArgs>(args, frameState.Lookup(m_pageKey).as<IMap<hstring, IInspectable>>()) :
-					winrt::make<implementation::LoadStateEventArgs>(args);
-
-				m_loadingStateEvent
-				(
-					*this,
-					evt.as<winrt::SimpleKit::WindowsRuntime::UI::Navigation::LoadStateEventArgs>()
-				);
 			}
-		}
-	}
-
-	void NavigationHelper::HandleNavigatedFromPage(NavigationEventArgs const& args)
-	{
-		auto page = m_page.get();
-		if (page)
-		{
-			m_savingStateEvent(*this, args);
 		}
 	}
 
