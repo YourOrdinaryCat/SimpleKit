@@ -15,7 +15,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		bool CanGoForward();
 		void GoForward();
 
-		void HandleNavigationToPage(Windows::UI::Xaml::Navigation::NavigationEventArgs const& args);
+		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> LoadState(Windows::UI::Xaml::Navigation::NavigationMode const& navigationMode);
 		void SaveState(Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const& state);
 
 	private:

@@ -79,7 +79,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void NavigationHelper::HandleNavigationToPage(NavigationEventArgs const& args)
+	IMap<hstring, IInspectable> NavigationHelper::LoadState(NavigationMode const& navigationMode)
 	{
 		auto page = m_page.get();
 		if (page)
@@ -87,7 +87,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
 			m_pageKey = L"Page-" + to_hstring(page.Frame().BackStackDepth());
 
-			if (args.NavigationMode() == NavigationMode::New)
+			if (navigationMode == NavigationMode::New)
 			{
 				// Clear existing state for new navigation
 				hstring nextPageKey = m_pageKey;
@@ -99,11 +99,17 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 					nextPageIndex++;
 					nextPageKey = L"Page-" + winrt::to_hstring(nextPageIndex);
 				}
+
+				return nullptr;
 			}
-			else
-			{
-			}
+
+			// If we were here before, return the preserved state
+			return frameState.HasKey(m_pageKey) ?
+				frameState.Lookup(m_pageKey).as<IMap<hstring, IInspectable>>() :
+				nullptr;
 		}
+
+		return nullptr;
 	}
 
 	void NavigationHelper::SaveState(IMap<hstring, IInspectable> const& state)

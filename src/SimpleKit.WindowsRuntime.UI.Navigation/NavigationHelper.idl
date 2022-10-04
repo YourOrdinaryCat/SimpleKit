@@ -14,7 +14,7 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		Boolean CanGoForward();
 		void GoForward();
 
-		void HandleNavigationToPage(Windows.UI.Xaml.Navigation.NavigationEventArgs args);
+		Windows.Foundation.Collections.IMap<String, Object> LoadState(Windows.UI.Xaml.Navigation.NavigationMode navigationMode);
 		void SaveState(Windows.Foundation.Collections.IMap<String, Object> state);
 	}
 }
