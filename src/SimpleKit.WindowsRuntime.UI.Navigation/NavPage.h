@@ -14,7 +14,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
 		void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
 
+		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> PageState() const
+		{
+			return m_pageState;
+		}
+
 		GET_PROPERTY(SimpleKit::WindowsRuntime::UI::Navigation::NavigationHelper, PageHelper);
+
+	private:
+		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> m_pageState;
 	};
 }
 

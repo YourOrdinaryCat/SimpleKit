@@ -10,5 +10,6 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		NavPage(Boolean useNavigationShortcuts);
 
 		SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper PageHelper{ get; };
+		Windows.Foundation.Collections.IMap<String, Object> PageState{ get; };
 	};
 }
