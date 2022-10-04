@@ -21,14 +21,18 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	{
 	}
 
-	void NavPage::OnNavigatedTo(NavigationEventArgs const& e)
+	bool NavPage::TryLoadState(NavigationMode const& navigationMode)
 	{
-		auto state = m_PageHelper.LoadState(e.NavigationMode());
-		if (state)
+		auto state = m_PageHelper.LoadState(navigationMode);
+		bool available = state != nullptr;
+
+		if (available)
 			m_pageState = state;
+
+		return available;
 	}
 
-	void NavPage::OnNavigatedFrom(NavigationEventArgs const&)
+	void NavPage::SaveState() const
 	{
 		m_PageHelper.SaveState(m_pageState);
 	}

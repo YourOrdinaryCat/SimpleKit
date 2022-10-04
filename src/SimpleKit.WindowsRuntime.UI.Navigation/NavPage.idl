@@ -9,6 +9,9 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		NavPage();
 		NavPage(Boolean useNavigationShortcuts);
 
+		Boolean TryLoadState(Windows.UI.Xaml.Navigation.NavigationMode navigationMode);
+		void SaveState();
+
 		SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper PageHelper{ get; };
 		Windows.Foundation.Collections.IMap<String, Object> PageState{ get; };
 	};
