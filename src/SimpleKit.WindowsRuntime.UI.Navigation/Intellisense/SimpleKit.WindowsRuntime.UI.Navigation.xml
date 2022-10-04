@@ -4,23 +4,6 @@
 		<name>SimpleKit.WindowsRuntime.UI.Navigation</name>
 	</assembly>
 	<members>
-		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs">
-			<summary>Holds event data related to reloading a page's state.</summary>
-		</member>
-		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs.NavigationArgs">
-			<summary>Event data that describes how this page was reached.</summary>
-		</member>
-		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs.HasState">
-			<summary>Whether the page has preserved state.</summary>
-		</member>
-		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.LoadStateEventArgs.PageState">
-			<summary>
-				A dictionary of state preserved by this page. This will be null
-				the first time a page is visited, or when the user gets to the
-				page by navigating back/forward.
-			</summary>
-		</member>
-
 		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper">
 			<summary>
 				A class that aids in navigation between pages, integrating with
@@ -54,18 +37,6 @@
 				For a set of types that are known to work, check
 				<see cref="T:Windows.Foundation.PropertyType"/>.
 			</remarks>
-		</member>
-		<member name="E:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.LoadingState">
-			<summary>
-				Invoked when the page is navigated to. This is your opportunity to
-				load session state.
-			</summary>
-		</member>
-		<member name="E:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.SavingState">
-			<summary>
-				Invoked when the page is about to be unloaded, last opportunity you
-				get to save the page's state.
-			</summary>
 		</member>
 
 		<member name="T:SimpleKit.WindowsRuntime.UI.Navigation.NavPage">
