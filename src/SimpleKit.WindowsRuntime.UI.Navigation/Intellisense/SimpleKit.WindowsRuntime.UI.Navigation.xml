@@ -27,6 +27,20 @@
 				Whether to enable handling for back/forward gestures and button combinations.
 			</param>
 		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.LoadState(Windows.UI.Xaml.Navigation.NavigationMode)">
+			<summary>
+				Loads currently saved session state from
+				<see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager"/>.
+			</summary>
+			<param name="navigationMode">
+				Indicates the way the page was reached, used to determine whether
+				session state from previous navigation should be kept.
+			</param>
+			<returns>
+				A dictionary containing session state saved through
+				<see cref="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.SaveState(System.Collections.Generic.IDictionary{System.String,System.Object})"/>.
+			</returns>
+		</member>
 		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.SaveState(System.Collections.Generic.IDictionary{System.String,System.Object})">
 			<summary>
 				Saves the data inside the dictionary for state restoration.
@@ -63,6 +77,31 @@
 			<summary>
 				The <see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper"/>
 				associated with this page.
+			</summary>
+		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.PageState">
+			<summary>
+				This page's session state, saved after navigation.
+			</summary>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.TryLoadState(Windows.UI.Xaml.Navigation.NavigationMode)">
+			<summary>
+				Loads this page's saved state, and if available, replaces
+				<see cref="P:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.PageState"/>
+				with it.
+			</summary>
+			<param name="navigationMode">
+				Indicates the way the page was reached, used to determine whether
+				session state from previous navigation should be kept.
+			</param>
+			<returns>
+				Whether session state is available.
+			</returns>
+		</member>
+		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.SaveState">
+			<summary>
+				Saves this page's state, which is stored in
+				<see cref="P:SimpleKit.WindowsRuntime.UI.Navigation.NavPage.PageState"/>.
 			</summary>
 		</member>
 
