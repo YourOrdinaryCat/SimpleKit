@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.ViewManagement</id>
-		<version>1.3</version>
+		<version>1.4</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,10 +11,9 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.ViewManagement</projectUrl>
 		<description>A set of helpers to manage views in UWP apps.</description>
 		<releaseNotes>
-			- Fixed native targets
-			- Improved the way static init is handled
+			- Updated C++/WinRT version
 		</releaseNotes>
-		<tags>Windows UWP</tags>
+		<tags>Windows UWP ApplicationView Window</tags>
 
 		<dependencies>
 			<group targetFramework="UAP10.0" />

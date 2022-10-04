@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Navigation</id>
-		<version>1.3</version>
+		<version>1.4</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,8 +11,8 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Navigation</projectUrl>
 		<description>A set of helpers that aid in navigation and session state management.</description>
 		<releaseNotes>
-			- Fixed native targets
-			- Improved the way static init is handled
+			- Improved the way saving/restoring state is handled
+			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP XAML Navigation</tags>
 
