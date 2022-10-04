@@ -11,6 +11,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		NavPage();
 		NavPage(bool const& useNavigationShortcuts);
 
+		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
+		void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
+
 		bool TryLoadState(Windows::UI::Xaml::Navigation::NavigationMode const& navigationMode);
 		void SaveState() const;
 
