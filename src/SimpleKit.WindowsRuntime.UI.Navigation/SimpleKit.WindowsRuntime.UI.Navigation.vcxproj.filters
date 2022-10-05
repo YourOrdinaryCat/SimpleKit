@@ -32,9 +32,6 @@
     <Filter Include="Project Files">
       <UniqueIdentifier>2135f3ff-26b0-475a-bd38-2c936c91cf4d</UniqueIdentifier>
     </Filter>
-    <Filter Include="Event Args">
-      <UniqueIdentifier>{03aafd93-1fc2-40e7-816b-a32b75ceb42b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -42,9 +39,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="LoadStateEventArgs.idl">
-      <Filter>Event Args</Filter>
-    </Midl>
     <Midl Include="NavPage.idl" />
     <Midl Include="NavigationHelper.idl" />
     <Midl Include="SessionStateManager.idl" />
