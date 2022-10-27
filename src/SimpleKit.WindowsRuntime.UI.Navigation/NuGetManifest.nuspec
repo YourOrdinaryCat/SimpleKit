@@ -24,6 +24,8 @@
 	</metadata>
 
 	<files>
+		<file src="readme.txt" target="" />
+
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Navigation.winmd" target="lib\uap10.0" />
 		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.Navigation.xml" target="lib\uap10.0" />
