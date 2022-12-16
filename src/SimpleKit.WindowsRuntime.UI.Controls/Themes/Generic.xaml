@@ -5,24 +5,33 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
-            <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush" />
-            <StaticResource x:Key="TitleBarInactiveForegroundThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
+            <SolidColorBrush x:Key="TitleBarBackgroundThemeBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="TitleBarInactiveBackgroundThemeBrush" Color="Transparent" />
+
+            <SolidColorBrush x:Key="TitleBarForegroundThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TitleBarInactiveForegroundThemeBrush" Color="#66FFFFFF" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
-            <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush" />
-            <StaticResource x:Key="TitleBarInactiveForegroundThemeBrush" ResourceKey="TextFillColorDisabledBrush" />
+            <SolidColorBrush x:Key="TitleBarBackgroundThemeBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="TitleBarInactiveBackgroundThemeBrush" Color="Transparent" />
+
+            <SolidColorBrush x:Key="TitleBarForegroundThemeBrush" Color="#FF000000" />
+            <SolidColorBrush x:Key="TitleBarInactiveForegroundThemeBrush" Color="#66000000" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
-            <StaticResource x:Key="TitleBarForegroundThemeBrush" ResourceKey="SystemColorWindowColor" />
-            <StaticResource x:Key="TitleBarInactiveForegroundThemeBrush" ResourceKey="SystemColorGrayTextColor" />
+            <SolidColorBrush x:Key="TitleBarBackgroundThemeBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="TitleBarInactiveBackgroundThemeBrush" Color="Transparent" />
+
+            <SolidColorBrush x:Key="TitleBarForegroundThemeBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="TitleBarInactiveForegroundThemeBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
     <Style BasedOn="{StaticResource DefaultExtendedTitleBarStyle}" TargetType="local:ExtendedTitleBar" />
     <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{ThemeResource TitleBarBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="IsTabStop" Value="False" />
@@ -64,7 +73,7 @@
                                 <VisualState x:Name="WindowActiveState" />
                                 <VisualState x:Name="WindowInactiveState">
                                     <VisualState.Setters>
-                                        <Setter Target="TitleBar.Background" Value="Transparent" />
+                                        <Setter Target="TitleBar.Background" Value="{ThemeResource TitleBarInactiveBackgroundThemeBrush}" />
                                         <Setter Target="TitleBarContent.Foreground" Value="{ThemeResource TitleBarInactiveForegroundThemeBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>
