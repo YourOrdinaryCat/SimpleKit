@@ -29,12 +29,13 @@
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
-    <Style BasedOn="{StaticResource DefaultExtendedTitleBarStyle}" TargetType="local:ExtendedTitleBar" />
     <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
         <Setter Property="Background" Value="{ThemeResource TitleBarBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -42,26 +43,37 @@
                 <ControlTemplate TargetType="local:ExtendedTitleBar">
                     <Grid
                         x:Name="TitleBar"
+                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         AutomationProperties.AutomationId="TitleBarDraggableArea"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid.RenderTransform>
+                            <TranslateTransform x:Name="TitleBarTranslate" />
+                        </Grid.RenderTransform>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
                         <ContentPresenter
-                            x:Name="TitleBarContent"
-                            Padding="{TemplateBinding Padding}"
+                            x:Name="TitleBarIcon"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                            Content="{TemplateBinding Icon}"
+                            Foreground="{TemplateBinding Foreground}" />
+
+                        <ContentPresenter
+                            x:Name="TitleBarContent"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Title}"
                             FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}">
-                            <ContentPresenter.RenderTransform>
-                                <TranslateTransform x:Name="ContentTranslate" />
-                            </ContentPresenter.RenderTransform>
-                        </ContentPresenter>
+                            Foreground="{TemplateBinding Foreground}" />
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="VisibilityStates">
@@ -78,10 +90,20 @@
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="IconStates">
+                                <VisualState x:Name="IconState" />
+                                <VisualState x:Name="NoIconState">
+                                    <VisualState.Setters>
+                                        <Setter Target="TitleBarIcon.Visibility" Value="Collapsed" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    <Style BasedOn="{StaticResource DefaultExtendedTitleBarStyle}" TargetType="local:ExtendedTitleBar" />
 </ResourceDictionary>

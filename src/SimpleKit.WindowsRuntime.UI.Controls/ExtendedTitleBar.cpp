@@ -20,6 +20,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 	ExtendedTitleBar::ExtendedTitleBar()
 	{
 		DefaultStyleKey(winrt::box_value(this->GetRuntimeClassName()));
+
+		m_IconProperty();
+		m_TitleProperty();
+
 		m_unloadedToken = Unloaded
 		(
 			{ this, &ExtendedTitleBar::OnUnloaded }
@@ -52,6 +56,25 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 			winrt::auto_revoke,
 			{ this, &ExtendedTitleBar::OnActivated }
 		);
+	}
+
+	void ExtendedTitleBar::OnApplyTemplate() const
+	{
+		__super::OnApplyTemplate();
+		this->UpdateIcon();
+	}
+
+	void ExtendedTitleBar::OnIconPropertyChanged(DependencyObject const& sender, DependencyPropertyChangedEventArgs const&)
+	{
+		sender.as<ExtendedTitleBar>()->UpdateIcon();
+	}
+
+	void ExtendedTitleBar::UpdateIcon() const
+	{
+		if (this->Icon())
+			VisualStateManager::GoToState(*this, L"IconState", true);
+		else
+			VisualStateManager::GoToState(*this, L"NoIconState", true);
 	}
 
 	void ExtendedTitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)

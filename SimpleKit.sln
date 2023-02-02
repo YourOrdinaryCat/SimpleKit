@@ -135,6 +135,7 @@ Global
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{1d961364-c1de-4e96-bf39-174cfabb93c5}*SharedItemsImports = 4
+		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{917fbec6-169a-4c30-8904-91a2ed799164}*SharedItemsImports = 4
 		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{e5e78e7f-65e5-4b00-9dfb-9d1f8e030c3b}*SharedItemsImports = 9
 		src\SimpleKit.WindowsRuntime.Shared\SimpleKit.WindowsRuntime.Shared.vcxitems*{ee3af4c9-6d86-46e1-8b6c-6d42cbef39f5}*SharedItemsImports = 4
 	EndGlobalSection
