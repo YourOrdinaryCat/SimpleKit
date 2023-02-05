@@ -29,6 +29,9 @@
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
+    <Thickness x:Key="TitleBarIconMargin">12,0,0,0</Thickness>
+    <Thickness x:Key="TitleBarTitleMargin">12,0,0,0</Thickness>
+
     <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
         <Setter Property="Background" Value="{ThemeResource TitleBarBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
@@ -61,14 +64,16 @@
 
                         <ContentPresenter
                             x:Name="TitleBarIcon"
+                            Margin="{StaticResource TitleBarIconMargin}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Icon}"
                             Foreground="{TemplateBinding Foreground}" />
 
                         <ContentPresenter
-                            x:Name="TitleBarContent"
+                            x:Name="TitleBarTitle"
                             Grid.Column="1"
+                            Margin="{StaticResource TitleBarTitleMargin}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Title}"
@@ -86,7 +91,7 @@
                                 <VisualState x:Name="WindowInactiveState">
                                     <VisualState.Setters>
                                         <Setter Target="TitleBar.Background" Value="{ThemeResource TitleBarInactiveBackgroundThemeBrush}" />
-                                        <Setter Target="TitleBarContent.Foreground" Value="{ThemeResource TitleBarInactiveForegroundThemeBrush}" />
+                                        <Setter Target="TitleBarTitle.Foreground" Value="{ThemeResource TitleBarInactiveForegroundThemeBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
