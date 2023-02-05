@@ -39,8 +39,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 		auto titleBar = view.TitleBar();
 		auto coreTitleBar = coreView.TitleBar();
 
-		titleBar.ButtonBackgroundColor(Colors::Transparent());
-		titleBar.ButtonInactiveBackgroundColor(Colors::Transparent());
+		static auto buttonColors = Colors::Transparent();
+		titleBar.ButtonBackgroundColor(buttonColors);
+		titleBar.ButtonInactiveBackgroundColor(buttonColors);
 
 		coreTitleBar.ExtendViewIntoTitleBar(true);
 		window.SetTitleBar(*this);
