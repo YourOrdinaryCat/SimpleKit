@@ -2,8 +2,6 @@
 
 #include "ExtendedTitleBar.g.h"
 
-#include "PropertyUtils.h"
-
 namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 {
 	struct ExtendedTitleBar : ExtendedTitleBarT<ExtendedTitleBar>
