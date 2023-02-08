@@ -127,6 +127,10 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="TitleBar.h">
+      <DependentUpon>TitleBar.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExtendedTitleBar.cpp">
@@ -137,6 +141,10 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="TitleBar.cpp">
+      <DependentUpon>TitleBar.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Exports.def" />
@@ -150,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ExtendedTitleBar.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="TitleBar.idl">
       <SubType>Designer</SubType>
     </Midl>
   </ItemGroup>

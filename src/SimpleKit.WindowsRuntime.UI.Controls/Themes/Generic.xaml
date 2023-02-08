@@ -32,7 +32,7 @@
     <Thickness x:Key="TitleBarIconMargin">12,0,0,0</Thickness>
     <Thickness x:Key="TitleBarTitleMargin">12,0,0,0</Thickness>
 
-    <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
+    <Style x:Key="DefaultTitleBarStyle" TargetType="local:TitleBar">
         <Setter Property="Background" Value="{ThemeResource TitleBarBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
         <Setter Property="FontSize" Value="12" />
@@ -43,7 +43,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:ExtendedTitleBar">
+                <ControlTemplate TargetType="local:TitleBar">
                     <Grid
                         x:Name="TitleBar"
                         Padding="{TemplateBinding Padding}"
@@ -110,5 +110,65 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="DefaultExtendedTitleBarStyle" TargetType="local:ExtendedTitleBar">
+        <Setter Property="Background" Value="{ThemeResource TitleBarBackgroundThemeBrush}" />
+        <Setter Property="Foreground" Value="{ThemeResource TitleBarForegroundThemeBrush}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ExtendedTitleBar">
+                    <Grid
+                        x:Name="TitleBar"
+                        Padding="{TemplateBinding Padding}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        AutomationProperties.AutomationId="TitleBarDraggableArea"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter
+                            x:Name="TitleBarContent"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{TemplateBinding Foreground}">
+                            <ContentPresenter.RenderTransform>
+                                <TranslateTransform x:Name="ContentTranslate" />
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualState x:Name="TitleBarVisibleState" />
+                                <VisualState x:Name="TitleBarCollapsedState" />
+                            </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="WindowStates">
+                                <VisualState x:Name="WindowActiveState" />
+                                <VisualState x:Name="WindowInactiveState">
+                                    <VisualState.Setters>
+                                        <Setter Target="TitleBar.Background" Value="{ThemeResource TitleBarInactiveBackgroundThemeBrush}" />
+                                        <Setter Target="TitleBarContent.Foreground" Value="{ThemeResource TitleBarInactiveForegroundThemeBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource DefaultTitleBarStyle}" TargetType="local:TitleBar" />
     <Style BasedOn="{StaticResource DefaultExtendedTitleBarStyle}" TargetType="local:ExtendedTitleBar" />
 </ResourceDictionary>

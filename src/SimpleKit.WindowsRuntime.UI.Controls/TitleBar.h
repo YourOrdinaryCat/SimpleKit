@@ -1,17 +1,42 @@
-﻿#pragma once
+#pragma once
 
-#include "ExtendedTitleBar.g.h"
+#include "TitleBar.g.h"
 
 #include "PropertyUtils.h"
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 {
-	struct ExtendedTitleBar : ExtendedTitleBarT<ExtendedTitleBar>
+	struct TitleBar : TitleBarT<TitleBar>
 	{
-		ExtendedTitleBar();
+		TitleBar();
+
 		void SetTitleBarForCurrentView();
+		void OnApplyTemplate() const;
+
+		DEPENDENCY_PROPERTY
+		(
+			Title,
+			Windows::Foundation::IInspectable,
+			Controls::TitleBar
+		)
+
+		DEPENDENCY_PROPERTY_META
+		(
+			Icon,
+			Windows::UI::Xaml::Controls::IconElement,
+			Controls::TitleBar,
+			OnIconPropertyChanged,
+			nullptr
+		)
 
 	private:
+		void UpdateIcon() const;
+		static void OnIconPropertyChanged
+		(
+			Windows::UI::Xaml::DependencyObject const& sender,
+			Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args
+		);
+
 		Windows::ApplicationModel::Core::CoreApplicationViewTitleBar::IsVisibleChanged_revoker m_visibleChangedToken;
 		void OnVisibleChanged
 		(
@@ -37,7 +62,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::factory_implementation
 {
-	struct ExtendedTitleBar : ExtendedTitleBarT<ExtendedTitleBar, implementation::ExtendedTitleBar>
+	struct TitleBar : TitleBarT<TitleBar, implementation::TitleBar>
 	{
 	};
 }
