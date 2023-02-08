@@ -1,0 +1,17 @@
+namespace SimpleKit.WindowsRuntime.UI.Controls
+{
+	[default_interface]
+	[webhosthidden]
+	[contentproperty("Title")]
+	unsealed runtimeclass TitleBar : Windows.UI.Xaml.Controls.Control
+	{
+		TitleBar();
+		void SetTitleBarForCurrentView();
+
+		static Windows.UI.Xaml.DependencyProperty TitleProperty{ get; };
+		Object Title{ get; set; };
+
+		static Windows.UI.Xaml.DependencyProperty IconProperty{ get; };
+		Windows.UI.Xaml.Controls.IconElement Icon{ get; set; };
+	}
+}

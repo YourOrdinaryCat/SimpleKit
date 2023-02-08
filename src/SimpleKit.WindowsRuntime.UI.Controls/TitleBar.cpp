@@ -1,7 +1,7 @@
-﻿#include "pch.h"
-#include "ExtendedTitleBar.h"
-#if __has_include("ExtendedTitleBar.g.cpp")
-#include "ExtendedTitleBar.g.cpp"
+#include "pch.h"
+#include "TitleBar.h"
+#if __has_include("TitleBar.g.cpp")
+#include "TitleBar.g.cpp"
 #endif
 
 using namespace winrt::Windows::ApplicationModel::Core;
@@ -16,17 +16,20 @@ using namespace winrt::Windows::UI::Xaml;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 {
-	ExtendedTitleBar::ExtendedTitleBar()
+	TitleBar::TitleBar()
 	{
 		DefaultStyleKey(winrt::box_value(this->GetRuntimeClassName()));
 
+		m_IconProperty();
+		m_TitleProperty();
+
 		m_unloadedToken = Unloaded
 		(
-			{ this, &ExtendedTitleBar::OnUnloaded }
+			{ this, &TitleBar::OnUnloaded }
 		);
 	}
 
-	void ExtendedTitleBar::SetTitleBarForCurrentView()
+	void TitleBar::SetTitleBarForCurrentView()
 	{
 		auto view = ApplicationView::GetForCurrentView();
 		auto coreView = CoreApplication::GetCurrentView();
@@ -45,17 +48,36 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 		m_visibleChangedToken = coreTitleBar.IsVisibleChanged
 		(
 			winrt::auto_revoke,
-			{ this, &ExtendedTitleBar::OnVisibleChanged }
+			{ this, &TitleBar::OnVisibleChanged }
 		);
 
 		m_activatedToken = window.Activated
 		(
 			winrt::auto_revoke,
-			{ this, &ExtendedTitleBar::OnActivated }
+			{ this, &TitleBar::OnActivated }
 		);
 	}
 
-	void ExtendedTitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
+	void TitleBar::OnApplyTemplate() const
+	{
+		__super::OnApplyTemplate();
+		this->UpdateIcon();
+	}
+
+	void TitleBar::OnIconPropertyChanged(DependencyObject const& sender, DependencyPropertyChangedEventArgs const&)
+	{
+		sender.as<TitleBar>()->UpdateIcon();
+	}
+
+	void TitleBar::UpdateIcon() const
+	{
+		if (this->Icon())
+			VisualStateManager::GoToState(*this, L"IconState", true);
+		else
+			VisualStateManager::GoToState(*this, L"NoIconState", true);
+	}
+
+	void TitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
 	{
 		if (sender.IsVisible())
 			VisualStateManager::GoToState(*this, L"TitleBarVisibleState", true);
@@ -63,7 +85,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 			VisualStateManager::GoToState(*this, L"TitleBarCollapsedState", true);
 	}
 
-	void ExtendedTitleBar::OnActivated(IInspectable const&, WindowActivatedEventArgs const& e)
+	void TitleBar::OnActivated(IInspectable const&, WindowActivatedEventArgs const& e)
 	{
 		if (e.WindowActivationState() == CoreWindowActivationState::Deactivated)
 			VisualStateManager::GoToState(*this, L"WindowInactiveState", true);
@@ -71,7 +93,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 			VisualStateManager::GoToState(*this, L"WindowActiveState", true);
 	}
 
-	void ExtendedTitleBar::OnUnloaded(IInspectable const&, RoutedEventArgs const&)
+	void TitleBar::OnUnloaded(IInspectable const&, RoutedEventArgs const&)
 	{
 		m_visibleChangedToken.revoke();
 		m_activatedToken.revoke();

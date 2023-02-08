@@ -7,6 +7,8 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
       <Filter>Project Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExtendedTitleBar.cpp" />
+    <ClCompile Include="TitleBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props">
@@ -40,9 +42,12 @@
     <ClInclude Include="pch.h">
       <Filter>Project Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExtendedTitleBar.h" />
+    <ClInclude Include="TitleBar.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ExtendedTitleBar.idl" />
+    <Midl Include="TitleBar.idl" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\Generic.xaml">
