@@ -11,7 +11,8 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Controls</projectUrl>
 		<description>A set of useful controls written in C++ for the Windows Runtime.</description>
 		<releaseNotes>
-			- Updated C++/WinRT version
+			- Added alternative title bar control
+			- Fixed indirect WinUI dependency
 		</releaseNotes>
 		<tags>Windows UWP Fluent XAML Controls</tags>
 
