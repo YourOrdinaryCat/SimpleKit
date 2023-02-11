@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Navigation</id>
-		<version>1.4</version>
+		<version>1.5</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
@@ -11,21 +11,18 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Navigation</projectUrl>
 		<description>A set of helpers that aid in navigation and session state management.</description>
 		<releaseNotes>
-			- Improved the way saving/restoring state is handled
 			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP XAML Navigation</tags>
 
 		<dependencies>
 			<group targetFramework="UAP10.0">
-				<dependency id="SimpleKit.WindowsRuntime.Data" version="1.4" />
+				<dependency id="SimpleKit.WindowsRuntime.Data" version="1.5" />
 			</group>
 		</dependencies>
 	</metadata>
 
 	<files>
-		<file src="readme.txt" target="" />
-
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Navigation.winmd" target="lib\uap10.0" />
 		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.Navigation.xml" target="lib\uap10.0" />

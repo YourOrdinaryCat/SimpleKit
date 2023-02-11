@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.Data</id>
-		<version>1.4</version>
+		<version>1.5</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<license type="expression">GPL-3.0-only</license>
