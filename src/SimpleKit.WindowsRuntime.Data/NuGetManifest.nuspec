@@ -5,6 +5,8 @@
 		<version>1.5</version>
 		<authors>YourOrdinaryCat</authors>
 
+		<icon>images\SimpleKit.png</icon>
+
 		<license type="expression">GPL-3.0-only</license>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 
@@ -21,6 +23,8 @@
 	</metadata>
 
 	<files>
+		<file src="..\..\assets\SimpleKit.png" target="images\" />
+
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.Data.winmd" target="lib\uap10.0" />
 		<file src="Intellisense\SimpleKit.WindowsRuntime.Data.xml" target="lib\uap10.0" />
