@@ -1,5 +1,10 @@
-# SimpleKit
-A set of useful helpers (mostly) written in C++ and C#.
+<p align="center">
+	<img src="assets/SimpleKit.png" />
+	<br>
+	<h1 align="center">SimpleKit</h1>
+</p>
+
+A set of useful helpers (mostly) written in C++ and C#
 
 ## Building
 Most of the time, you'll want to use the `BuildAll.ps1` script. There are 4 parameters you can adjust:
