@@ -4,6 +4,7 @@
         <Identity Id="SimpleKit.Templates.WindowsRuntime.b1f6162e-940d-49b1-a95b-5fa1721cc309" Version="1.2" Language="en-US" Publisher="YourOrdinaryCat" />
         <DisplayName>SimpleKit WinRT Templates</DisplayName>
         <Description xml:space="preserve">Templates used by the SimpleKit project for WinRT related work.</Description>
+        <Icon>SimpleKit.png</Icon>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">

@@ -2,8 +2,10 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Controls</id>
-		<version>1.4</version>
+		<version>1.5</version>
 		<authors>YourOrdinaryCat</authors>
+
+		<icon>images\SimpleKit.png</icon>
 
 		<license type="expression">GPL-3.0-only</license>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -13,6 +15,7 @@
 		<releaseNotes>
 			- Added alternative title bar control
 			- Fixed indirect WinUI dependency
+			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP Fluent XAML Controls</tags>
 
@@ -22,6 +25,8 @@
 	</metadata>
 
 	<files>
+		<file src="..\..\assets\SimpleKit.png" target="images\" />
+
 		<!-- WinMD, IntelliSense -->
 		<file src="Release\Win32\SimpleKit.WindowsRuntime.UI.Controls.winmd" target="lib\uap10.0" />
 		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.Controls.xml" target="lib\uap10.0" />
