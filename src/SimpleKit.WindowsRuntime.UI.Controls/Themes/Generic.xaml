@@ -64,7 +64,7 @@
 
                         <ContentPresenter
                             x:Name="TitleBarIcon"
-                            Margin="{StaticResource TitleBarIconMargin}"
+                            Margin="{ThemeResource TitleBarIconMargin}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Icon}"
@@ -73,7 +73,7 @@
                         <ContentPresenter
                             x:Name="TitleBarTitle"
                             Grid.Column="1"
-                            Margin="{StaticResource TitleBarTitleMargin}"
+                            Margin="{ThemeResource TitleBarTitleMargin}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Title}"
