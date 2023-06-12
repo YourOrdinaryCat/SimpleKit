@@ -28,7 +28,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			m_pageState = state;
 	}
 
-	void NavPage::OnNavigatedFrom(NavigationEventArgs const&)
+	void NavPage::OnNavigatedFrom(NavigationEventArgs const&) const
 	{
 		m_PageHelper.SaveState(m_pageState);
 	}

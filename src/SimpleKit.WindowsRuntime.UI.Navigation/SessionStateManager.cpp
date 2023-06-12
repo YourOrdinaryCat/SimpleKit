@@ -62,20 +62,20 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 
 		// Switch to a background context to reduce unnecessary switching
-		winrt::apartment_context context;
+		const winrt::apartment_context context;
 		co_await winrt::resume_background();
 
 		// Serialize the session state synchronously to avoid asynchronous access to shared state
-		auto sessionData = InMemoryRandomAccessStream();
-		auto sessionDataWriter = DataWriter(sessionData.GetOutputStreamAt(0));
+		const auto sessionData = InMemoryRandomAccessStream();
+		const auto sessionDataWriter = DataWriter(sessionData.GetOutputStreamAt(0));
 
 		DataWriterHelper::WriteObject(sessionDataWriter, m_sessionState);
 		co_await sessionDataWriter.StoreAsync();
 
-		StorageFile file{ co_await ApplicationData::Current().LocalFolder().
-			CreateFileAsync(m_sessionStateFilename, CreationCollisionOption::ReplaceExisting) };
-		IRandomAccessStream fileStream{ co_await file.OpenAsync(FileAccessMode::ReadWrite) };
+		const auto stateFolder = ApplicationData::Current().LocalFolder();
+		StorageFile file{ co_await stateFolder.CreateFileAsync(m_sessionStateFilename, CreationCollisionOption::ReplaceExisting) };
 
+		const IRandomAccessStream fileStream{ co_await file.OpenAsync(FileAccessMode::ReadWrite) };
 		co_await RandomAccessStream::CopyAsync
 		(
 			sessionData.GetInputStreamAt(0),
@@ -91,31 +91,31 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		return RestoreAsync(hstring{});
 	}
 
-	IAsyncAction SessionStateManager::RestoreAsync(hstring sessionBaseKey)
+	IAsyncAction SessionStateManager::RestoreAsync(hstring const sessionBaseKey)
 	{
 		m_sessionState.Clear();
 
 		// Switch to a background context to reduce unnecessary switching
-		winrt::apartment_context context;
+		const winrt::apartment_context context;
 		co_await winrt::resume_background();
 
-		StorageFile stateFile{ co_await ApplicationData::Current().
-			LocalFolder().GetFileAsync(m_sessionStateFilename) };
+		const auto stateFolder = ApplicationData::Current().LocalFolder();
+		const StorageFile stateFile{ co_await stateFolder.GetFileAsync(m_sessionStateFilename) };
 
-		BasicProperties props{ co_await stateFile.GetBasicPropertiesAsync() };
+		const BasicProperties props{ co_await stateFile.GetBasicPropertiesAsync() };
 
 		// We can't work with anything larger than 4GB
-		auto size = unsigned int(props.Size());
+		const auto size = unsigned int(props.Size());
 		if (size != props.Size())
 			throw hresult_out_of_bounds(L"Session state larger than 4GB");
 
-		IRandomAccessStreamWithContentType strm{ co_await stateFile.OpenReadAsync() };
-		auto reader = DataReader(strm);
+		const IRandomAccessStreamWithContentType strm{ co_await stateFile.OpenReadAsync() };
+		const auto reader = DataReader(strm);
 
 		co_await reader.LoadAsync(size);
 
 		// Deserialize the Session State
-		auto state = DataReaderHelper::ReadObject(reader);
+		const auto state = DataReaderHelper::ReadObject(reader);
 		m_sessionState = state.as<IMap<hstring, IInspectable>>();
 
 		// Go back to the original context before manipulating the frames
@@ -124,12 +124,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		// Restore any registered frames to their saved state
 		for (auto&& weakFrame : m_registeredFrames)
 		{
-			auto frame = weakFrame.get();
+			const auto frame = weakFrame.get();
 			if (frame)
 			{
 				if (!sessionBaseKey.empty())
 				{
-					auto key = frame.GetValue(m_frameSessionBaseKeyProperty).try_as<hstring>();
+					const auto key = frame.GetValue(m_frameSessionBaseKeyProperty).try_as<hstring>();
 					if (key && key.value() != sessionBaseKey) continue;
 				}
 
@@ -229,16 +229,16 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void SessionStateManager::OnSessionKeyAdded(DependencyObject const& d, DependencyPropertyChangedEventArgs const& e)
 	{
-		auto newVal = e.NewValue().as<hstring>();
-		auto stdVal = winrt::to_string(newVal);
+		const auto newVal = e.NewValue().as<hstring>();
+		const auto stdVal = winrt::to_string(newVal);
 
-		auto npos = stdVal.find('_');
+		const auto npos = stdVal.find('_');
 		if (npos != std::string::npos)
 		{
-			auto secondHalf = stdVal.substr(npos + 1);
+			const auto secondHalf = stdVal.substr(npos + 1);
 			if (!secondHalf.empty())
 			{
-				auto firstHalf = stdVal.substr(0, npos);
+				const auto firstHalf = stdVal.substr(0, npos);
 				if (!firstHalf.empty())
 				{
 					RegisterFrame
@@ -247,7 +247,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 						winrt::to_hstring(secondHalf),
 						winrt::to_hstring(firstHalf)
 					);
-					return;
 				}
 			}
 		}
@@ -257,17 +256,17 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void SessionStateManager::RestoreFrameNavigationState(Frame const& frame)
 	{
-		auto frameState = SessionStateForFrame(frame);
+		const auto frameState = SessionStateForFrame(frame);
 		if (frameState.HasKey(L"Navigation"))
 		{
-			auto navState = frameState.Lookup(L"Navigation");
+			const auto navState = frameState.Lookup(L"Navigation");
 			frame.SetNavigationState(navState.as<hstring>());
 		}
 	}
 
 	void SessionStateManager::SaveFrameNavigationState(Frame const& frame)
 	{
-		IMap<hstring, IInspectable> frameState = SessionStateForFrame(frame);
+		const auto frameState = SessionStateForFrame(frame);
 		frameState.Insert(L"Navigation", box_value(frame.GetNavigationState()));
 	}
 
