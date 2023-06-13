@@ -17,46 +17,46 @@ using namespace winrt::Windows::UI::Xaml::Interop;
 
 namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 {
-	IAsyncOperation<ApplicationView> ViewHelpers::CreateNewViewAsync(TypeName const sourcePageType)
+	IAsyncOperation<ApplicationView> ViewHelpers::CreateNewViewAsync(TypeName const& sourcePageType)
 	{
-		auto coreView = CoreApplication::CreateNewView();
+		ApplicationView newView{ nullptr };
 
-		// Temporary switch to the new view's context to be able
-		// to use the GetForCurrentView style methods
-		winrt::apartment_context context;
-		co_await coreView.Dispatcher();
+		const auto coreView = CoreApplication::CreateNewView();
+		co_await coreView.Dispatcher().RunAsync(CoreDispatcherPriority::Normal,
+			[sourcePageType, &newView]
+			{
+				const auto frame = Frame();
+				frame.Navigate(sourcePageType);
 
-		auto frame = Frame();
-		frame.Navigate(sourcePageType);
+				const auto curr = Window::Current();
+				curr.Content(frame);
+				curr.Activate();
 
-		auto curr = Window::Current();
-		curr.Content(frame);
-		curr.Activate();
+				newView = ApplicationView::GetForCurrentView();
+				const auto id = newView.Id();
 
-		auto newView = ApplicationView::GetForCurrentView();
+				m_frames[id] = winrt::make_weak(frame);
+				m_tokens[id] = newView.Consolidated(OnViewConsolidated);
+			});
 
-		m_tokens[newView.Id()] = newView.Consolidated(OnViewConsolidated);
-		m_frames[newView.Id()] = winrt::make_weak(frame);
-
-		co_await context;
 		co_return newView;
 	}
 
-	IAsyncOperation<bool> ViewHelpers::ShowNewViewAsync(TypeName const sourcePageType)
+	IAsyncOperation<bool> ViewHelpers::ShowNewViewAsync(TypeName const& sourcePageType)
 	{
-		ApplicationView newView{ co_await CreateNewViewAsync(sourcePageType) };
+		const ApplicationView newView{ co_await CreateNewViewAsync(sourcePageType) };
 		co_return co_await ApplicationViewSwitcher::TryShowAsStandaloneAsync(newView.Id());
 	}
 
 	void ViewHelpers::OnViewConsolidated(ApplicationView const& sender, ApplicationViewConsolidatedEventArgs const&)
 	{
-		auto id = sender.Id();
-		auto frame = m_frames[id].get();
+		const auto id = sender.Id();
 
 		// Set the frame's content to null when the view's consolidated,
 		// which prevents memory leaks
-		if (frame)
+		if (const auto frame = m_frames[id].get())
 			frame.Content(nullptr);
+
 		sender.Consolidated(m_tokens[id]);
 
 		m_frames.erase(id);
@@ -65,9 +65,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 
 	void ViewHelpers::OnViewTitleChanged(DependencyObject const&, DependencyPropertyChangedEventArgs const& e)
 	{
-		auto newVal = e.NewValue();
-		if (newVal)
-			ApplicationView::GetForCurrentView().Title(newVal.as<hstring>());
+		if (const auto view = ApplicationView::GetForCurrentView())
+		{
+			const auto newVal = e.NewValue();
+			if (newVal)
+				view.Title(newVal.as<hstring>());
+		}
 	}
 
 	std::map<int, winrt::weak_ref<Frame>> ViewHelpers::m_frames = std::map<int, winrt::weak_ref<Frame>>();
