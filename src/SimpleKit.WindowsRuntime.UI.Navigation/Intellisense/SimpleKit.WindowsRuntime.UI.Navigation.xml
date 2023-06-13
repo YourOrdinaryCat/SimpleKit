@@ -27,6 +27,19 @@
 				Whether to enable handling for back/forward gestures and button combinations.
 			</param>
 		</member>
+		<member name="P:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.PageKey">
+			<summary>
+				A key used to identify the page's session state in
+				<see cref="T:SimpleKit.WindowsRuntime.UI.Navigation.SessionStateManager"/>.
+			</summary>
+			<returns>
+				The page's key.
+			</returns>
+			<remarks>
+				This property can only be used after calling
+				<see cref="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.LoadState(Windows.UI.Xaml.Navigation.NavigationMode)"/>.
+			</remarks>
+		</member>
 		<member name="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.LoadState(Windows.UI.Xaml.Navigation.NavigationMode)">
 			<summary>
 				Loads currently saved session state from
