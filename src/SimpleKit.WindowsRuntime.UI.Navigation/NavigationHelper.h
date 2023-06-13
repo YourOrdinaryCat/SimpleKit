@@ -2,6 +2,8 @@
 
 #include "NavigationHelper.g.h"
 
+#include "PropertyUtils.h"
+
 namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct NavigationHelper : NavigationHelperT<NavigationHelper>
@@ -18,15 +20,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> LoadState(Windows::UI::Xaml::Navigation::NavigationMode const& navigationMode);
 		void SaveState(Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const& state) const;
 
+		GET_PROPERTY(hstring, PageKey)
+
 	private:
 		~NavigationHelper();
 
+		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
 		Windows::UI::Xaml::Controls::Frame GetPageFrame() const;
 
 		bool m_useNavigationShortcuts;
-
-		weak_ref<Windows::UI::Xaml::Controls::Page> m_page;
-		hstring m_pageKey;
 
 		winrt::event_token m_backRequestedToken;
 		winrt::event_token m_loadedToken;
