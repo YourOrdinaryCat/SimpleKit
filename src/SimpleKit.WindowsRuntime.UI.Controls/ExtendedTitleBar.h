@@ -15,14 +15,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 		(
 			Windows::ApplicationModel::Core::CoreApplicationViewTitleBar const& sender,
 			Windows::Foundation::IInspectable const& args
-		);
+		) const;
 
 		Windows::UI::Xaml::Window::Activated_revoker m_activatedToken;
 		void OnActivated
 		(
 			Windows::Foundation::IInspectable const& sender,
 			Windows::UI::Core::WindowActivatedEventArgs const& e
-		);
+		) const;
 
 		winrt::event_token m_unloadedToken;
 		void OnUnloaded

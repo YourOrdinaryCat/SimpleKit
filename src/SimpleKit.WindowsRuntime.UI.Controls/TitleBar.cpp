@@ -31,16 +31,16 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 
 	void TitleBar::SetTitleBarForCurrentView()
 	{
-		auto view = ApplicationView::GetForCurrentView();
-		auto coreView = CoreApplication::GetCurrentView();
-		auto window = Window::Current();
+		const auto view = ApplicationView::GetForCurrentView();
+		const auto coreView = CoreApplication::GetCurrentView();
+		const auto window = Window::Current();
 
-		auto titleBar = view.TitleBar();
-		auto coreTitleBar = coreView.TitleBar();
+		const auto titleBar = view.TitleBar();
+		const auto coreTitleBar = coreView.TitleBar();
 
-		static auto buttonColors = Colors::Transparent();
-		titleBar.ButtonBackgroundColor(buttonColors);
-		titleBar.ButtonInactiveBackgroundColor(buttonColors);
+		const auto buttonBg = Colors::Transparent();
+		titleBar.ButtonBackgroundColor(buttonBg);
+		titleBar.ButtonInactiveBackgroundColor(buttonBg);
 
 		coreTitleBar.ExtendViewIntoTitleBar(true);
 		window.SetTitleBar(*this);
@@ -77,7 +77,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 			VisualStateManager::GoToState(*this, L"NoIconState", true);
 	}
 
-	void TitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&)
+	void TitleBar::OnVisibleChanged(CoreApplicationViewTitleBar const& sender, IInspectable const&) const
 	{
 		if (sender.IsVisible())
 			VisualStateManager::GoToState(*this, L"TitleBarVisibleState", true);
@@ -85,7 +85,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 			VisualStateManager::GoToState(*this, L"TitleBarCollapsedState", true);
 	}
 
-	void TitleBar::OnActivated(IInspectable const&, WindowActivatedEventArgs const& e)
+	void TitleBar::OnActivated(IInspectable const&, WindowActivatedEventArgs const& e) const
 	{
 		if (e.WindowActivationState() == CoreWindowActivationState::Deactivated)
 			VisualStateManager::GoToState(*this, L"WindowInactiveState", true);

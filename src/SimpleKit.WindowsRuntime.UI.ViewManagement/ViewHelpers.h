@@ -13,10 +13,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 		ViewHelpers() = default;
 
 		static Windows::Foundation::IAsyncOperation<Windows::UI::ViewManagement::ApplicationView>
-			CreateNewViewAsync(Windows::UI::Xaml::Interop::TypeName const sourcePageType);
+			CreateNewViewAsync(Windows::UI::Xaml::Interop::TypeName const& sourcePageType);
 
 		static Windows::Foundation::IAsyncOperation<bool>
-			ShowNewViewAsync(Windows::UI::Xaml::Interop::TypeName const sourcePageType);
+			ShowNewViewAsync(Windows::UI::Xaml::Interop::TypeName const& sourcePageType);
 
 		ATTACHED_PROPERTY_META
 		(

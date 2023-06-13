@@ -21,40 +21,17 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 	void DataWriterHelper::WriteObject(DataWriter const& writer, IInspectable const& obj)
 	{
 		if (!obj)
-		{
 			writer.WriteByte((uint8_t)StreamTypes::NullPtrType);
-			return;
-		}
-
-		auto prop = obj.try_as<IPropertyValue>();
-		if (prop)
-		{
+		else if (const auto prop = obj.try_as<IPropertyValue>())
 			WriteProperty(writer, prop);
-			return;
-		}
-
-		auto strMap = obj.try_as<IMap<hstring, IInspectable>>();
-		if (strMap)
-		{
+		else if (const auto strMap = obj.try_as<IMap<hstring, IInspectable>>())
 			WriteStringToObjectMap(writer, strMap);
-			return;
-		}
-
-		auto map = obj.try_as<IMap<IInspectable, IInspectable>>();
-		if (map)
-		{
+		else if (const auto map = obj.try_as<IMap<IInspectable, IInspectable>>())
 			WriteMap(writer, map);
-			return;
-		}
-
-		auto vector = obj.try_as<IVector<IInspectable>>();
-		if (vector)
-		{
+		else if (const auto vector = obj.try_as<IVector<IInspectable>>())
 			WriteVector(writer, vector);
-			return;
-		}
-
-		throw hresult_invalid_argument(L"Unsupported property type.");
+		else
+			throw hresult_invalid_argument(L"Unsupported property type.");
 	}
 
 	void DataWriterHelper::WriteProperty(DataWriter const& writer, IPropertyValue const& propertyValue)
@@ -122,7 +99,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		writer.WriteByte((uint8_t)StreamTypes::StrToObjMapStartMarker);
 		writer.WriteUInt32(map.Size());
 
-		for (auto&& pair : map)
+		for (const auto&& pair : map)
 		{
 			WriteObject(writer, box_value(pair.Key()));
 			WriteObject(writer, pair.Value());
@@ -136,7 +113,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		writer.WriteByte((uint8_t)StreamTypes::MapStartMarker);
 		writer.WriteUInt32(map.Size());
 
-		for (auto&& pair : map)
+		for (const auto&& pair : map)
 		{
 			WriteObject(writer, pair.Key());
 			WriteObject(writer, pair.Value());
@@ -150,7 +127,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		writer.WriteByte((uint8_t)StreamTypes::VectorStartMarker);
 		writer.WriteUInt32(vector.Size());
 
-		for (auto&& item : vector)
+		for (const auto&& item : vector)
 			WriteObject(writer, item);
 
 		writer.WriteByte((uint8_t)StreamTypes::VectorEndMarker);

@@ -23,12 +23,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Input::implementation
 		m_canExecute = canExecute;
 	}
 
-	void RelayCommand::Execute(IInspectable const& param)
+	void RelayCommand::Execute(IInspectable const& param) const
 	{
 		m_execute(param);
 	}
 
-	bool RelayCommand::CanExecute(IInspectable const& param)
+	bool RelayCommand::CanExecute(IInspectable const& param) const
 	{
 		if (m_canExecute != nullptr) return m_canExecute(param);
 		return true;

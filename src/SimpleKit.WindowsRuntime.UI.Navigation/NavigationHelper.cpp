@@ -33,65 +33,52 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	{
 	}
 
-	bool NavigationHelper::CanGoBack()
+	bool NavigationHelper::CanGoBack() const
 	{
-		auto page = m_page.get();
-		if (page != nullptr)
-		{
-			auto frame = page.Frame();
-			return (frame != nullptr && frame.CanGoBack());
-		}
+		if (const auto frame = GetPageFrame())
+			return frame.CanGoBack();
 
 		return false;
 	}
 
-	void NavigationHelper::GoBack()
+	void NavigationHelper::GoBack() const
 	{
-		auto page = m_page.get();
-		if (page != nullptr)
+		if (const auto frame = GetPageFrame())
 		{
-			auto frame = page.Frame();
-			if (frame != nullptr && frame.CanGoBack())
+			if (frame.CanGoBack())
 				frame.GoBack();
 		}
 	}
 
-	bool NavigationHelper::CanGoForward()
+	bool NavigationHelper::CanGoForward() const
 	{
-		auto page = m_page.get();
-		if (page != nullptr)
-		{
-			auto frame = page.Frame();
-			return (frame != nullptr && frame.CanGoForward());
-		}
+		if (const auto frame = GetPageFrame())
+			return frame.CanGoForward();
 
 		return false;
 	}
 
-	void NavigationHelper::GoForward()
+	void NavigationHelper::GoForward() const
 	{
-		auto page = m_page.get();
-		if (page != nullptr)
+		if (const auto frame = GetPageFrame())
 		{
-			auto frame = page.Frame();
-			if (frame != nullptr && frame.CanGoForward())
+			if (frame.CanGoForward())
 				frame.GoForward();
 		}
 	}
 
 	IMap<hstring, IInspectable> NavigationHelper::LoadState(NavigationMode const& navigationMode)
 	{
-		auto page = m_page.get();
-		if (page)
+		if (const auto frame = GetPageFrame())
 		{
-			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
-			m_pageKey = L"Page-" + to_hstring(page.Frame().BackStackDepth());
+			const auto frameState = SessionStateManager::SessionStateForFrame(frame);
+			m_pageKey = L"Page-" + to_hstring(frame.BackStackDepth());
 
 			if (navigationMode == NavigationMode::New)
 			{
 				// Clear existing state for new navigation
 				hstring nextPageKey = m_pageKey;
-				int nextPageIndex = page.Frame().BackStackDepth();
+				int nextPageIndex = frame.BackStackDepth();
 
 				while (frameState.HasKey(nextPageKey))
 				{
@@ -104,20 +91,18 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			}
 
 			// If we were here before, return the preserved state
-			return frameState.HasKey(m_pageKey) ?
-				frameState.Lookup(m_pageKey).as<IMap<hstring, IInspectable>>() :
-				nullptr;
+			if (frameState.HasKey(m_pageKey))
+				return frameState.Lookup(m_pageKey).as<IMap<hstring, IInspectable>>();
 		}
 
 		return nullptr;
 	}
 
-	void NavigationHelper::SaveState(IMap<hstring, IInspectable> const& state)
+	void NavigationHelper::SaveState(IMap<hstring, IInspectable> const& state) const
 	{
-		auto page = m_page.get();
-		if (page)
+		if (const auto frame = GetPageFrame())
 		{
-			auto frameState = SessionStateManager::SessionStateForFrame(page.Frame());
+			const auto frameState = SessionStateManager::SessionStateForFrame(frame);
 			frameState.Insert(m_pageKey, state);
 		}
 	}
@@ -125,6 +110,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	NavigationHelper::~NavigationHelper()
 	{
 		m_page = nullptr;
+	}
+
+	Frame NavigationHelper::GetPageFrame() const
+	{
+		const auto page = m_page.get();
+		if (page)
+			return page.Frame();
+		return nullptr;
 	}
 
 	void NavigationHelper::OnPageLoaded(IInspectable const&, RoutedEventArgs const&)
@@ -135,7 +128,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 				BackRequested({ this, &NavigationHelper::OnBackRequested });
 
 			// Listen to the window directly so page focus isn't required
-			auto coreWindow = Window::Current().CoreWindow();
+			const auto coreWindow = Window::Current().CoreWindow();
 			m_acceleratorKeyActivatedToken = coreWindow.Dispatcher().AcceleratorKeyActivated
 			(
 				{ this, &NavigationHelper::OnAcceleratorKeyActivated }
@@ -156,7 +149,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			SystemNavigationManager::GetForCurrentView().
 				BackRequested(m_backRequestedToken);
 
-			auto coreWindow = Window::Current().CoreWindow();
+			const auto coreWindow = Window::Current().CoreWindow();
 			coreWindow.Dispatcher().
 				AcceleratorKeyActivated(m_acceleratorKeyActivatedToken);
 
@@ -166,14 +159,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 
 		// Remove handler and release the reference to page
-		if (auto page = m_page.get())
+		if (const auto page = m_page.get())
 		{
 			page.Loaded(m_loadedToken);
 			page.Unloaded(m_unloadedToken);
 		}
 	}
 
-	void NavigationHelper::OnBackRequested(IInspectable const&, BackRequestedEventArgs const& args)
+	void NavigationHelper::OnBackRequested(IInspectable const&, BackRequestedEventArgs const& args) const
 	{
 		if (CanGoBack())
 		{
@@ -182,9 +175,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void NavigationHelper::OnAcceleratorKeyActivated(CoreDispatcher const&, AcceleratorKeyEventArgs const& args)
+	void NavigationHelper::OnAcceleratorKeyActivated(CoreDispatcher const&, AcceleratorKeyEventArgs const& args) const
 	{
-		auto virtualKey = args.VirtualKey();
+		const auto virtualKey = args.VirtualKey();
 
 		// Only investigate further when Left, Right, or the dedicated Previous or Next keys
 		// are pressed
@@ -193,15 +186,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			(virtualKey == VirtualKey::Left || virtualKey == VirtualKey::Right ||
 				virtualKey == VirtualKey::GoBack || virtualKey == VirtualKey::GoForward))
 		{
-			auto coreWindow = Window::Current().CoreWindow();
-			auto downState = CoreVirtualKeyStates::Down;
+			const auto coreWindow = Window::Current().CoreWindow();
+			const auto downState = CoreVirtualKeyStates::Down;
 
-			bool menuKey = (coreWindow.GetKeyState(VirtualKey::Menu) & downState) == downState;
-			bool controlKey = (coreWindow.GetKeyState(VirtualKey::Control) & downState) == downState;
-			bool shiftKey = (coreWindow.GetKeyState(VirtualKey::Shift) & downState) == downState;
+			const bool menuKey = (coreWindow.GetKeyState(VirtualKey::Menu) & downState) == downState;
+			const bool controlKey = (coreWindow.GetKeyState(VirtualKey::Control) & downState) == downState;
+			const bool shiftKey = (coreWindow.GetKeyState(VirtualKey::Shift) & downState) == downState;
 
-			bool noModifiers = !menuKey && !controlKey && !shiftKey;
-			bool onlyAlt = menuKey && !controlKey && !shiftKey;
+			const bool noModifiers = !menuKey && !controlKey && !shiftKey;
+			const bool onlyAlt = menuKey && !controlKey && !shiftKey;
 
 			if ((virtualKey == VirtualKey::GoBack && noModifiers) ||
 				(virtualKey == VirtualKey::Left && onlyAlt))
@@ -220,9 +213,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void NavigationHelper::OnPointerPressed(CoreWindow const&, PointerEventArgs const& args)
+	void NavigationHelper::OnPointerPressed(CoreWindow const&, PointerEventArgs const& args) const
 	{
-		auto properties = args.CurrentPoint().Properties();
+		const auto properties = args.CurrentPoint().Properties();
 
 		// Ignore button chords with the left, right, and middle buttons
 		if (properties.IsLeftButtonPressed() ||
@@ -233,20 +226,16 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 
 		// If back or foward are pressed (but not both) navigate appropriately
-		bool backPressed = properties.IsXButton1Pressed();
-		bool forwardPressed = properties.IsXButton2Pressed();
+		const bool backPressed = properties.IsXButton1Pressed();
+		const bool forwardPressed = properties.IsXButton2Pressed();
 
 		if (backPressed ^ forwardPressed)
 		{
 			args.Handled(true);
 			if (backPressed)
-			{
 				GoBack();
-			}
 			else
-			{
 				GoForward();
-			}
 		}
 	}
 }

@@ -13,13 +13,13 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 {
 	hstring DataReaderHelper::ReadString(DataReader const& reader)
 	{
-		int length = reader.ReadUInt32();
+		const int length = reader.ReadUInt32();
 		return reader.ReadString(length);
 	}
 
 	IInspectable DataReaderHelper::ReadObject(DataReader const& reader)
 	{
-		auto type = reader.ReadByte();
+		const auto type = reader.ReadByte();
 		switch (type)
 		{
 		case (int)StreamTypes::NullPtrType:
@@ -63,13 +63,13 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 
 	IMap<hstring, IInspectable> DataReaderHelper::ReadStringToObjectMap(DataReader const& reader)
 	{
-		auto map = single_threaded_map<hstring, IInspectable>();
-		auto size = reader.ReadUInt32();
+		const auto map = single_threaded_map<hstring, IInspectable>();
+		const auto size = reader.ReadUInt32();
 
-		for (unsigned int index = 0; index < size; index++)
+		for (uint32_t index = 0; index < size; index++)
 		{
-			auto key = ReadObject(reader).try_as<hstring>();
-			auto value = ReadObject(reader);
+			const auto key = ReadObject(reader).try_as<hstring>();
+			const auto value = ReadObject(reader);
 
 			if (key)
 				map.Insert(key.value(), value);
@@ -78,20 +78,20 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 		}
 
 		if (reader.ReadByte() != (uint8_t)StreamTypes::StrToObjMapEndMarker)
-			throw hresult_invalid_argument(L"Invalid stream");
+			throw hresult_invalid_argument(L"Invalid stream.");
 
 		return map;
 	}
 
 	IMap<IInspectable, IInspectable> DataReaderHelper::ReadMap(DataReader const& reader)
 	{
-		auto map = single_threaded_map<IInspectable, IInspectable>();
-		auto size = reader.ReadUInt32();
+		const auto map = single_threaded_map<IInspectable, IInspectable>();
+		const auto size = reader.ReadUInt32();
 
-		for (unsigned int index = 0; index < size; index++)
+		for (uint32_t index = 0; index < size; index++)
 		{
-			auto key = ReadObject(reader);
-			auto value = ReadObject(reader);
+			const auto key = ReadObject(reader);
+			const auto value = ReadObject(reader);
 
 			if (key)
 				map.Insert(key, value);
@@ -107,12 +107,12 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 
 	IVector<IInspectable> DataReaderHelper::ReadVector(DataReader const& reader)
 	{
-		auto vector = single_threaded_vector<IInspectable>();
-		auto size = reader.ReadUInt32();
+		const auto vector = single_threaded_vector<IInspectable>();
+		const auto size = reader.ReadUInt32();
 
-		for (unsigned int index = 0; index < size; index++)
+		for (uint32_t index = 0; index < size; index++)
 		{
-			auto value = ReadObject(reader);
+			const auto value = ReadObject(reader);
 			if (value)
 				vector.Append(value);
 			else
