@@ -72,12 +72,12 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		if (const auto frame = GetPageFrame())
 		{
 			const auto frameState = SessionStateManager::SessionStateForFrame(frame);
-			m_pageKey = L"Page-" + to_hstring(frame.BackStackDepth());
+			m_PageKey = L"Page-" + to_hstring(frame.BackStackDepth());
 
 			if (navigationMode == NavigationMode::New)
 			{
 				// Clear existing state for new navigation
-				hstring nextPageKey = m_pageKey;
+				hstring nextPageKey = m_PageKey;
 				int nextPageIndex = frame.BackStackDepth();
 
 				while (frameState.HasKey(nextPageKey))
@@ -91,8 +91,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 			}
 
 			// If we were here before, return the preserved state
-			if (frameState.HasKey(m_pageKey))
-				return frameState.Lookup(m_pageKey).as<IMap<hstring, IInspectable>>();
+			if (frameState.HasKey(m_PageKey))
+				return frameState.Lookup(m_PageKey).as<IMap<hstring, IInspectable>>();
 		}
 
 		return nullptr;
@@ -103,7 +103,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		if (const auto frame = GetPageFrame())
 		{
 			const auto frameState = SessionStateManager::SessionStateForFrame(frame);
-			frameState.Insert(m_pageKey, state);
+			frameState.Insert(m_PageKey, state);
 		}
 	}
 

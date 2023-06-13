@@ -7,6 +7,8 @@ namespace SimpleKit.WindowsRuntime.UI.Navigation
 		NavigationHelper(Windows.UI.Xaml.Controls.Page page);
 		NavigationHelper(Windows.UI.Xaml.Controls.Page page, Boolean useNavigationShortcuts);
 
+		String PageKey{ get; };
+
 		Boolean CanGoBack();
 		void GoBack();
 
