@@ -17,8 +17,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Input::implementation
 			SimpleKit::WindowsRuntime::UI::Input::CanExecuteDelegate const& canExecute
 		);
 
-		void Execute(winrt::Windows::Foundation::IInspectable const& param);
-		bool CanExecute(winrt::Windows::Foundation::IInspectable const& param);
+		void Execute(winrt::Windows::Foundation::IInspectable const& param) const;
+		bool CanExecute(winrt::Windows::Foundation::IInspectable const& param) const;
 
 		winrt::event_token CanExecuteChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& handler);
 		void CanExecuteChanged(winrt::event_token const& token) noexcept;
