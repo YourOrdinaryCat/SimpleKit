@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Controls</id>
-		<version>1.5</version>
+		<version>1.6</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<icon>images\SimpleKit.png</icon>
@@ -13,8 +13,8 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Controls</projectUrl>
 		<description>A set of useful controls written in C++ for the Windows Runtime.</description>
 		<releaseNotes>
-			- Added alternative title bar control
-			- Fixed indirect WinUI dependency
+			- Fixed default titlebar styles not using ThemeResource for margins
+			- Improved underlying code
 			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP Fluent XAML Controls</tags>

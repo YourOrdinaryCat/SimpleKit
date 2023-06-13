@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.ViewManagement</id>
-		<version>1.5</version>
+		<version>1.6</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<icon>images\SimpleKit.png</icon>
@@ -13,6 +13,7 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.ViewManagement</projectUrl>
 		<description>A set of helpers to manage views in UWP apps.</description>
 		<releaseNotes>
+			- Improved underlying code
 			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP ApplicationView Window</tags>

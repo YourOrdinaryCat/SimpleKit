@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Navigation</id>
-		<version>1.5</version>
+		<version>1.6</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<icon>images\SimpleKit.png</icon>
@@ -13,6 +13,8 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Navigation</projectUrl>
 		<description>A set of helpers that aid in navigation and session state management.</description>
 		<releaseNotes>
+			- Added NavigationHelper.PageKey to get the key associated to a page's session state
+			- Improved underlying code
 			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP XAML Navigation</tags>
