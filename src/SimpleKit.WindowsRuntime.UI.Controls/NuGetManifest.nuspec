@@ -32,7 +32,8 @@
 		<file src="Intellisense\SimpleKit.WindowsRuntime.UI.Controls.xml" target="lib\uap10.0" />
 
 		<!-- XAML -->
-		<file src="Themes\Generic.xaml" target="lib\uap10.0\Themes"/>
+		<file src="Themes\Generic.xaml" target="lib\uap10.0\SimpleKit.WindowsRuntime.UI.Controls\Themes" />
+		<file src="Generated Files\Themes\Generic.xbf" target="lib\uap10.0\SimpleKit.WindowsRuntime.UI.Controls\Themes" />
 
 		<!-- DLLs and resources -->
 		<file src="Release\x64\SimpleKit.WindowsRuntime.UI.Controls.dll" target="runtimes\win10-x64\native" />
