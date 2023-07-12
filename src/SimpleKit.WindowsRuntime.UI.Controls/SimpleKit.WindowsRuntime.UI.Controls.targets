@@ -10,4 +10,12 @@
 		</Reference>
 		<ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(Native-Platform)\native\SimpleKit.WindowsRuntime.UI.Controls.dll" />
 	</ItemGroup>
+
+	<Target Name="CopyContent" BeforeTargets="AssignTargetPaths">
+		<ItemGroup>
+			<AppxPackagePayload Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\SimpleKit.WindowsRuntime.UI.Controls\Themes\Generic.xbf">
+				<TargetPath>SimpleKit.WindowsRuntime.UI.Controls\Themes\Generic.xbf</TargetPath>
+			</AppxPackagePayload>
+		</ItemGroup>
+	</Target>
 </Project>
