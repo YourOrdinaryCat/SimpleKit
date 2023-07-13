@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>$projectname$</name>
+	</assembly>
+	<members>
+		<member name="T:$projectname$.Class">
+			<summary></summary>
+		</member>
+		<member name="P:$projectname$.Class.Property">
+			<summary></summary>
+			<returns></returns>
+		</member>
+		<member name="M:$projectname$.Class.Method(Sytem.Type)">
+			<summary></summary>
+			<returns></returns>
+		</member>
+	</members>
+</doc>

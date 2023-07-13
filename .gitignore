@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 # Build script output
 *out.txt
+
+# Template ZIPs
+templates/**/*.zip

@@ -1,0 +1,31 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+	<TemplateData>
+		<Name>SimpleKit - Windows Runtime Component</Name>
+		<Description>Template used for runtime components on SimpleKit.</Description>
+		<ProjectType>VC</ProjectType>
+		<LanguageTag>cpp</LanguageTag>
+		<PlatformTag>windows</PlatformTag>
+		<ProjectTypeTag>uwp</ProjectTypeTag>
+		<SortOrder>1000</SortOrder>
+		<CreateNewFolder>true</CreateNewFolder>
+		<DefaultName>SimpleKit.WindowsRuntime</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+		<Icon>TemplateIcon.ico</Icon>
+	</TemplateData>
+	<TemplateContent>
+		<Project TargetFileName="$projectname$.vcxproj" File="Project.vcxproj" ReplaceParameters="true">
+			<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">Project.vcxproj.filters</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="pch.h">pch.h</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="Exports.def">Exports.def</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="NuGetManifest.nuspec">NuGetManifest.nuspec</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.targets">Targets.targets</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="PropertySheet.props">PropertySheet.props</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="module.g.cpp">Generated Files\module.g.cpp</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.xml">Intellisense\Documentation.xml</ProjectItem>
+		</Project>
+	</TemplateContent>
+</VSTemplate>

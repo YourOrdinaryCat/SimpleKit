@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+	<metadata>
+		<id>$projectname$</id>
+		<version>1.0</version>
+		<authors>YourOrdinaryCat</authors>
+
+		<icon>images\SimpleKit.png</icon>
+
+		<license type="expression">GPL-3.0-only</license>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/$projectname$</projectUrl>
+		<description></description>
+		<releaseNotes>Initial release.</releaseNotes>
+		<tags>Windows UWP</tags>
+
+		<dependencies>
+			<group targetFramework="UAP10.0" />
+		</dependencies>
+	</metadata>
+
+	<files>
+		<file src="..\..\assets\SimpleKit.png" target="images\" />
+
+		<!-- WinMD, IntelliSense -->
+		<file src="Release\Win32\$projectname$.winmd" target="lib\uap10.0" />
+		<file src="Intellisense\$projectname$.xml" target="lib\uap10.0" />
+
+		<!-- DLLs and resources -->
+		<file src="Release\x64\$projectname$.dll" target="runtimes\win10-x64\native" />
+		<file src="Release\x64\$projectname$.pri" target="runtimes\win10-x64\native" />
+
+		<file src="Release\ARM\$projectname$.dll" target="runtimes\win10-arm\native" />
+		<file src="Release\ARM\$projectname$.pri" target="runtimes\win10-arm\native" />
+
+		<file src="Release\ARM64\$projectname$.dll" target="runtimes\win10-arm64\native" />
+		<file src="Release\ARM64\$projectname$.pri" target="runtimes\win10-arm64\native" />
+
+		<file src="Release\Win32\$projectname$.dll" target="runtimes\win10-x86\native" />
+		<file src="Release\Win32\$projectname$.pri" target="runtimes\win10-x86\native" />
+
+		<!-- Targets -->
+		<file src="$projectname$.targets" target="build\native"/>
+	</files>
+</package>
