@@ -20,3 +20,6 @@ If you want to build a single project, use the `BuildProject.ps1` script:
 - `CreatePackage`: whether to create a NuGet package for the project - if you specify this parameter, `NuGetSource` should be set as well
 - `ProjectLog`: where to log the project build output - by default it's logged to the folder containing the script, to a file named `{ProjectName}-out.txt`
 - `NuGetSource`: a NuGet package source where the package should be added if the `CreatePackage` parameter is set
+
+## Templates
+To build and/or use the SimpleKit templates, archive the contents of the folders under `templates\SimpleKit.Templates.WindowsRuntime\ProjectTemplates` into ZIPs without compression. VSIX distribution is under consideration.
