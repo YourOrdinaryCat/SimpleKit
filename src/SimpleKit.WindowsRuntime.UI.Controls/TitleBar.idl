@@ -1,3 +1,5 @@
+#include "../SimpleKit.WindowsRuntime.Shared/MidlUtils.h"
+
 namespace SimpleKit.WindowsRuntime.UI.Controls
 {
 	[default_interface]
@@ -8,10 +10,7 @@ namespace SimpleKit.WindowsRuntime.UI.Controls
 		TitleBar();
 		void SetTitleBarForCurrentView();
 
-		static Windows.UI.Xaml.DependencyProperty TitleProperty{ get; };
-		Object Title{ get; set; };
-
-		static Windows.UI.Xaml.DependencyProperty IconProperty{ get; };
-		Windows.UI.Xaml.Controls.IconElement Icon{ get; set; };
+		DEPENDENCY_PROPERTY(Title, Object);
+		DEPENDENCY_PROPERTY(Icon, Windows.UI.Xaml.Controls.IconElement);
 	}
 }
