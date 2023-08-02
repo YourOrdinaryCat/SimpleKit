@@ -103,12 +103,12 @@ private:                                                                      \
 __DEPENDENCY_PROPERTY_BASE(NAME, TYPE, nullptr)
 
 // Defines a dependency property with property metadata for a WinRT class.
-#define DEPENDENCY_PROPERTY_META(NAME, TYPE, DEFAULT, CHANGE_HANDLER) \
-__DEPENDENCY_PROPERTY_BASE                                            \
-(                                                                     \
-	NAME,                                                             \
-	TYPE,                                                             \
-	__DEPENDENCY_PROPERTY_METADATA(DEFAULT, CHANGE_HANDLER)           \
+#define DEPENDENCY_PROPERTY_META(NAME, TYPE, VALUE, CHANGE_HANDLER) \
+__DEPENDENCY_PROPERTY_BASE                                          \
+(                                                                   \
+	NAME,                                                           \
+	TYPE,                                                           \
+	__DEPENDENCY_PROPERTY_METADATA(VALUE, CHANGE_HANDLER)           \
 )
 
 // Defines an attached property for a WinRT class.
