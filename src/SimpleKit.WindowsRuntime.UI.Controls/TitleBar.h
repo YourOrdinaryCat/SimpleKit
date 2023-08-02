@@ -8,6 +8,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 {
 	struct TitleBar : TitleBarT<TitleBar>
 	{
+	private:
+		static void OnIconPropertyChanged
+		(
+			Windows::UI::Xaml::DependencyObject const& sender,
+			Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args
+		);
+
+	public:
 		TitleBar();
 
 		void SetTitleBarForCurrentView();
@@ -16,26 +24,19 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 		DEPENDENCY_PROPERTY
 		(
 			Title,
-			Windows::Foundation::IInspectable,
-			Controls::TitleBar
-		)
+			Windows::Foundation::IInspectable
+		);
 
 		DEPENDENCY_PROPERTY_META
 		(
 			Icon,
 			Windows::UI::Xaml::Controls::IconElement,
-			Controls::TitleBar,
-			OnIconPropertyChanged,
-			nullptr
-		)
+			nullptr,
+			OnIconPropertyChanged
+		);
 
 	private:
 		void UpdateIcon() const;
-		static void OnIconPropertyChanged
-		(
-			Windows::UI::Xaml::DependencyObject const& sender,
-			Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args
-		);
 
 		Windows::ApplicationModel::Core::CoreApplicationViewTitleBar::IsVisibleChanged_revoker m_visibleChangedToken;
 		void OnVisibleChanged

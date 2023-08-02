@@ -8,6 +8,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	struct SessionStateManager : SessionStateManagerT<SessionStateManager>
 	{
+	private:
+		static void OnSessionKeyAdded(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
+
+	public:
 		SessionStateManager() = default;
 		static void Initialize();
 
@@ -30,16 +34,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		(
 			SessionKey,
 			hstring,
-			Navigation::SessionStateManager,
 			Windows::UI::Xaml::Controls::Frame,
-			OnSessionKeyAdded,
-			nullptr
-		)
+			nullptr,
+			OnSessionKeyAdded
+		);
 
 	private:
 		inline static const hstring m_sessionStateFilename = L"_sessionState.dat";
 
-		static void OnSessionKeyAdded(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
 		static void RestoreFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
 		static void SaveFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
 

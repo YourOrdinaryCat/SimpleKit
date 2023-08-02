@@ -10,6 +10,10 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 {
 	struct ViewHelpers : ViewHelpersT<ViewHelpers>
 	{
+	private:
+		static void OnViewTitleChanged(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
+
+	public:
 		ViewHelpers() = default;
 
 		static Windows::Foundation::IAsyncOperation<Windows::UI::ViewManagement::ApplicationView>
@@ -22,18 +26,16 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 		(
 			ViewTitle,
 			hstring,
-			ViewManagement::ViewHelpers,
 			Windows::UI::Xaml::Controls::Page,
-			OnViewTitleChanged,
-			nullptr
-		)
+			nullptr,
+			OnViewTitleChanged
+		);
 
 	private:
 		static std::map<int, winrt::weak_ref<Windows::UI::Xaml::Controls::Frame>> m_frames;
 		static std::map<int, winrt::event_token> m_tokens;
 
 		static void OnViewConsolidated(Windows::UI::ViewManagement::ApplicationView const& sender, Windows::UI::ViewManagement::ApplicationViewConsolidatedEventArgs const& args);
-		static void OnViewTitleChanged(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
 	};
 }
 

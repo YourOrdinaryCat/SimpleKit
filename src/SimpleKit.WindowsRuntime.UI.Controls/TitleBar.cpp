@@ -20,9 +20,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 	{
 		DefaultStyleKey(winrt::box_value(this->GetRuntimeClassName()));
 
-		m_IconProperty();
-		m_TitleProperty();
-
 		m_unloadedToken = Unloaded
 		(
 			{ this, &TitleBar::OnUnloaded }
