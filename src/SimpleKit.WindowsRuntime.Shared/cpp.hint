@@ -1,6 +1,0 @@
-#define PROPERTY(type, name)
-#define GET_PROPERTY(type, name)
-#define STATIC_PROPERTY(type, name)
-#define STATIC_GET_PROPERTY(type, name)
-#define DEPENDENCY_PROPERTY(type, name)
-#define ATTACHED_PROPERTY(targetType, type, name)
