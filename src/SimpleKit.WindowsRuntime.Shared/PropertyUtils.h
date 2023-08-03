@@ -1,6 +1,6 @@
 #pragma once
 
-// Defines a property for a WinRT class.
+// Defines a property with public getter and setter for a WinRT class.
 #define PROPERTY(TYPE, NAME)     \
 public:                          \
 	void NAME(const TYPE &value) \
@@ -9,7 +9,7 @@ public:                          \
 	}                            \
 	GET_PROPERTY(TYPE, NAME)
 
-// Defines a get-only property for a WinRT class.
+// Defines a property with a public getter for a WinRT class.
 #define GET_PROPERTY(TYPE, NAME) \
 public:                          \
 	TYPE NAME() const            \
@@ -19,7 +19,7 @@ public:                          \
 private:                         \
 	TYPE m_##NAME
 
-// Defines a static property for a WinRT class.
+// Defines a static property with public getter and setter for a WinRT class.
 #define STATIC_PROPERTY(TYPE, NAME)     \
 public:                                 \
 	static void NAME(const TYPE &value) \
@@ -28,7 +28,7 @@ public:                                 \
 	}                                   \
 	STATIC_GET_PROPERTY(TYPE, NAME)
 
-// Defines a static get-only property for a WinRT class.
+// Defines a static property with a public getter for a WinRT class.
 #define STATIC_GET_PROPERTY(TYPE, NAME) \
 public:                                 \
 	static TYPE NAME()                  \
@@ -44,11 +44,13 @@ private:                                \
 #define __XAML winrt::Windows::UI::Xaml
 #endif
 
-// Helper macro for property metadata. Do not use in authored code.
+// Helper macro for property metadata.
+// Do not use in authored code.
 #define __DEPENDENCY_PROPERTY_METADATA(VALUE, CHANGE_HANDLER) \
 __XAML::PropertyMetadata(VALUE, CHANGE_HANDLER)
 
-// Base macro for DependencyProperty registration. Do not use in authored code.
+// Base macro for DependencyProperty registration.
+// Do not use in authored code.
 #define __DEPENDENCY_PROPERTY_BASE(NAME, TYPE, METADATA)                \
 public:                                                                 \
 	static __XAML::DependencyProperty NAME##Property() noexcept         \
@@ -73,7 +75,8 @@ private:                                                                \
 			METADATA                                                    \
 		)
 
-// Base macro for attached DependencyProperty registration. Do not use in authored code.
+// Base macro for attached DependencyProperty registration.
+// Do not use in authored code.
 #define __ATTACHED_PROPERTY_BASE(NAME, TYPE, TARGETTYPE, METADATA)            \
 public:                                                                       \
 	static __XAML::DependencyProperty NAME##Property() noexcept               \
