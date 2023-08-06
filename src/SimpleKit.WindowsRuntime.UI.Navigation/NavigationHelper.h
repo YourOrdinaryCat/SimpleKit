@@ -20,7 +20,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> LoadState(Windows::UI::Xaml::Navigation::NavigationMode const& navigationMode);
 		void SaveState(Windows::Foundation::Collections::IMap<hstring, Windows::Foundation::IInspectable> const& state) const;
 
-		GET_PROPERTY(hstring, PageKey)
+		GET_PROPERTY(hstring, PageKey);
 
 	private:
 		~NavigationHelper();

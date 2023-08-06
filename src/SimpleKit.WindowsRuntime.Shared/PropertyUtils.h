@@ -1,173 +1,129 @@
 #pragma once
 
-// Defines a property for a WinRT class.
-#define PROPERTY(type, name)     \
+// Defines a property with public getter and setter for a WinRT class.
+#define PROPERTY(TYPE, NAME)     \
 public:                          \
-	type name() const            \
+	void NAME(const TYPE &value) \
 	{                            \
-		return m_##name##;       \
+		m_##NAME## = value;      \
 	}                            \
-	void name(type const& value) \
+	GET_PROPERTY(TYPE, NAME)
+
+// Defines a property with a public getter for a WinRT class.
+#define GET_PROPERTY(TYPE, NAME) \
+public:                          \
+	TYPE NAME() const            \
 	{                            \
-		m_##name## = value;      \
+		return m_##NAME##;       \
 	}                            \
 private:                         \
-	type m_##name##;
+	TYPE m_##NAME
 
-// Defines a get-only property for a WinRT class.
-#define GET_PROPERTY(type, name) \
-public:                          \
-	type name() const            \
-	{                            \
-		return m_##name##;       \
-	}                            \
-private:                         \
-	void name(type const& value) \
-	{                            \
-		m_##name## = value;      \
-	}                            \
-	type m_##name##;
-
-// Defines a static property for a WinRT class.
-#define STATIC_PROPERTY(type, name)     \
+// Defines a static property with public getter and setter for a WinRT class.
+#define STATIC_PROPERTY(TYPE, NAME)     \
 public:                                 \
-	static type name()                  \
+	static void NAME(const TYPE &value) \
 	{                                   \
-		return m_##name##;              \
+		m_##NAME = value;               \
 	}                                   \
-	static void name(type const& value) \
+	STATIC_GET_PROPERTY(TYPE, NAME)
+
+// Defines a static property with a public getter for a WinRT class.
+#define STATIC_GET_PROPERTY(TYPE, NAME) \
+public:                                 \
+	static TYPE NAME()                  \
 	{                                   \
-		m_##name## = value;             \
+		return m_##NAME##;              \
 	}                                   \
 private:                                \
-	static type m_##name##;
+	static TYPE m_##NAME
 
-// Defines a static get-only property for a WinRT class.
-#define STATIC_GET_PROPERTY(type, name) \
-public:                                 \
-	static type name()                  \
-	{                                   \
-		return m_##name##;              \
-	}                                   \
-private:                                \
-	static void name(type const& value) \
-	{                                   \
-		m_##name## = value;             \
-	}                                   \
-	static type m_##name##;
+#ifdef USE_WINUI3
+#define __XAML winrt::Microsoft::UI::Xaml
+#else
+#define __XAML winrt::Windows::UI::Xaml
+#endif
+
+// Helper macro for property metadata.
+// Do not use in authored code.
+#define __DEPENDENCY_PROPERTY_METADATA(VALUE, CHANGE_HANDLER) \
+__XAML::PropertyMetadata(VALUE, CHANGE_HANDLER)
+
+// Base macro for DependencyProperty registration.
+// Do not use in authored code.
+#define __DEPENDENCY_PROPERTY_BASE(NAME, TYPE, METADATA)                \
+public:                                                                 \
+	static __XAML::DependencyProperty NAME##Property() noexcept         \
+	{                                                                   \
+		return m_##NAME##Property;                                      \
+	}                                                                   \
+	TYPE NAME() const                                                   \
+	{                                                                   \
+		return winrt::unbox_value<TYPE>(GetValue(m_##NAME##Property));  \
+	}                                                                   \
+	void NAME(const TYPE &value) const                                  \
+	{                                                                   \
+		SetValue(m_##NAME##Property, winrt::box_value(value));          \
+	}                                                                   \
+private:                                                                \
+	inline static __XAML::DependencyProperty const m_##NAME##Property = \
+		__XAML::DependencyProperty::Register                            \
+		(                                                               \
+			L#NAME,                                                     \
+			winrt::xaml_typename<TYPE>(),                               \
+			winrt::xaml_typename<class_type>(),                         \
+			METADATA                                                    \
+		)
+
+// Base macro for attached DependencyProperty registration.
+// Do not use in authored code.
+#define __ATTACHED_PROPERTY_BASE(NAME, TYPE, TARGETTYPE, METADATA)            \
+public:                                                                       \
+	static __XAML::DependencyProperty NAME##Property() noexcept               \
+	{                                                                         \
+		return m_##NAME##Property;                                            \
+	}                                                                         \
+	static TYPE Get##NAME(const TARGETTYPE &target)                           \
+	{                                                                         \
+		return winrt::unbox_value<TYPE>(target.GetValue(m_##NAME##Property)); \
+	}                                                                         \
+	static void Set##NAME(const TARGETTYPE &target, const TYPE &value)        \
+	{                                                                         \
+		target.SetValue(m_##NAME##Property, winrt::box_value(value));         \
+	}                                                                         \
+private:                                                                      \
+	inline static __XAML::DependencyProperty const m_##NAME##Property =       \
+		__XAML::DependencyProperty::RegisterAttached                          \
+		(                                                                     \
+			L#NAME,                                                           \
+			winrt::xaml_typename<TYPE>(),                                     \
+			winrt::xaml_typename<class_type>(),                               \
+			METADATA                                                          \
+		)
 
 // Defines a dependency property for a WinRT class.
-#define DEPENDENCY_PROPERTY(name, type, ownerType)                                   \
-public:                                                                              \
-	static winrt::Windows::UI::Xaml::DependencyProperty name##Property()             \
-	{                                                                                \
-		return m_##name##Property();                                                 \
-	}                                                                                \
-	type name() const                                                                \
-	{                                                                                \
-		return winrt::unbox_value<type>(GetValue(m_##name##Property()));             \
-	}                                                                                \
-	void name(type const& value)                                                     \
-	{                                                                                \
-		SetValue(m_##name##Property(), winrt::box_value(value));                     \
-	}                                                                                \
-private:                                                                             \
-	static inline winrt::Windows::UI::Xaml::DependencyProperty& m_##name##Property() \
-	{                                                                                \
-		static auto m_##name## =                                                     \
-			winrt::Windows::UI::Xaml::DependencyProperty::Register                   \
-			(                                                                        \
-				L#name,                                                              \
-				winrt::xaml_typename<##type##>(),                                    \
-				winrt::xaml_typename<##ownerType##>(),                               \
-				winrt::Windows::UI::Xaml::PropertyMetadata{ nullptr }                \
-			);                                                                       \
-		return m_##name##;                                                           \
-	}
+#define DEPENDENCY_PROPERTY(NAME, TYPE)         \
+__DEPENDENCY_PROPERTY_BASE(NAME, TYPE, nullptr)
 
 // Defines a dependency property with property metadata for a WinRT class.
-#define DEPENDENCY_PROPERTY_META(name, type, ownerType, changeHandler, defaultVal)        \
-public:                                                                                   \
-	static winrt::Windows::UI::Xaml::DependencyProperty name##Property()                  \
-	{                                                                                     \
-		return m_##name##Property();                                                      \
-	}                                                                                     \
-	type name() const                                                                     \
-	{                                                                                     \
-		return winrt::unbox_value<type>(GetValue(m_##name##Property()));                  \
-	}                                                                                     \
-	void name(type const& value)                                                          \
-	{                                                                                     \
-		SetValue(m_##name##Property(), winrt::box_value(value));                          \
-	}                                                                                     \
-private:                                                                                  \
-	static inline winrt::Windows::UI::Xaml::DependencyProperty& m_##name##Property()      \
-	{                                                                                     \
-		static auto m_##name## =                                                          \
-			winrt::Windows::UI::Xaml::DependencyProperty::Register                        \
-			(                                                                             \
-				L#name,                                                                   \
-				winrt::xaml_typename<##type##>(),                                         \
-				winrt::xaml_typename<##ownerType##>(),                                    \
-				winrt::Windows::UI::Xaml::PropertyMetadata(defaultVal, ##changeHandler##) \
-			);                                                                            \
-		return m_##name##;                                                                \
-	}
+#define DEPENDENCY_PROPERTY_META(NAME, TYPE, VALUE, CHANGE_HANDLER) \
+__DEPENDENCY_PROPERTY_BASE                                          \
+(                                                                   \
+	NAME,                                                           \
+	TYPE,                                                           \
+	__DEPENDENCY_PROPERTY_METADATA(VALUE, CHANGE_HANDLER)           \
+)
 
 // Defines an attached property for a WinRT class.
-#define ATTACHED_PROPERTY(name, type, ownerType, targetType)                         \
-public:                                                                              \
-	static winrt::Windows::UI::Xaml::DependencyProperty name##Property()             \
-	{                                                                                \
-		return m_##name##Property();                                                 \
-	}                                                                                \
-	static type Get##name(targetType const& target)                                  \
-	{                                                                                \
-		return winrt::unbox_value<type>(target.GetValue(m_##name##Property()));      \
-	}                                                                                \
-	static void Set##name(targetType const& target, type const& value)               \
-	{                                                                                \
-		target.SetValue(m_##name##Property(), winrt::box_value(value));              \
-	}                                                                                \
-private:                                                                             \
-	static inline winrt::Windows::UI::Xaml::DependencyProperty& m_##name##Property() \
-	{                                                                                \
-		static auto m_##name## =                                                     \
-			winrt::Windows::UI::Xaml::DependencyProperty::RegisterAttached           \
-			(                                                                        \
-				L#name,                                                              \
-				winrt::xaml_typename<##type##>(),                                    \
-				winrt::xaml_typename<##ownerType##>(),                               \
-				winrt::Windows::UI::Xaml::PropertyMetadata{ nullptr }                \
-			);                                                                       \
-		return m_##name##;                                                           \
-	}
+#define ATTACHED_PROPERTY(NAME, TYPE, TARGETTYPE)         \
+__ATTACHED_PROPERTY_BASE(NAME, TYPE, TARGETTYPE, nullptr)
 
 // Defines an attached property with property metadata for a WinRT class.
-#define ATTACHED_PROPERTY_META(name, type, ownerType, targetType, changeHandler, defaultVal)  \
-public:                                                                                       \
-	static winrt::Windows::UI::Xaml::DependencyProperty name##Property()                      \
-	{                                                                                         \
-		return m_##name##Property();                                                          \
-	}                                                                                         \
-	static type Get##name(targetType const& target)                                           \
-	{                                                                                         \
-		return winrt::unbox_value<type>(target.GetValue(m_##name##Property()));               \
-	}                                                                                         \
-	static void Set##name(targetType const& target, type const& value)                        \
-	{                                                                                         \
-		target.SetValue(m_##name##Property(), winrt::box_value(value));                       \
-	}                                                                                         \
-private:                                                                                      \
-	static inline winrt::Windows::UI::Xaml::DependencyProperty& m_##name##Property()          \
-	{                                                                                         \
-		static auto m_##name## =                                                              \
-			winrt::Windows::UI::Xaml::DependencyProperty::RegisterAttached                    \
-			(                                                                                 \
-				L#name,                                                                       \
-				winrt::xaml_typename<##type##>(),                                             \
-				winrt::xaml_typename<##ownerType##>(),                                        \
-				winrt::Windows::UI::Xaml::PropertyMetadata(##defaultVal##, ##changeHandler##) \
-			);                                                                                \
-		return m_##name##;                                                                    \
-	}
+#define ATTACHED_PROPERTY_META(NAME, TYPE, TARGETTYPE, VALUE, CHANGE_HANDLER) \
+__ATTACHED_PROPERTY_BASE                                                      \
+(                                                                             \
+	NAME,                                                                     \
+	TYPE,                                                                     \
+	TARGETTYPE,                                                               \
+	__DEPENDENCY_PROPERTY_METADATA(VALUE, CHANGE_HANDLER)                     \
+)

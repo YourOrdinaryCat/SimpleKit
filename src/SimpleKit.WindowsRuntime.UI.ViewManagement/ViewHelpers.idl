@@ -1,3 +1,5 @@
+#include "../SimpleKit.WindowsRuntime.Shared/MidlUtils.h"
+
 namespace SimpleKit.WindowsRuntime.UI.ViewManagement
 {
 	[default_interface]
@@ -9,8 +11,6 @@ namespace SimpleKit.WindowsRuntime.UI.ViewManagement
 		static Windows.Foundation.IAsyncOperation<Windows.UI.ViewManagement.ApplicationView> CreateNewViewAsync(Windows.UI.Xaml.Interop.TypeName sourcePageType);
 		static Windows.Foundation.IAsyncOperation<Boolean> ShowNewViewAsync(Windows.UI.Xaml.Interop.TypeName sourcePageType);
 
-		static Windows.UI.Xaml.DependencyProperty ViewTitleProperty { get; };
-		static String GetViewTitle(Windows.UI.Xaml.Controls.Page target);
-		static void SetViewTitle(Windows.UI.Xaml.Controls.Page target, String value);
+		ATTACHED_PROPERTY(ViewTitle, String, Windows.UI.Xaml.Controls.Page);
 	}
 }

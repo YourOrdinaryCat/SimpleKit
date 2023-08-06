@@ -14,9 +14,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MidlUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PropertyUtils.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)cpp.hint" />
   </ItemGroup>
 </Project>
