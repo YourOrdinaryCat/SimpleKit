@@ -32,7 +32,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::ViewManagement::implementation
 		);
 
 	private:
-		static std::map<int, winrt::weak_ref<Windows::UI::Xaml::Controls::Frame>> m_frames;
 		static std::map<int, winrt::event_token> m_tokens;
 
 		static void OnViewConsolidated(Windows::UI::ViewManagement::ApplicationView const& sender, Windows::UI::ViewManagement::ApplicationViewConsolidatedEventArgs const& args);
