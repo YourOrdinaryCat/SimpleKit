@@ -30,7 +30,7 @@ namespace SimpleKit.Templates.WindowsRuntime
         /// <summary>
         /// Package GUID string.
         /// </summary>
-        public const string PackageGuidString = "a870c576-f385-44a4-a870-230bc44ca52d";
+        public const string PackageGuidString = "A870C576-F385-44A4-A870-230BC44CA52D";
 
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
