@@ -24,7 +24,6 @@
 			<ProjectItem ReplaceParameters="true" TargetFileName="NuGetManifest.nuspec">NuGetManifest.nuspec</ProjectItem>
 			<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.targets">Targets.targets</ProjectItem>
 			<ProjectItem ReplaceParameters="true" TargetFileName="PropertySheet.props">PropertySheet.props</ProjectItem>
-			<ProjectItem ReplaceParameters="true" TargetFileName="module.g.cpp">Generated Files\module.g.cpp</ProjectItem>
 			<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.xml">Intellisense\Documentation.xml</ProjectItem>
 		</Project>
 	</TemplateContent>
