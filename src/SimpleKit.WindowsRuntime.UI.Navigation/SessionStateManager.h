@@ -25,7 +25,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		static Windows::Foundation::IAsyncAction RestoreAsync(hstring sessionBaseKey);
 
 		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring const& sessionStateKey);
-		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey);
+		static void RegisterFrame(Windows::UI::Xaml::Controls::Frame const& frame, hstring const& sessionStateKey, hstring const& sessionBaseKey);
 
 		static void UnregisterFrame(Windows::UI::Xaml::Controls::Frame const& frame);
 
@@ -41,6 +41,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	private:
 		inline static const hstring m_sessionStateFilename = L"_sessionState.dat";
+
+		static void ThrowIfRegistered(Frame const& frame) inline;
+		static void RegisterFrameByKey(Frame const& frame, hstring const& key);
 
 		static void RestoreFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
 		static void SaveFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);

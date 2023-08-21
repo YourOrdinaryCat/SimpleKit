@@ -141,27 +141,39 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)
 	{
-		RegisterFrame(frame, sessionStateKey, hstring{});
+		ThrowIfRegistered(frame);
+		RegisterFrameByKey(frame, sessionStateKey);
 	}
 
-	void SessionStateManager::RegisterFrame(Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey)
+	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey, hstring const& sessionBaseKey)
+	{
+		ThrowIfRegistered(frame);
+		if (!sessionBaseKey.empty())
+		{
+			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
+			RegisterFrameByKey(frame, winrt::format(L"{}_{}", sessionBaseKey, sessionStateKey));
+		}
+		else
+		{
+			RegisterFrameByKey(frame, sessionStateKey);
+		}
+	}
+
+	void SessionStateManager::ThrowIfRegistered(Frame const& frame) inline
 	{
 		if (frame.GetValue(m_frameSessionStateKeyProperty))
 			throw hresult_invalid_argument(L"Frames can only be registered to one session state key.");
 
 		if (frame.GetValue(m_frameSessionStateProperty))
 			throw hresult_illegal_method_call(L"Frames must either be registered before accessing frame session state, or not registered at all.");
+	}
 
-		if (!sessionBaseKey.empty())
+	void SessionStateManager::RegisterFrameByKey(Frame const& frame, hstring const& key)
 		{
-			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
-			sessionStateKey = winrt::format(L"{}_{}", sessionBaseKey, sessionStateKey);
-		}
-
 		// Use a dependency property to associate the session key with a frame, and keep a list of frames whose
 		// navigation state should be managed
-		frame.SetValue(m_frameSessionStateKeyProperty, box_value(sessionStateKey));
-		m_registeredFrames.insert(m_registeredFrames.begin(), make_weak(frame));
+		frame.SetValue(m_frameSessionStateKeyProperty, winrt::box_value(key));
+		m_registeredFrames.emplace_back(winrt::make_weak(frame));
 
 		// Check to see if navigation state can be restored
 		RestoreFrameNavigationState(frame);
