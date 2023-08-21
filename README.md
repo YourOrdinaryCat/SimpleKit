@@ -22,4 +22,4 @@ If you want to build a single project, use the `BuildProject.ps1` script:
 - `NuGetSource`: a NuGet package source where the package should be added if the `CreatePackage` parameter is set
 
 ## Templates
-To build and/or use the SimpleKit templates, archive the contents of the folders under `templates\SimpleKit.Templates.WindowsRuntime\ProjectTemplates` into ZIPs without compression. VSIX distribution is under consideration.
+To build and/or use the SimpleKit templates, build the `SimpleKit.WindowsRuntime.Templates` project and install the resulting VSIX. VSIX distribution is under consideration.
