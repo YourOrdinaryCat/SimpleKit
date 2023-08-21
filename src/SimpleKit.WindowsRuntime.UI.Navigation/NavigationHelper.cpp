@@ -4,6 +4,8 @@
 #include "NavigationHelper.g.cpp"
 #endif
 
+#include <format>
+
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
 
@@ -19,6 +21,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	NavigationHelper::NavigationHelper(Page const& page) :
 		m_page(page),
+		m_PageKey(std::format(L"Page-{}", page.Frame().BackStackDepth())),
 		m_useNavigationShortcuts(true),
 		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
 		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
@@ -27,6 +30,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	NavigationHelper::NavigationHelper(Page const& page, bool const& useNavigationShortcuts) :
 		m_page(page),
+		m_PageKey(std::format(L"Page-{}", page.Frame().BackStackDepth())),
 		m_useNavigationShortcuts(useNavigationShortcuts),
 		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
 		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
@@ -72,8 +76,6 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		if (const auto frame = GetPageFrame())
 		{
 			const auto frameState = SessionStateManager::SessionStateForFrame(frame);
-			m_PageKey = L"Page-" + to_hstring(frame.BackStackDepth());
-
 			if (navigationMode == NavigationMode::New)
 			{
 				// Clear existing state for new navigation
@@ -84,7 +86,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 				{
 					frameState.Remove(nextPageKey);
 					nextPageIndex++;
-					nextPageKey = L"Page-" + winrt::to_hstring(nextPageIndex);
+					nextPageKey = std::format(L"Page-{}", nextPageIndex);
 				}
 
 				return nullptr;
