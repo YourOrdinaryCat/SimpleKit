@@ -178,20 +178,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 
 		// Remove weak references that are no longer reachable
-		m_registeredFrames.erase
+		std::erase_if
 		(
-			std::remove_if
-			(
-				m_registeredFrames.begin(),
-				m_registeredFrames.end(),
-				[=](weak_ref<Frame> const& e)
-				{
-					auto testFrame = e.get();
-					return testFrame == nullptr || testFrame == frame;
-				}
-			),
-			m_registeredFrames.end()
-					);
+			m_registeredFrames,
+			[&frame](weak_ref<Frame> const& e)
+			{
+				const auto testFrame = e.get();
+				return testFrame == nullptr || testFrame == frame;
+			}
+		);
 	}
 
 	IMap<hstring, IInspectable> SessionStateManager::SessionStateForFrame(Frame const& frame)
