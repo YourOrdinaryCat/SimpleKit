@@ -36,7 +36,7 @@
 				The page's key.
 			</returns>
 			<remarks>
-				This property can only be used after calling
+				This property can only be used after the page is loaded, or after calling
 				<see cref="M:SimpleKit.WindowsRuntime.UI.Navigation.NavigationHelper.LoadState(Windows.UI.Xaml.Navigation.NavigationMode)"/>.
 			</remarks>
 		</member>
