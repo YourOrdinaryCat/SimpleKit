@@ -56,7 +56,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		// Save the navigation state for all registered frames
 		for (auto&& weakRef : m_registeredFrames)
 		{
-			auto frame = weakRef.get();
+			const auto frame = weakRef.get();
 			if (frame)
 				SaveFrameNavigationState(frame);
 		}
@@ -169,7 +169,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	}
 
 	void SessionStateManager::RegisterFrameByKey(Frame const& frame, hstring const& key)
-		{
+	{
 		// Use a dependency property to associate the session key with a frame, and keep a list of frames whose
 		// navigation state should be managed
 		frame.SetValue(m_frameSessionStateKeyProperty, winrt::box_value(key));
@@ -208,7 +208,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		if (!frameState)
 		{
-			auto frameSessionKey = frame.GetValue(m_frameSessionStateKeyProperty).try_as<hstring>();
+			const auto frameSessionKey = frame.GetValue(m_frameSessionStateKeyProperty).try_as<hstring>();
 			if (frameSessionKey)
 			{
 				// Registered frames reflect the corresponding session state
