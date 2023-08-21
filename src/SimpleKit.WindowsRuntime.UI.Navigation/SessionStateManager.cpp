@@ -225,23 +225,24 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	void SessionStateManager::OnSessionKeyAdded(DependencyObject const& d, DependencyPropertyChangedEventArgs const& e)
 	{
 		const auto newVal = e.NewValue().as<hstring>();
-		const auto stdVal = winrt::to_string(newVal);
+		const auto wstr = std::wstring_view{ newVal };
 
-		const auto npos = stdVal.find('_');
-		if (npos != std::string::npos)
+		const auto index = wstr.find('_');
+		if (index != std::wstring_view::npos)
 		{
-			const auto secondHalf = stdVal.substr(npos + 1);
-			if (!secondHalf.empty())
+			const auto stateKey = wstr.substr(index + 1);
+			if (!stateKey.empty())
 			{
-				const auto firstHalf = stdVal.substr(0, npos);
-				if (!firstHalf.empty())
+				const auto baseKey = wstr.substr(0, index);
+				if (!baseKey.empty())
 				{
 					RegisterFrame
 					(
 						d.as<Frame>(),
-						winrt::to_hstring(secondHalf),
-						winrt::to_hstring(firstHalf)
+						winrt::hstring{ stateKey },
+						winrt::hstring{ baseKey }
 					);
+					return;
 				}
 			}
 		}
