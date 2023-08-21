@@ -23,8 +23,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void NavPage::OnNavigatedTo(NavigationEventArgs const& e)
 	{
-		auto state = m_PageHelper.LoadState(e.NavigationMode());
-		if (state)
+		if (const auto state = m_PageHelper.LoadState(e.NavigationMode()))
 			m_pageState = state;
 	}
 
@@ -35,7 +34,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	bool NavPage::TryLoadState(NavigationMode const& navigationMode)
 	{
-		auto state = m_PageHelper.LoadState(navigationMode);
+		const auto state = m_PageHelper.LoadState(navigationMode);
 		bool available = state != nullptr;
 
 		if (available)

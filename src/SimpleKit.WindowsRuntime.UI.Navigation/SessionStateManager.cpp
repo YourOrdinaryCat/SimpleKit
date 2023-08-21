@@ -56,7 +56,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		// Save the navigation state for all registered frames
 		for (auto&& weakRef : m_registeredFrames)
 		{
-			auto frame = weakRef.get();
+			const auto frame = weakRef.get();
 			if (frame)
 				SaveFrameNavigationState(frame);
 		}
@@ -141,27 +141,39 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey)
 	{
-		RegisterFrame(frame, sessionStateKey, hstring{});
+		ThrowIfRegistered(frame);
+		RegisterFrameByKey(frame, sessionStateKey);
 	}
 
-	void SessionStateManager::RegisterFrame(Frame const& frame, hstring sessionStateKey, hstring const& sessionBaseKey)
+	void SessionStateManager::RegisterFrame(Frame const& frame, hstring const& sessionStateKey, hstring const& sessionBaseKey)
+	{
+		ThrowIfRegistered(frame);
+		if (!sessionBaseKey.empty())
+		{
+			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
+			RegisterFrameByKey(frame, winrt::format(L"{}_{}", sessionBaseKey, sessionStateKey));
+		}
+		else
+		{
+			RegisterFrameByKey(frame, sessionStateKey);
+		}
+	}
+
+	void SessionStateManager::ThrowIfRegistered(Frame const& frame)
 	{
 		if (frame.GetValue(m_frameSessionStateKeyProperty))
 			throw hresult_invalid_argument(L"Frames can only be registered to one session state key.");
 
 		if (frame.GetValue(m_frameSessionStateProperty))
 			throw hresult_illegal_method_call(L"Frames must either be registered before accessing frame session state, or not registered at all.");
+	}
 
-		if (!sessionBaseKey.empty())
-		{
-			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
-			sessionStateKey = sessionBaseKey + L"_" + sessionStateKey;
-		}
-
+	void SessionStateManager::RegisterFrameByKey(Frame const& frame, hstring const& key)
+	{
 		// Use a dependency property to associate the session key with a frame, and keep a list of frames whose
 		// navigation state should be managed
-		frame.SetValue(m_frameSessionStateKeyProperty, box_value(sessionStateKey));
-		m_registeredFrames.insert(m_registeredFrames.begin(), make_weak(frame));
+		frame.SetValue(m_frameSessionStateKeyProperty, winrt::box_value(key));
+		m_registeredFrames.emplace_back(winrt::make_weak(frame));
 
 		// Check to see if navigation state can be restored
 		RestoreFrameNavigationState(frame);
@@ -178,20 +190,15 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 
 		// Remove weak references that are no longer reachable
-		m_registeredFrames.erase
+		std::erase_if
 		(
-			std::remove_if
-			(
-				m_registeredFrames.begin(),
-				m_registeredFrames.end(),
-				[=](weak_ref<Frame> const& e)
-				{
-					auto testFrame = e.get();
-					return testFrame == nullptr || testFrame == frame;
-				}
-			),
-			m_registeredFrames.end()
-					);
+			m_registeredFrames,
+			[&frame](weak_ref<Frame> const& e)
+			{
+				const auto testFrame = e.get();
+				return testFrame == nullptr || testFrame == frame;
+			}
+		);
 	}
 
 	IMap<hstring, IInspectable> SessionStateManager::SessionStateForFrame(Frame const& frame)
@@ -201,7 +208,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 		if (!frameState)
 		{
-			auto frameSessionKey = frame.GetValue(m_frameSessionStateKeyProperty).try_as<hstring>();
+			const auto frameSessionKey = frame.GetValue(m_frameSessionStateKeyProperty).try_as<hstring>();
 			if (frameSessionKey)
 			{
 				// Registered frames reflect the corresponding session state
@@ -230,23 +237,24 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	void SessionStateManager::OnSessionKeyAdded(DependencyObject const& d, DependencyPropertyChangedEventArgs const& e)
 	{
 		const auto newVal = e.NewValue().as<hstring>();
-		const auto stdVal = winrt::to_string(newVal);
+		const auto wstr = std::wstring_view{ newVal };
 
-		const auto npos = stdVal.find('_');
-		if (npos != std::string::npos)
+		const auto index = wstr.find('_');
+		if (index != std::wstring_view::npos)
 		{
-			const auto secondHalf = stdVal.substr(npos + 1);
-			if (!secondHalf.empty())
+			const auto stateKey = wstr.substr(index + 1);
+			if (!stateKey.empty())
 			{
-				const auto firstHalf = stdVal.substr(0, npos);
-				if (!firstHalf.empty())
+				const auto baseKey = wstr.substr(0, index);
+				if (!baseKey.empty())
 				{
 					RegisterFrame
 					(
 						d.as<Frame>(),
-						winrt::to_hstring(secondHalf),
-						winrt::to_hstring(firstHalf)
+						winrt::hstring{ stateKey },
+						winrt::hstring{ baseKey }
 					);
+					return;
 				}
 			}
 		}
