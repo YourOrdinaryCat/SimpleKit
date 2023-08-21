@@ -74,7 +74,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			if (key)
 				map.Insert(key.value(), value);
 			else
-				throw hresult_invalid_argument(L"Invalid key at index: " + index);
+				throw hresult_invalid_argument(winrt::format(L"Invalid key at index: {}", index));
 		}
 
 		if (reader.ReadByte() != (uint8_t)StreamTypes::StrToObjMapEndMarker)
@@ -96,7 +96,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			if (key)
 				map.Insert(key, value);
 			else
-				throw hresult_invalid_argument(L"Invalid key at index: " + index);
+				throw hresult_invalid_argument(winrt::format(L"Invalid key at index: {}", index));
 		}
 
 		if (reader.ReadByte() != (uint8_t)StreamTypes::MapEndMarker)
@@ -116,7 +116,7 @@ namespace winrt::SimpleKit::WindowsRuntime::Data::implementation
 			if (value)
 				vector.Append(value);
 			else
-				throw hresult_invalid_argument(L"Invalid key at index: " + index);
+				throw hresult_invalid_argument(winrt::format(L"Invalid key at index: {}", index));
 		}
 
 		if (reader.ReadByte() != (uint8_t)StreamTypes::VectorEndMarker)
