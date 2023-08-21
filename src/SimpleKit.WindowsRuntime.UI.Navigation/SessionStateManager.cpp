@@ -155,7 +155,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		if (!sessionBaseKey.empty())
 		{
 			frame.SetValue(m_frameSessionBaseKeyProperty, box_value(sessionBaseKey));
-			sessionStateKey = std::format(L"{}_{}", sessionBaseKey, sessionStateKey);
+			sessionStateKey = winrt::format(L"{}_{}", sessionBaseKey, sessionStateKey);
 		}
 
 		// Use a dependency property to associate the session key with a frame, and keep a list of frames whose
