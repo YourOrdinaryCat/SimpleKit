@@ -18,7 +18,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Controls::implementation
 {
 	ExtendedTitleBar::ExtendedTitleBar()
 	{
-		DefaultStyleKey(winrt::box_value(this->GetRuntimeClassName()));
+		DefaultStyleKey(winrt::box_value(winrt::name_of<class_type>()));
 
 		m_unloadedToken = Unloaded
 		(
