@@ -159,7 +159,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		}
 	}
 
-	void SessionStateManager::ThrowIfRegistered(Frame const& frame) inline
+	void SessionStateManager::ThrowIfRegistered(Frame const& frame)
 	{
 		if (frame.GetValue(m_frameSessionStateKeyProperty))
 			throw hresult_invalid_argument(L"Frames can only be registered to one session state key.");

@@ -42,8 +42,8 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 	private:
 		inline static const hstring m_sessionStateFilename = L"_sessionState.dat";
 
-		static void ThrowIfRegistered(Frame const& frame) inline;
-		static void RegisterFrameByKey(Frame const& frame, hstring const& key);
+		static inline void ThrowIfRegistered(Windows::UI::Xaml::Controls::Frame const& frame);
+		static void RegisterFrameByKey(Windows::UI::Xaml::Controls::Frame const& frame, hstring const& key);
 
 		static void RestoreFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
 		static void SaveFrameNavigationState(Windows::UI::Xaml::Controls::Frame const& frame);
