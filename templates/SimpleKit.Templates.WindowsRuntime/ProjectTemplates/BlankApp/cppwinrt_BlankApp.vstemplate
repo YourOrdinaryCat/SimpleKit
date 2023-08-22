@@ -19,7 +19,6 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="pch.h">pch.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="App.idl">App.idl</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.cpp">App.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.h">App.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.xaml">MainPage.xaml</ProjectItem>

@@ -7,7 +7,6 @@
     <Page Include="MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="App.idl"/>
     <Midl Include="MainPage.idl"/>
   </ItemGroup>
   <ItemGroup>

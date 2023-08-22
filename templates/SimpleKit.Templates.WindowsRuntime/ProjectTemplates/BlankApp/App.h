@@ -1,13 +1,18 @@
 ﻿#pragma once
 #include "App.xaml.g.h"
 
-namespace winrt::$safeprojectname$::implementation
-{
-    struct App : AppT<App>
-    {
-        App();
-        void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs const&);
-        void OnSuspending(IInspectable const&, Windows::ApplicationModel::SuspendingEventArgs const&);
-        void OnNavigationFailed(IInspectable const&, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const&);
-    };
+namespace winrt::$safeprojectname$::implementation {
+	struct App : AppT<App> {
+		/**
+		 * @brief Creates the singleton application object.
+		*/
+		App();
+
+		/**
+		 * @brief Invoked when the application is launched normally by the end user.
+		 *
+		 * @param args Details about the launch request and process.
+		*/
+		void OnLaunched(const Windows::ApplicationModel::Activation::LaunchActivatedEventArgs&) const;
+	};
 }
