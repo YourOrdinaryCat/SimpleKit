@@ -1,24 +1,19 @@
 ﻿#include "pch.h"
 #include "MainPage.h"
-#include "MainPage.g.cpp"
+#include "Views/MainPage.g.cpp"
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
+namespace wux = winrt::Windows::UI::Xaml;
 
-namespace winrt::$safeprojectname$::implementation
-{
-    int32_t MainPage::MyProperty()
-    {
-        throw hresult_not_implemented();
-    }
+namespace winrt::$safeprojectname$::Views::implementation {
+	int32_t MainPage::MyProperty() const {
+		throw hresult_not_implemented();
+	}
 
-    void MainPage::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
-    }
+	void MainPage::MyProperty(int32_t /* value */) {
+		throw hresult_not_implemented();
+	}
 
-    void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
-    {
-        myButton().Content(box_value(L"Clicked"));
-    }
+	void MainPage::ClickHandler(const IInspectable&, const wux::RoutedEventArgs&) {
+		MyButton().Content(winrt::box_value(L"Clicked"));
+	}
 }
