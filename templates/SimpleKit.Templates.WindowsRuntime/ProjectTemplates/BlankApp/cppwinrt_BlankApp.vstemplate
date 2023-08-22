@@ -21,10 +21,10 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.cpp">App.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.h">App.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.xaml">MainPage.xaml</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.idl">MainPage.idl</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.cpp">MainPage.cpp</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.h">MainPage.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Views\MainPage.xaml">Views\MainPage.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Views\MainPage.idl">Views\MainPage.idl</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Views\MainPage.cpp">Views\MainPage.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Views\MainPage.h">Views\MainPage.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package.appxmanifest</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Assets\LockScreenLogo.scale-200.png">Assets\LockScreenLogo.scale-200.png</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Assets\SplashScreen.scale-200.png">Assets\SplashScreen.scale-200.png</ProjectItem>

@@ -4,15 +4,15 @@
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainPage.xaml" />
+    <Page Include="Views\MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="MainPage.idl"/>
+    <Midl Include="Views\MainPage.idl"/>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="App.cpp"/>
-    <ClCompile Include="MainPage.cpp"/>
+    <ClCompile Include="Views\MainPage.cpp"/>
     <ClCompile Include="Generated Files\module.g.cpp">
         <Filter>Generated Files</Filter>
     </ClCompile>
@@ -20,7 +20,7 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClCompile Include="App.h"/>
-    <ClCompile Include="MainPage.h"/>
+    <ClCompile Include="Views\MainPage.h"/>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
