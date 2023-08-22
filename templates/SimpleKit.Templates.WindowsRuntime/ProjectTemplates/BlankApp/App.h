@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "App.xaml.g.h"
 
-namespace winrt::$safeprojectname$::implementation {
+namespace winrt::$cpprootnamespace$::implementation {
 	struct App : AppT<App> {
 		/**
 		 * @brief Creates the singleton application object.

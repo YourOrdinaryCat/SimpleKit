@@ -3,11 +3,12 @@
 
 #include "Views/MainPage.h"
 
-namespace wamc = winrt::Windows::ApplicationModel::Core;
+namespace views = winrt::$cpprootnamespace$::Views::implementation;
 namespace wama = winrt::Windows::ApplicationModel::Activation;
+namespace wamc = winrt::Windows::ApplicationModel::Core;
 namespace wux = winrt::Windows::UI::Xaml;
 
-namespace winrt::$safeprojectname$::implementation {
+namespace winrt::$cpprootnamespace$::implementation {
 	App::App() {
 #if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
 		UnhandledException([this](const IInspectable&, const wux::UnhandledExceptionEventArgs& e)
@@ -24,7 +25,7 @@ namespace winrt::$safeprojectname$::implementation {
 	void App::OnLaunched(const wama::LaunchActivatedEventArgs& args) const {
 		const auto window = wux::Window::Current();
 		if (!window.Content())
-			window.Content(winrt::make<Views::implementation::MainPage>());
+			window.Content(winrt::make<views::MainPage>());
 
 		if (!args.PrelaunchActivated()) {
 			window.Activate();

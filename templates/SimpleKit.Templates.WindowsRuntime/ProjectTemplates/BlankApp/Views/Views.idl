@@ -1,4 +1,4 @@
-namespace $safeprojectname$.Views {
+namespace $projectname$.Views {
 	[default_interface]
 	runtimeclass MainPage : Windows.UI.Xaml.Controls.UserControl {
 		MainPage();

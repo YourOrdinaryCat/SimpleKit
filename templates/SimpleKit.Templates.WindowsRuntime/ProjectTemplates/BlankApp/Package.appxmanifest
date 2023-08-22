@@ -30,7 +30,7 @@
 		<Application
 			Id="App"
 			Executable="$targetnametoken$.exe"
-			EntryPoint="$safeprojectname$.App">
+			EntryPoint="$projectname$.App">
 			<uap:VisualElements
 				DisplayName="$projectname$"
 				Description="Project for a single page C++/WinRT Universal Windows Platform (UWP) app with no predefined layout"

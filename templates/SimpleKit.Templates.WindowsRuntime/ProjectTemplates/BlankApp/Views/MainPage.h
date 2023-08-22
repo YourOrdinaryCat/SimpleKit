@@ -2,7 +2,7 @@
 
 #include "Views/MainPage.g.h"
 
-namespace winrt::$safeprojectname$::Views::implementation {
+namespace winrt::$cpprootnamespace$::Views::implementation {
 	/**
 	 * @brief Shown to the user when the app is launched normally.
 	*/
@@ -19,7 +19,7 @@ namespace winrt::$safeprojectname$::Views::implementation {
 	};
 }
 
-namespace winrt::$safeprojectname$::Views::factory_implementation {
+namespace winrt::$cpprootnamespace$::Views::factory_implementation {
 	struct MainPage : MainPageT<MainPage, implementation::MainPage> {
 	};
 }

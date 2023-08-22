@@ -4,7 +4,7 @@
 
 namespace wux = winrt::Windows::UI::Xaml;
 
-namespace winrt::$safeprojectname$::Views::implementation {
+namespace winrt::$cpprootnamespace$::Views::implementation {
 	int32_t MainPage::MyProperty() const {
 		throw hresult_not_implemented();
 	}

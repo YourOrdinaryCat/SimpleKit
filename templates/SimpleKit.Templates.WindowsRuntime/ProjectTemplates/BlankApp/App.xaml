@@ -1,7 +1,4 @@
 ﻿<Application
-    x:Class="$safeprojectname$.App"
+    x:Class="$projectname$.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:$safeprojectname$">
-
-</Application>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
