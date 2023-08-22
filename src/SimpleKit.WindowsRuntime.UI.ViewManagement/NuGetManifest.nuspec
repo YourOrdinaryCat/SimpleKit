@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.ViewManagement</id>
-		<version>1.6</version>
+		<version>1.7</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<icon>images\SimpleKit.png</icon>
@@ -14,6 +14,7 @@
 		<description>A set of helpers to manage views in UWP apps.</description>
 		<releaseNotes>
 			- Improved underlying code
+			- Switched to CoreWindow.Close() for view consolidation
 			- Updated C++/WinRT version
 		</releaseNotes>
 		<tags>Windows UWP ApplicationView Window</tags>

@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Input</id>
-		<version>1.6</version>
+		<version>1.7</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<icon>images\SimpleKit.png</icon>

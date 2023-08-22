@@ -19,7 +19,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 {
 	NavigationHelper::NavigationHelper(Page const& page) :
 		m_page(page),
-		m_PageKey(winrt::format(L"Page-{}", page.Frame().BackStackDepth())),
+		m_PageKey(L""),
 		m_useNavigationShortcuts(true),
 		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
 		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
@@ -28,7 +28,7 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	NavigationHelper::NavigationHelper(Page const& page, bool const& useNavigationShortcuts) :
 		m_page(page),
-		m_PageKey(winrt::format(L"Page-{}", page.Frame().BackStackDepth())),
+		m_PageKey(L""),
 		m_useNavigationShortcuts(useNavigationShortcuts),
 		m_loadedToken(page.Loaded({ this, &NavigationHelper::OnPageLoaded })),
 		m_unloadedToken(page.Unloaded({ this, &NavigationHelper::OnPageUnloaded }))
@@ -74,6 +74,9 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 		if (const auto frame = GetPageFrame())
 		{
 			const auto frameState = SessionStateManager::SessionStateForFrame(frame);
+			if (m_PageKey.empty())
+				m_PageKey = winrt::format(L"Page-{}", frame.BackStackDepth());
+
 			if (navigationMode == NavigationMode::New)
 			{
 				// Clear existing state for new navigation
@@ -122,8 +125,14 @@ namespace winrt::SimpleKit::WindowsRuntime::UI::Navigation::implementation
 
 	void NavigationHelper::OnPageLoaded(IInspectable const&, RoutedEventArgs const&)
 	{
-		if (m_useNavigationShortcuts && m_page)
+		if (const auto frame = GetPageFrame())
 		{
+			if (!m_PageKey.empty())
+				m_PageKey = winrt::format(L"Page-{}", frame.BackStackDepth());
+
+			if (!m_useNavigationShortcuts)
+				return;
+
 			m_backRequestedToken = SystemNavigationManager::GetForCurrentView().
 				BackRequested({ this, &NavigationHelper::OnBackRequested });
 

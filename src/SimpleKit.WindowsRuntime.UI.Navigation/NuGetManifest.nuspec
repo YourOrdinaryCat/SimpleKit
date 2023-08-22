@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>SimpleKit.WindowsRuntime.UI.Navigation</id>
-		<version>1.6</version>
+		<version>1.7.1</version>
 		<authors>YourOrdinaryCat</authors>
 
 		<icon>images\SimpleKit.png</icon>
@@ -13,7 +13,7 @@
 		<projectUrl>https://github.com/YourOrdinaryCat/SimpleKit/tree/master/src/SimpleKit.WindowsRuntime.UI.Navigation</projectUrl>
 		<description>A set of helpers that aid in navigation and session state management.</description>
 		<releaseNotes>
-			- Added NavigationHelper.PageKey to get the key associated to a page's session state
+			- Fixed NavigationHelper.PageKey being unavailable before loading state (along with possible side effects of that)
 			- Improved underlying code
 			- Updated C++/WinRT version
 		</releaseNotes>
