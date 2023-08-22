@@ -7,7 +7,7 @@
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{$guid1$}</ProjectGuid>
     <ProjectName>$projectname$</ProjectName>
-    <RootNamespace>$safeprojectname$</RootNamespace>
+    <RootNamespace>$projectname$</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>

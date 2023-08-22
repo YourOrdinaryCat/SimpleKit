@@ -15,8 +15,8 @@
 		<Icon>TemplateIcon.ico</Icon>
 	</TemplateData>
   <TemplateContent>
-    <Project TargetFileName="$safeprojectname$.vcxproj" File="BlankApp.vcxproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.vcxproj.filters">BlankApp.vcxproj.filters</ProjectItem>
+    <Project TargetFileName="$projectname$.vcxproj" File="BlankApp.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">BlankApp.vcxproj.filters</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="pch.h">pch.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
