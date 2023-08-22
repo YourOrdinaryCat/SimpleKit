@@ -35,7 +35,6 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="StoreLogo.png">Assets\StoreLogo.png</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Wide310x150Logo.scale-200.png">Assets\Wide310x150Logo.scale-200.png</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="PropertySheet.props">PropertySheet.props</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="readme.txt">readme.txt</ProjectItem>
     </Project>
   </TemplateContent>
   <WizardExtension>

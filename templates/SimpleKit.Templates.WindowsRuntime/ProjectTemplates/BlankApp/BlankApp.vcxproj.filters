@@ -48,9 +48,6 @@
     <None Include="PropertySheet.props" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Views\MainPage.xaml">
       <Filter>Views</Filter>
     </Page>
