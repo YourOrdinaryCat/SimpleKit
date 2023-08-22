@@ -50,6 +50,9 @@
     <Compile Include="Package.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ProjectTemplates\BlankApp.zip">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="ProjectTemplates\CppComponent.zip">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -75,6 +78,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Target Name="BeforeBuild">
+    <ZipDirectory SourceDirectory="ProjectTemplates\BlankApp" DestinationFile="ProjectTemplates\BlankApp.zip" Overwrite="true" />
     <ZipDirectory SourceDirectory="ProjectTemplates\CppComponent" DestinationFile="ProjectTemplates\CppComponent.zip" Overwrite="true" />
   </Target>
 </Project>
