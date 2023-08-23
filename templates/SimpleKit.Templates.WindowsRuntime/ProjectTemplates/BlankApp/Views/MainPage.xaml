@@ -6,7 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Spacing="8">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Welcome to C++/WinRT!" />
         <Button x:Name="MyButton" Click="ClickHandler">Click Me</Button>
     </StackPanel>
 </Page>
