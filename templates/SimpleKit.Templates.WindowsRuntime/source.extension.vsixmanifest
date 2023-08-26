@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SimpleKit.Templates.WindowsRuntime.b1f6162e-940d-49b1-a95b-5fa1721cc309" Version="1.2" Language="en-US" Publisher="YourOrdinaryCat" />
-        <DisplayName>SimpleKit WinRT Templates</DisplayName>
-        <Description xml:space="preserve">Templates used by the SimpleKit project for WinRT related work.</Description>
+        <Identity Id="SimpleKit.Templates.WindowsRuntime.Dev17" Version="2.0.0" Language="en-US" Publisher="YourOrdinaryCat" />
+        <DisplayName>SimpleKit WinRT Templates for VS2022</DisplayName>
+        <Description xml:space="preserve">A set of templates usable for WinRT related work. For VS2022.</Description>
         <Icon>SimpleKit.png</Icon>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
-            <ProductArchitecture>amd64</ProductArchitecture>
-        </InstallationTarget>
+		<InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[17.0, 18.0)">
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[17.0, 18.0)">
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
     </Installation>
     <Dependencies>
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
